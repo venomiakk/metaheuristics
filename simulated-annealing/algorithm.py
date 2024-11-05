@@ -37,11 +37,12 @@ class simulatedAnnealing:
         @param Temp_alpha Cooling rate for the temperature.
         @param k_iter Number of iterations per temperature step.
         @param wsp_k_boltz Boltzmann constant for the acceptance probability.
-        @param result_accuracy Desired accuracy for the result. Default is 0.1
-        @param results_stored Number of results to calculate for checking result_accuracy. Default is 10 
-        @param max_epochs Maximum number of epochs to run the algorithm, If -1, other stop condition. Default is -1
-        @param k_iter_bonus Increment for the number of iterations per temperature step. Default is 1
-        @param wsp_c Coefficient for the generation of new candidate solutions. Default is 1
+        @param result_accuracy Desired accuracy for the result. Default is 0.1.
+        @param results_stored Number of results to calculate for checking result_accuracy. Default is 10.
+        @param max_epochs Maximum number of epochs to run the algorithm, If -1, other stop condition. Default is -1.
+        @param k_iter_bonus Increment for the number of iterations per temperature step. Default is 1.
+        @param wsp_c Coefficient for the generation of new candidate solutions. Default is 1.
+        @param filename File to save results. Default is '', then results are not saved.
         """
         self.minX = minX
         self.maxX = maxX
@@ -121,7 +122,7 @@ class simulatedAnnealing:
                     break
             
             self.last_result = current_result
-            print(f'{self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}')
+            print(f'{self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}, T={self.temp}, ro={math.exp(-(self.func(self.x,self.y) - self.func(newx,newy)) / (self.wsp_k * self.temp))}')
             if self.filename != '':
                 file = open(self.filename, 'a')
                 file.write(f'{self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}\n')
@@ -135,7 +136,7 @@ class simulatedAnnealing:
                 file = open(self.filename, 'a')
                 file.write(f'Result: {self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}\n')
                 file.close()
-        
+
         return points
 
 
