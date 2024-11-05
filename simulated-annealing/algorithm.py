@@ -1,6 +1,7 @@
 import math
 import numpy as np
 from random import randint, uniform
+from datetime import datetime
 
 # maksimum funkcji o ekstremach bardzo oddalonych od siebie
 # [-15, 15]×[-15, 15]
@@ -23,7 +24,7 @@ def funkcja4(x, y):
 class simulatedAnnealing:
     def __init__(self, minX, maxX, minY, maxY, func, Temp, Temp_alpha,
                   k_iter, wsp_k_boltz, result_accuracy=0.1, results_stored=10,
-                    max_epochs=-1, k_iter_bonus=1, wsp_c=1):
+                    max_epochs=-1, k_iter_bonus=1, wsp_c=1, filename=''):
         """
         @brief Constructor for the simulatedAnnealing class.
 
@@ -64,6 +65,8 @@ class simulatedAnnealing:
 
         self.epochs = 0
         self.results_tab = []
+
+        self.filename = filename
     
     def generate(self, value, min, max ):
         while True:
@@ -73,6 +76,17 @@ class simulatedAnnealing:
         return wynik
 
     def run(self):
+        points = []
+        if self.filename != '':
+                current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                file = open(self.filename, 'a')
+                file.write(
+                    f'{current_time}, params:minX={self.minX}, maxX={self.maxX}, minY={self.minY}, maxY={self.maxY}, '
+                    f'func={self.func}, Temp={self.temp}, Temp_alpha={self.t_alpha}, k_iter={self.k_iter}, '
+                    f'wsp_k_boltz={self.wsp_k}, result_accuracy={self.result_accuracy}, results_stored={self.results_stored}, '
+                    f'max_epochs={self.max_epochs}, k_iter_bonus={self.k_iter_bonus}, wsp_c={self.wsp_c}, filename={self.filename}\n'
+                )
+                file.close()
         while True:
             self.epochs += 1
             for _ in range(self.k_iter):
@@ -88,11 +102,13 @@ class simulatedAnnealing:
                         self.x = newx
                         self.y = newy
             
+            tmp = [self.x, self.y]
+            points.append(tmp)
+
             current_result = self.func(self.x, self.y)
             self.results_tab.append(current_result)
             if len(self.results_tab) > self.results_stored:
                 self.results_tab.pop(0)
-
 
             if (self.max_epochs != -1 and self.epochs >= self.max_epochs):
                 self.last_result = current_result
@@ -103,67 +119,24 @@ class simulatedAnnealing:
                 if avg_diff <= self.result_accuracy:
                     self.last_result = current_result
                     break
-
-            self.last_result = self.func(self.x, self.y)
-            print(self.x, self.y, self.last_result, self.epochs)
+            
+            self.last_result = current_result
+            print(f'{self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}')
+            if self.filename != '':
+                file = open(self.filename, 'a')
+                file.write(f'{self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}\n')
+                file.close()
+            
             self.temp *= self.t_alpha
             self.k_iter += self.k_iter_bonus
         
-        print(self.x, self.y, self.last_result, self.epochs)
-
-
-    
-    def calc(self,  gen, func, wsp_alpha, wsp_k):
-        epochs = 0
-        while(self.temp>0.1):
-            epochs += 1
-            for _ in range(self.k):
-                newx = gen(self.x, 0.5, self.minX, self.maxX)
-                newy = gen(self.y, 0.5, self.minY, self.maxY)
-
-                if func(self.x, self.y) - func(newx, self.y) < 0:
-                    self.x = newx
-                else:
-                    check = uniform(0, 1)
-                    if math.exp(-(func(self.x,self.y) - func(newx,self.y)) / (wsp_k * self.temp)) > check:
-                        self.x = newx
-                if func(self.x, self.y) - func(self.x, newy) < 0:
-                    self.y = newy
-                else:
-                    check = uniform(0, 1)
-                    if math.exp(-(func(self.x,self.y) - func(self.x,newy)) / (wsp_k * self.temp)) > check:
-                        self.y = newy
-
-            print(self.x, self.y, func(self.x, self.y), epochs)
-            self.temp *= wsp_alpha
-            #self.k += 3
-
-        return self.x, self.y, func(self.x, self.y)
-    
-    def calc2(self,  gen, fun, wsp_alpha, wsp_k):
-        epochs = 0
-        while(self.temp>0.1):
-            epochs += 1
-            for _ in range(self.k):
-                newx = gen(self.x, 0.5, self.minX, self.maxX)
-                newy = gen(self.y, 0.5, self.minY, self.maxY)
-
-                # if fun(self.x, self.y) - fun(newx, newy) < 0:
-                if fun(newx, newy) >= fun(self.x, self.y):
-                    self.x = newx
-                    self.y = newy
-                else:
-                    check = uniform(0, 1)
-                    if math.exp(-(fun(self.x,self.y) - fun(newx,newy)) / (wsp_k * self.temp)) > check:
-                        self.x = newx
-                        self.y = newy
-
-            print(self.x, self.y, fun(self.x, self.y), epochs)
-            self.temp *= wsp_alpha
-            # self.k += 3
-
-        return self.x, self.y, fun(self.x, self.y)
-
+        print(f'Result: {self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}')
+        if self.filename != '':
+                file = open(self.filename, 'a')
+                file.write(f'Result: {self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}\n')
+                file.close()
+        
+        return points
 
 
 # Press the green button in the gutter to run the script.

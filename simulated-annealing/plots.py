@@ -26,7 +26,7 @@ def test():
     # Wyświetlenie wykresu
     plt.show()
 
-def plot_f3():
+def plot_f3(points):
     x = np.linspace(-15, 15, 100)
     y = np.linspace(-15, 15, 100)
     X, Y = np.meshgrid(x, y)
@@ -45,12 +45,20 @@ def plot_f3():
     point_x = 12
     point_y = 12
     point_z = funkcja3(point_x, point_y)
-    ax.scatter(point_x, point_y, point_z, color='r', s=10)
+    ax.scatter(point_x, point_y, point_z, color='b', s=10)
+    if points != 0:
+        for i in points:
+            x = i[0]
+            y = i[1]
+            point_z = funkcja3(x, y)
+            if point_z > 1:
+                ax.scatter(x, y, point_z, color='r', s=10)
+    
 
     # Wyświetlenie wykresu
     plt.show()
 
-def plot_f4():
+def plot_f4(points = 0):
     x = np.linspace(-3, 12, 100)
     y = np.linspace(4.1, 5.8, 100)
     X, Y = np.meshgrid(x, y)
@@ -69,7 +77,14 @@ def plot_f4():
     point_x = 11.625545 
     point_y = 5.7250444
     point_z = funkcja4(point_x, point_y)
-    ax.scatter(point_x, point_y, point_z, color='r', s=10)
+    ax.scatter(point_x, point_y, point_z, color='b', s=10)
+    if points != 0:
+        for i in points:
+            x = i[0]
+            y = i[1]
+            point_z = funkcja4(x, y)
+            if point_z > 1:
+                ax.scatter(x, y, point_z, color='r', s=10)
 
     # Wyświetlenie wykresu
     plt.show()

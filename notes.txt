@@ -1,0 +1,1 @@
+- zwiększanie iteracji co każdą epokę znacząco wydłuża czas obliczenia, ale nie wpływa znacząco na otrzymywane wyniki
