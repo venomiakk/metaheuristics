@@ -18,7 +18,7 @@ def funkcja3(x, y):
 # [-3, 12]×[4.1, 5.8].
 # f(11.625545, 5.7250444) = 38.850294
 def funkcja4(x, y):
-    return 21.5 + x * np.sin(4 * np.pi * x) + y * np.sin(20 * np.pi * y)
+    return 21.5 + (x * np.sin(4 * np.pi * x)) + (y * np.sin(20 * np.pi * y))
 
 
 class simulatedAnnealing:
@@ -26,23 +26,23 @@ class simulatedAnnealing:
                   k_iter, wsp_k_boltz, result_accuracy=0.1, results_stored=10,
                     max_epochs=-1, k_iter_bonus=1, wsp_c=1, filename=''):
         """
-        @brief Constructor for the simulatedAnnealing class.
+        @brief Konstruktor klasy simulatedAnnealing.
 
-        @param minX Minimum value for the x-coordinate.
-        @param maxX Maximum value for the x-coordinate.
-        @param minY Minimum value for the y-coordinate.
-        @param maxY Maximum value for the y-coordinate.
-        @param func Function to find the maximum.
-        @param Temp Initial temperature for the annealing process.
-        @param Temp_alpha Cooling rate for the temperature.
-        @param k_iter Number of iterations per temperature step.
-        @param wsp_k_boltz Boltzmann constant for the acceptance probability.
-        @param result_accuracy Desired accuracy for the result. Default is 0.1.
-        @param results_stored Number of results to calculate for checking result_accuracy. Default is 10.
-        @param max_epochs Maximum number of epochs to run the algorithm, If -1, other stop condition. Default is -1.
-        @param k_iter_bonus Increment for the number of iterations per temperature step. Default is 1.
-        @param wsp_c Coefficient for the generation of new candidate solutions. Default is 1.
-        @param filename File to save results. Default is '', then results are not saved.
+        @param minX Poczatek przedzialu X
+        @param maxX Koniec przedzialu X
+        @param minY Poczatek przedzialu Y
+        @param maxY Koniec przedzialu Y
+        @param func Funkcja, ktorej maksimum szukamy
+        @param Temp Poczatkowa temperatura
+        @param Temp_alpha Wspolczynnik schladzania
+        @param k_iter Liczba iteracji dla kazdej epoki
+        @param wsp_k_boltz Stala Boltzmanna dla prawdopodobienstaw przyjecia gorszego rozwiazania
+        @param result_accuracy Zmiana rozwiazania (warunek stopu), domyslnie 0.1
+        @param results_stored Liczba ostatnich wynikow brana pod uwage przy obliczaniu zmiany rozwiazan, domyslnie 10
+        @param max_epochs Liczba epok, po ktorej algorytm ma zakonczyc obliczenia, jezeli -1, drugi warunek stopu, domyslnie -1
+        @param k_iter_bonus Inkrementacja iteracji w kazdej epoce, domyslnie 1
+        @param wsp_c Wspolczynnik zawezajacy przedzial podczas losowania nowego rozwiazania, domyslnie 1
+        @param filename Nazwa pliku do zapisania wynikow, domyslnie '', wtedy wyniki nie sa zapisywane
         """
         self.minX = minX
         self.maxX = maxX
@@ -122,7 +122,7 @@ class simulatedAnnealing:
                     break
             
             self.last_result = current_result
-            print(f'{self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}, T={self.temp}, ro={math.exp(-(self.func(self.x,self.y) - self.func(newx,newy)) / (self.wsp_k * self.temp))}')
+            print(f'{self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}')
             if self.filename != '':
                 file = open(self.filename, 'a')
                 file.write(f'{self.epochs}: x={self.x}, y={self.y}, f(x,y)={self.last_result}\n')
@@ -138,19 +138,4 @@ class simulatedAnnealing:
                 file.close()
 
         return points
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    nwm = simulatedAnnealing(-3, 12, 4.1, 5.8, funkcja4, 100, 0.999, 7000, 0.2) #K = M
-    nwm.run()
-    # print(nwm.calc(nwm.generate, funkcja4, 0.999, 0.2)) #wsp1= k wsp = alfa(T)   
-    #print(nwm.calc2(nwm.generate, funkcja4, 0.999, 0.2)) #6905 epochs
-
-    # sa2 = simulatedAnnealing(-15, 15, -15, 15, 90)
-    # print(sa2.calc2(sa2.generate, funkcja3, 0.999, 0.5))
-    # print(funkcja3(-12,-12))
-    # print(funkcja3(-12,12))
-    # print(funkcja3(12,-12))
-    # print(funkcja3(12,12))
-    # print(funkcja4(11.625545, 5.7250444))
+    
