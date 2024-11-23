@@ -2,7 +2,7 @@ from algorithm import geneticAlgorithm
 from data import items
 
 if __name__ == '__main__':
-    ga = geneticAlgorithm(items, 4)
+    ga = geneticAlgorithm(items, 5)
     ga.run()
 
 

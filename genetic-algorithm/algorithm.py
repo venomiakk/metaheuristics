@@ -3,6 +3,7 @@ import random
 
 class Individual:
     def __init__(self, chromosome_binary_list):
+        # 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25
         self.chromosome = chromosome_binary_list
         self.weight = 0  # value of fitness function
         self.value = 0
@@ -22,9 +23,14 @@ class geneticAlgorithm:
         for i in self.population:
             self.__fitness(i)
         # self.__roulette_selection()
-        self.__rank_selection()
-        # print(len(self.population))
+        parents = self.__rank_selection()
+        # print(len(new_generation))
         # print(self.population_size)
+
+        # test = self.__crossover_masked_random(parents[0], parents[1])
+        test = self.__crossover_single_point(parents[0], parents[1])
+        self.__mutation_single_gene(test[0])
+
 
     def __generate_starting_population(self):
         population = []
@@ -60,7 +66,7 @@ class geneticAlgorithm:
                     selected_individuals.append(individual)
                     break
 
-        self.population = selected_individuals
+        return selected_individuals
 
     def __rank_selection(self):
         # print('rank selection')
@@ -90,4 +96,51 @@ class geneticAlgorithm:
                     selected_individuals.append(individual)
                     break
 
-        self.population = selected_individuals
+        return selected_individuals
+
+    def __crossover_single_point(self, parent_a, parent_b, point_deviation=4):
+        middle_point = int(len(parent_a.chromosome) / 2)
+        crossover_point = random.randint(middle_point - point_deviation, middle_point + point_deviation)
+        # print(crossover_point)
+        ab_child_chromosome = []
+        ba_child_chromosome = []
+        # print(parent_a.chromosome)
+        # print(parent_b.chromosome)
+        for index, (a_gene, b_gene) in enumerate(zip(parent_a.chromosome, parent_b.chromosome)):
+            if index < crossover_point:
+                ab_child_chromosome.append(a_gene)
+                ba_child_chromosome.append(b_gene)
+            else:
+                ab_child_chromosome.append(b_gene)
+                ba_child_chromosome.append(a_gene)
+
+        return Individual(ab_child_chromosome), Individual(ba_child_chromosome)
+
+    def __crossover_masked_random(self, parent_a, parent_b, min_crossings=6, max_crossings=15):
+        # crossing_points = random.randint(min_crossings, max_crossings)
+        # interval = int(len(parent_a.chromosome) / crossing_points) + 1
+        # print(crossing_points)
+        # print(interval)
+
+        crossing_mask = [random.randint(0, 1) for _ in range(len(parent_a.chromosome))]
+        a_child_chromosome = [a_gene if mask_bit == 1 else b_gene for a_gene, b_gene, mask_bit in
+                              zip(parent_a.chromosome, parent_b.chromosome, crossing_mask)]
+        b_child_chromosome = [b_gene if mask_bit == 1 else a_gene for a_gene, b_gene, mask_bit in
+                              zip(parent_a.chromosome, parent_b.chromosome, crossing_mask)]
+        # print(parent_a.chromosome)
+        # print(parent_b.chromosome)
+        # print(crossing_mask)
+        # print(a_child_chromosome)
+        # print(b_child_chromosome)
+        return Individual(a_child_chromosome), Individual(b_child_chromosome)
+
+    def __mutation_single_gene(self, individual, mutation_chance=1):
+        # print(individual.chromosome)
+        gene_index = random.randint(0, len(individual.chromosome) - 1)
+        # print(f'{gene_index}, gene: {individual.chromosome[gene_index]}')
+        if random.random() <= mutation_chance:
+            # print('mutation')
+            individual.chromosome[gene_index] ^= 1  # flip bit
+
+        # print(individual.chromosome)
+        # print(f'gene: {individual.chromosome[gene_index]}')
