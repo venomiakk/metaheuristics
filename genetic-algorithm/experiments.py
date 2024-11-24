@@ -263,8 +263,8 @@ def test():
     @brief  Wplyw prawdopodobienstwa krzyzowania
     """
     # data:
-    population_size = 20
-    no_of_generations = 100
+    population_size = 2
+    no_of_generations = 10
     backpack_capacity = 6404180
     stop_condition = 0
     selection_method = 0

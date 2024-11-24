@@ -95,15 +95,15 @@ class GeneticAlgorithm:
         self.final_iterations = generations_iter
         expectedBestValue = 13692887
         expectedBestWeight = 6397822
-        print(f'\nGenerations: {generations_iter}\n'
-              f'Best by value: {best_individual.chromosome}\n'
-              f'Value: {best_individual.value}, Weight: {best_individual.weight}, '
-              f'{best_individual.weight / self.backpack_capacity * 100}% of backpack\n'
-              f'Diff to expected best values:\n'
-              f'value_diff: {expectedBestValue - best_individual.value}, '
-              f'{best_individual.value / expectedBestValue * 100}%, '
-              f'weight_diff: {expectedBestWeight - best_individual.weight}, '
-              f'{best_individual.weight / expectedBestWeight * 100}%')
+        # print(f'\nGenerations: {generations_iter}\n'
+        #       f'Best by value: {best_individual.chromosome}\n'
+        #       f'Value: {best_individual.value}, Weight: {best_individual.weight}, '
+        #       f'{best_individual.weight / self.backpack_capacity * 100}% of backpack\n'
+        #       f'Diff to expected best values:\n'
+        #       f'value_diff: {expectedBestValue - best_individual.value}, '
+        #       f'{best_individual.value / expectedBestValue * 100}%, '
+        #       f'weight_diff: {expectedBestWeight - best_individual.weight}, '
+        #       f'{best_individual.weight / expectedBestWeight * 100}%')
         return population
 
     def __generate_starting_population(self):
@@ -127,7 +127,8 @@ class GeneticAlgorithm:
     def __roulette_selection(self, population):
         # print('roulette')
         fitness_sum = sum(individual.weight for individual in population)
-        # if fitness_sum == 0: ...
+        if fitness_sum == 0:
+            return population
         probabilities = [i.weight / fitness_sum for i in population]
         cumulative_probability = [sum(probabilities[:i + 1]) for i in range(len(probabilities))]
         # print(probabilities)
