@@ -7,6 +7,10 @@ def select_highest_value_individual(individuals):
     return max(individuals, key=lambda individual: individual.value)
 
 
+def select_highest_weight_individual(individuals):
+    return max(individuals, key=lambda individual: individual.weight)
+
+
 class Individual:
     def __init__(self, chromosome_binary_list):
         # 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25
@@ -17,7 +21,8 @@ class Individual:
 
 class GeneticAlgorithm:
     def __init__(self, dicts_list_binary_data, population_size, no_of_generations=100, backpack_capacity=6404180,
-                 stop_condition=0, selection_method=0, crossover_method=0, results_to_store=2, chance_for_mutation=0.7):
+                 stop_condition=0, selection_method=0, crossover_method=0, results_to_store=2, chance_for_mutation=0.7,
+                 chance_for_crossover=0.7):
         self.backpack_capacity = backpack_capacity
         self.items = dicts_list_binary_data
         self.individual_size = len(self.items)
@@ -26,17 +31,22 @@ class GeneticAlgorithm:
         self.stop_condition = stop_condition
         self.selection_method = selection_method
         self.crossover_method = crossover_method
-        self.results_to_store = results_to_store
         self.chance_for_mutation = chance_for_mutation
+        self.chance_for_crossover = chance_for_crossover
 
         self.final_iterations = 0
+        self.results_to_store = results_to_store
         self.stored_results = []
-
 
     def run(self):
         population = self.__generate_starting_population()
-        for individual in population:
-            self.__fitness(individual)
+        [self.__fitness(individual) for individual in population]
+        starting_fitness_sum = sum(individual.weight for individual in population)
+
+        while starting_fitness_sum == 0:
+            population = self.__generate_starting_population()
+            [self.__fitness(individual) for individual in population]
+            starting_fitness_sum = sum(individual.weight for individual in population)
 
         generations_iter = 0
 
@@ -44,7 +54,6 @@ class GeneticAlgorithm:
             generations_iter += 1
             # Choosing parents
             if self.selection_method == 0:
-                # TODO warunek gdy wszystki wieght = 0
                 parents = self.__roulette_selection(population)
             else:
                 parents = self.__rank_selection(population)
@@ -67,29 +76,35 @@ class GeneticAlgorithm:
                 self.__fitness(b_child)
                 new_generation.extend([a_child, b_child])
 
+            population = new_generation
+            #TODO best by value or best by weight?
+            best_individual = select_highest_value_individual(population)
 
             if self.stop_condition == 0:
                 if generations_iter >= self.no_of_generations:
-                    #return best_individual / generation
                     break
             else:
-                # TODO czy to tak powinno wygladc
                 if len(self.stored_results) >= self.results_to_store:
                     self.stored_results.pop(0)
-                # TODO best_by_value czy best_by_weight??
-                best_individual = select_highest_value_individual(new_generation)
                 self.stored_results.append(best_individual.weight)
-
                 if len(self.stored_results) == self.results_to_store:
                     avg_diff = np.mean(np.abs(np.diff(self.stored_results)))
                     if avg_diff < 1:
-                        #return best_individual / generation
                         break
 
-
         self.final_iterations = generations_iter
-        return new_generation
-
+        expectedBestValue = 13692887
+        expectedBestWeight = 6397822
+        print(f'\nGenerations: {generations_iter}\n'
+              f'Best by value: {best_individual.chromosome}\n'
+              f'Value: {best_individual.value}, Weight: {best_individual.weight}, '
+              f'{best_individual.weight / self.backpack_capacity * 100}% of backpack\n'
+              f'Diff to expected best values:\n'
+              f'value_diff: {expectedBestValue - best_individual.value}, '
+              f'{best_individual.value / expectedBestValue * 100}%, '
+              f'weight_diff: {expectedBestWeight - best_individual.weight}, '
+              f'{best_individual.weight / expectedBestWeight * 100}%')
+        return population
 
     def __generate_starting_population(self):
         population = []
@@ -158,40 +173,46 @@ class GeneticAlgorithm:
         return selected_individuals
 
     def __crossover_single_point(self, parent_a, parent_b, point_deviation=4):
-        middle_point = int(len(parent_a.chromosome) / 2)
-        crossover_point = random.randint(middle_point - point_deviation, middle_point + point_deviation)
-        # print(crossover_point)
-        ab_child_chromosome = []
-        ba_child_chromosome = []
-        # print(parent_a.chromosome)
-        # print(parent_b.chromosome)
-        for index, (a_gene, b_gene) in enumerate(zip(parent_a.chromosome, parent_b.chromosome)):
-            if index < crossover_point:
-                ab_child_chromosome.append(a_gene)
-                ba_child_chromosome.append(b_gene)
-            else:
-                ab_child_chromosome.append(b_gene)
-                ba_child_chromosome.append(a_gene)
+        if random.random() <= self.chance_for_crossover:
+            middle_point = int(len(parent_a.chromosome) / 2)
+            crossover_point = random.randint(middle_point - point_deviation, middle_point + point_deviation)
+            # print(crossover_point)
+            ab_child_chromosome = []
+            ba_child_chromosome = []
+            # print(parent_a.chromosome)
+            # print(parent_b.chromosome)
+            for index, (a_gene, b_gene) in enumerate(zip(parent_a.chromosome, parent_b.chromosome)):
+                if index < crossover_point:
+                    ab_child_chromosome.append(a_gene)
+                    ba_child_chromosome.append(b_gene)
+                else:
+                    ab_child_chromosome.append(b_gene)
+                    ba_child_chromosome.append(a_gene)
 
-        return Individual(ab_child_chromosome), Individual(ba_child_chromosome)
+            return Individual(ab_child_chromosome), Individual(ba_child_chromosome)
+        else:
+            return parent_a, parent_b
 
     def __crossover_masked_random(self, parent_a, parent_b, min_crossings=6, max_crossings=15):
-        # crossing_points = random.randint(min_crossings, max_crossings)
-        # interval = int(len(parent_a.chromosome) / crossing_points) + 1
-        # print(crossing_points)
-        # print(interval)
+        if random.random() <= self.chance_for_crossover:
+            # crossing_points = random.randint(min_crossings, max_crossings)
+            # interval = int(len(parent_a.chromosome) / crossing_points) + 1
+            # print(crossing_points)
+            # print(interval)
 
-        crossing_mask = [random.randint(0, 1) for _ in range(len(parent_a.chromosome))]
-        a_child_chromosome = [a_gene if mask_bit == 1 else b_gene for a_gene, b_gene, mask_bit in
-                              zip(parent_a.chromosome, parent_b.chromosome, crossing_mask)]
-        b_child_chromosome = [b_gene if mask_bit == 1 else a_gene for a_gene, b_gene, mask_bit in
-                              zip(parent_a.chromosome, parent_b.chromosome, crossing_mask)]
-        # print(parent_a.chromosome)
-        # print(parent_b.chromosome)
-        # print(crossing_mask)
-        # print(a_child_chromosome)
-        # print(b_child_chromosome)
-        return Individual(a_child_chromosome), Individual(b_child_chromosome)
+            crossing_mask = [random.randint(0, 1) for _ in range(len(parent_a.chromosome))]
+            a_child_chromosome = [a_gene if mask_bit == 1 else b_gene for a_gene, b_gene, mask_bit in
+                                  zip(parent_a.chromosome, parent_b.chromosome, crossing_mask)]
+            b_child_chromosome = [b_gene if mask_bit == 1 else a_gene for a_gene, b_gene, mask_bit in
+                                  zip(parent_a.chromosome, parent_b.chromosome, crossing_mask)]
+            # print(parent_a.chromosome)
+            # print(parent_b.chromosome)
+            # print(crossing_mask)
+            # print(a_child_chromosome)
+            # print(b_child_chromosome)
+            return Individual(a_child_chromosome), Individual(b_child_chromosome)
+        else:
+            return parent_a, parent_b
 
     def __mutation_single_gene(self, individual):
         # print(individual.chromosome)
