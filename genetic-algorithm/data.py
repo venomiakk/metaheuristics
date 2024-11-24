@@ -26,3 +26,21 @@ items = [
     {"id": 24, "name": "Stara księga", "weight": 926023, "value": 1746556},
     {"id": 25, "name": "Puchar z cynku", "weight": 978724, "value": 2100851},
 ]
+
+
+# Backpack capacity: 6404180
+# Maximum value: 13692887
+# Maximum weight: 6397822
+# Expected chromosome: [0,0,0,0,1,1,0,1,0,0,1,1,0,1,0,1,0,0,0,0,1,1,0,1,0,1]
+# Selected items:
+# {'id': 25, 'name': 'Puchar z cynku', 'weight': 978724, 'value': 2100851}
+# {'id': 23, 'name': 'Kusza', 'weight': 952360, 'value': 2068204}
+# {'id': 21, 'name': 'Trucizna', 'weight': 730061, 'value': 1528646}
+# {'id': 20, 'name': 'Mundur', 'weight': 904818, 'value': 1910501}
+# {'id': 15, 'name': 'Perły', 'weight': 854190, 'value': 1853562}
+# {'id': 13, 'name': 'Naszyjnik', 'weight': 169738, 'value': 376418}
+# {'id': 11, 'name': 'Długi miecz', 'weight': 382846, 'value': 833132}
+# {'id': 10, 'name': 'Nóż', 'weight': 323618, 'value': 677562}
+# {'id': 7, 'name': 'Hełm', 'weight': 800493, 'value': 1686515}
+# {'id': 5, 'name': 'Skamieliny', 'weight': 265590, 'value': 579152}
+# {'id': 4, 'name': 'Szmaragdowy pas', 'weight': 35384, 'value': 78344}

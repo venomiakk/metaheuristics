@@ -1,5 +1,11 @@
 import random
 
+import numpy as np
+
+
+def select_highest_value_individual(individuals):
+    return max(individuals, key=lambda individual: individual.value)
+
 
 class Individual:
     def __init__(self, chromosome_binary_list):
@@ -9,27 +15,80 @@ class Individual:
         self.value = 0
 
 
-class geneticAlgorithm:
-    def __init__(self, dicts_list_binary_data, population_size, backpack_capacity=6404180):
+class GeneticAlgorithm:
+    def __init__(self, dicts_list_binary_data, population_size, no_of_generations=100, backpack_capacity=6404180,
+                 stop_condition=0, selection_method=0, crossover_method=0, results_to_store=2, chance_for_mutation=0.7):
         self.backpack_capacity = backpack_capacity
         self.items = dicts_list_binary_data
         self.individual_size = len(self.items)
-        self.population_size = population_size
-        self.population = self.__generate_starting_population()
+        self.population_size = population_size + 1 if population_size % 2 != 0 else population_size
+        self.no_of_generations = no_of_generations
+        self.stop_condition = stop_condition
+        self.selection_method = selection_method
+        self.crossover_method = crossover_method
+        self.results_to_store = results_to_store
+        self.chance_for_mutation = chance_for_mutation
+
+        self.final_iterations = 0
+        self.stored_results = []
+
 
     def run(self):
-        # print(self.population[0].chromosome)
-        # self.__fitness(self.population[0])
-        for i in self.population:
-            self.__fitness(i)
-        # self.__roulette_selection()
-        parents = self.__rank_selection()
-        # print(len(new_generation))
-        # print(self.population_size)
+        population = self.__generate_starting_population()
+        for individual in population:
+            self.__fitness(individual)
 
-        # test = self.__crossover_masked_random(parents[0], parents[1])
-        test = self.__crossover_single_point(parents[0], parents[1])
-        self.__mutation_single_gene(test[0])
+        generations_iter = 0
+
+        while True:
+            generations_iter += 1
+            # Choosing parents
+            if self.selection_method == 0:
+                # TODO warunek gdy wszystki wieght = 0
+                parents = self.__roulette_selection(population)
+            else:
+                parents = self.__rank_selection(population)
+
+            # Creating new generation
+            new_generation = []
+            for i in range(0, len(parents), 2):
+                # Creating offspring
+                if self.crossover_method == 0:
+                    a_child, b_child = self.__crossover_single_point(parents[i], parents[i + 1])
+                else:
+                    a_child, b_child = self.__crossover_masked_random(parents[i], parents[i + 1])
+
+                # Mutation of offspring
+                self.__mutation_single_gene(a_child)
+                self.__mutation_single_gene(b_child)
+
+                # Calculating fitenss of offspring
+                self.__fitness(a_child)
+                self.__fitness(b_child)
+                new_generation.extend([a_child, b_child])
+
+
+            if self.stop_condition == 0:
+                if generations_iter >= self.no_of_generations:
+                    #return best_individual / generation
+                    break
+            else:
+                # TODO czy to tak powinno wygladc
+                if len(self.stored_results) >= self.results_to_store:
+                    self.stored_results.pop(0)
+                # TODO best_by_value czy best_by_weight??
+                best_individual = select_highest_value_individual(new_generation)
+                self.stored_results.append(best_individual.weight)
+
+                if len(self.stored_results) == self.results_to_store:
+                    avg_diff = np.mean(np.abs(np.diff(self.stored_results)))
+                    if avg_diff < 1:
+                        #return best_individual / generation
+                        break
+
+
+        self.final_iterations = generations_iter
+        return new_generation
 
 
     def __generate_starting_population(self):
@@ -50,27 +109,27 @@ class geneticAlgorithm:
             individual.value = value
         # print(individual.weight, individual.value)
 
-    def __roulette_selection(self):
+    def __roulette_selection(self, population):
         # print('roulette')
-        fitness_sum = sum(individual.weight for individual in self.population)
+        fitness_sum = sum(individual.weight for individual in population)
         # if fitness_sum == 0: ...
-        probabilities = [i.weight / fitness_sum for i in self.population]
+        probabilities = [i.weight / fitness_sum for i in population]
         cumulative_probability = [sum(probabilities[:i + 1]) for i in range(len(probabilities))]
         # print(probabilities)
         # print(cumulative_probability)
         selected_individuals = []
         for _ in range(self.population_size):
             r = random.random()
-            for i, individual in enumerate(self.population):
+            for i, individual in enumerate(population):
                 if r <= cumulative_probability[i]:
                     selected_individuals.append(individual)
                     break
 
         return selected_individuals
 
-    def __rank_selection(self):
+    def __rank_selection(self, population):
         # print('rank selection')
-        sorted_population = sorted(self.population, key=lambda individual: individual.weight, reverse=True)
+        sorted_population = sorted(population, key=lambda individual: individual.weight, reverse=True)
 
         rank_sum = sum(range(1, self.population_size + 1))  # sum of an arithmetic series
         probabilities = [(self.population_size - rank) / rank_sum for rank in range(self.population_size)]
@@ -134,11 +193,11 @@ class geneticAlgorithm:
         # print(b_child_chromosome)
         return Individual(a_child_chromosome), Individual(b_child_chromosome)
 
-    def __mutation_single_gene(self, individual, mutation_chance=1):
+    def __mutation_single_gene(self, individual):
         # print(individual.chromosome)
         gene_index = random.randint(0, len(individual.chromosome) - 1)
         # print(f'{gene_index}, gene: {individual.chromosome[gene_index]}')
-        if random.random() <= mutation_chance:
+        if random.random() <= self.chance_for_mutation:
             # print('mutation')
             individual.chromosome[gene_index] ^= 1  # flip bit
 
