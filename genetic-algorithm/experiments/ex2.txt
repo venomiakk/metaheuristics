@@ -1,0 +1,1290 @@
+
+Wplyw prawdopodobienstwa mutacji
+
+
+2024-11-25 17:59:18.559297
+
+params:
+pop_size: 20, no_of_generations: 100, backpack_capacity: 6404180
+stop_condition: 0 - 0: generations, 1: stagnation
+selection_method: 0 - 0: roulette, 1: ranked
+crossover_method: 0 - 0: single point, 1: masked random
+chance_for_mutation: 0.1
+chance_for_crossover: 0.7
+results_to_store: 3 - for stagnation stop condition, difference between last best weights
+
+--------------Iteration 1--------------------
+Population: 20, 
+All weights: [5711515, 5711515, 5100639, 5181352, 4570476, 5711515, 5181352, 5711515, 4570476, 5181352, 5100639, 5100639, 5273851, 5711515, 6160076, 5181352, 5100639, 5676131, 5351090, 5213604]
+All values: [11483501, 11483501, 10229515, 10512129, 9258143, 11483501, 10512129, 11483501, 9258143, 10512129, 10229515, 10229515, 10647114, 11483501, 12612980, 10512129, 10229515, 11405157, 10888547, 10580803]
+Best by value:  <algorithm.Individual object at 0x000001884F0EA660>
+Best (by value) [0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1] value: 12612980, weight: 6160076, to backpack_capacity: 244104
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1079907 , v_weight_diff: 237746,
+value% to expected: 92.11337243928179%, weight% to expected 96.28395413314094%
+v_result_to_backpack_capacity: 244104, 96.18836447445263%
+
+ For experiments:
+value: 12612980 val_diff: 1079907, %val: 92.11337243928179% weight: 6160076, weight_diff: 237746, %weight: 96.28395413314094% backpack_diff: 244104, %backpack: 96.18836447445263%
+
+--------------Iteration 2--------------------
+Population: 20, 
+All weights: [6029631, 5314347, 6177598, 5418755, 5153165, 5153165, 6029631, 6177598, 5803841, 5261363, 5120011, 5314347, 5418755, 5153165, 0, 6016541, 4320625, 4509135, 5106921, 0]
+All values: [12136729, 10703625, 12593505, 10882743, 10303591, 10303591, 12136729, 12593505, 11665719, 10861598, 10459195, 10703625, 10882743, 10303591, 0, 12100424, 8616507, 9205209, 10422890, 0]
+Best by value:  <algorithm.Individual object at 0x000001884F0EADE0>
+Best (by value) [1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1] value: 12593505, weight: 6177598, to backpack_capacity: 226582
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1099382 , v_weight_diff: 220224,
+value% to expected: 91.97114531070036%, weight% to expected 96.55782858604069%
+v_result_to_backpack_capacity: 226582, 96.46196702778498%
+
+ For experiments:
+value: 12593505 val_diff: 1099382, %val: 91.97114531070036% weight: 6177598, weight_diff: 220224, %weight: 96.55782858604069% backpack_diff: 226582, %backpack: 96.46196702778498%
+
+--------------Iteration 3--------------------
+Population: 20, 
+All weights: [5957943, 5513125, 5904361, 6002619, 4558829, 5868977, 6296499, 4959357, 5513125, 5468449, 6198510, 5054824, 5513125, 5513125, 6296499, 6198510, 5468449, 5468449, 5513125, 5513125]
+All values: [12059297, 11196395, 11973149, 12158489, 9419669, 11894805, 12827129, 10217271, 11196395, 11097203, 12625849, 10145729, 11196395, 11196395, 12827129, 12625849, 11097203, 11097203, 11196395, 11196395]
+Best by value:  <algorithm.Individual object at 0x000001884F0EB5C0>
+Best (by value) [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1] value: 12827129, weight: 6296499, to backpack_capacity: 107681
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 865758 , v_weight_diff: 101323,
+value% to expected: 93.67731582098064%, weight% to expected 98.41628916840762%
+v_result_to_backpack_capacity: 107681, 98.31858255077152%
+
+ For experiments:
+value: 12827129 val_diff: 865758, %val: 93.67731582098064% weight: 6296499, weight_diff: 101323, %weight: 98.41628916840762% backpack_diff: 107681, %backpack: 98.31858255077152%
+
+--------------Iteration 4--------------------
+Population: 20, 
+All weights: [5879121, 5083158, 5712288, 5905826, 5083158, 5446341, 5127834, 4894139, 6148200, 5861150, 5712288, 5938078, 6103524, 6103524, 5478593, 6148200, 5905826, 6148200, 5657007, 0]
+All values: [11716845, 10285424, 11509447, 11911783, 10285424, 10850569, 10384616, 9794412, 12385393, 11812591, 11509447, 11980457, 12286201, 12286201, 10919243, 12385393, 11911783, 12385393, 11426366, 0]
+Best by value:  <algorithm.Individual object at 0x000001884F0EBA70>
+Best (by value) [0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0] value: 12385393, weight: 6148200, to backpack_capacity: 255980
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1307494 , v_weight_diff: 249622,
+value% to expected: 90.45129051309632%, weight% to expected 96.09832846240487%
+v_result_to_backpack_capacity: 255980, 96.00292309085629%
+
+ For experiments:
+value: 12385393 val_diff: 1307494, %val: 90.45129051309632% weight: 6148200, weight_diff: 249622, %weight: 96.09832846240487% backpack_diff: 255980, %backpack: 96.00292309085629%
+
+--------------Iteration 5--------------------
+Population: 20, 
+All weights: [6111075, 6111075, 6111075, 6199722, 5832133, 5773287, 6155751, 6155751, 6111075, 5255247, 6111075, 6111075, 0, 6325489, 0, 6111075, 5773287, 6111075, 6123499, 6325489]
+All values: [12480679, 12480679, 12480679, 12727570, 11902309, 11900132, 12579871, 12579871, 12480679, 10723314, 12480679, 12480679, 0, 12956289, 0, 12480679, 11900132, 12480679, 12511197, 12956289]
+Best by value:  <algorithm.Individual object at 0x000001884F108860>
+Best (by value) [1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1] value: 12956289, weight: 6325489, to backpack_capacity: 78691
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 736598 , v_weight_diff: 72333,
+value% to expected: 94.62057928324393%, weight% to expected 98.8694121218127%
+v_result_to_backpack_capacity: 78691, 98.77125564865447%
+
+ For experiments:
+value: 12956289 val_diff: 736598, %val: 94.62057928324393% weight: 6325489, weight_diff: 72333, %weight: 98.8694121218127% backpack_diff: 78691, %backpack: 98.77125564865447%
+
+--------------Iteration 6--------------------
+Population: 20, 
+All weights: [6287142, 6189237, 6358975, 5432952, 4856568, 5432952, 6287142, 6287142, 6358975, 4822076, 4856568, 4418844, 6048181, 5263214, 5432952, 6111980, 6189237, 6358975, 5761386, 5432952]
+All values: [12830875, 12347451, 12723869, 10977313, 9741845, 10977313, 12830875, 12830875, 12723869, 9723327, 9741845, 8798118, 12067553, 10600895, 10977313, 12416804, 12347451, 12723869, 11652346, 10977313]
+Best by value:  <algorithm.Individual object at 0x000001884F108CE0>
+Best (by value) [0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1] value: 12830875, weight: 6287142, to backpack_capacity: 117038
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 862012 , v_weight_diff: 110680,
+value% to expected: 93.70467309048851%, weight% to expected 98.27003627171872%
+v_result_to_backpack_capacity: 117038, 98.17247485236204%
+
+ For experiments:
+value: 12830875 val_diff: 862012, %val: 93.70467309048851% weight: 6287142, weight_diff: 110680, %weight: 98.27003627171872% backpack_diff: 117038, %backpack: 98.17247485236204%
+
+--------------Iteration 7--------------------
+Population: 20, 
+All weights: [6075740, 0, 6111124, 6280862, 6111124, 6111124, 6111124, 6280862, 5845534, 5266754, 6245478, 6245478, 4866810, 6245478, 6280862, 6111124, 6111124, 6111124, 5845534, 4331907]
+All values: [12587398, 0, 12665742, 13042160, 12665742, 12665742, 12665742, 13042160, 12086590, 10862965, 12963816, 12963816, 9985739, 12963816, 13042160, 12665742, 12665742, 12665742, 12086590, 8878376]
+Best by value:  <algorithm.Individual object at 0x000001884F109130>
+Best (by value) [0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1] value: 13042160, weight: 6280862, to backpack_capacity: 123318
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 650727 , v_weight_diff: 116960,
+value% to expected: 95.24770050318826%, weight% to expected 98.17187786718668%
+v_result_to_backpack_capacity: 123318, 98.07441389842259%
+
+ For experiments:
+value: 13042160 val_diff: 650727, %val: 95.24770050318826% weight: 6280862, weight_diff: 116960, %weight: 98.17187786718668% backpack_diff: 123318, %backpack: 98.07441389842259%
+
+--------------Iteration 8--------------------
+Population: 20, 
+All weights: [5180199, 5950334, 5648363, 5180199, 5180199, 4275381, 5626716, 5180199, 4275381, 5180199, 5180199, 4275381, 5626716, 4598999, 5180199, 5180199, 5180199, 5180199, 5626716, 5626716]
+All values: [10660286, 12197683, 11604906, 10660286, 10660286, 8749785, 11520121, 10660286, 8749785, 10660286, 10660286, 8749785, 11520121, 9427347, 10660286, 10660286, 10660286, 10660286, 11520121, 11520121]
+Best by value:  <algorithm.Individual object at 0x000001884F109CA0>
+Best (by value) [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0] value: 12197683, weight: 5950334, to backpack_capacity: 453846
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1495204 , v_weight_diff: 447488,
+value% to expected: 89.08043278236357%, weight% to expected 93.00561972496266%
+v_result_to_backpack_capacity: 453846, 92.91328476089055%
+
+ For experiments:
+value: 12197683 val_diff: 1495204, %val: 89.08043278236357% weight: 5950334, weight_diff: 447488, %weight: 93.00561972496266% backpack_diff: 453846, %backpack: 92.91328476089055%
+
+--------------Iteration 9--------------------
+Population: 20, 
+All weights: [5841912, 5348556, 5348556, 5829230, 5348556, 5348556, 4706502, 4932292, 5348556, 5348556, 5348556, 5446384, 5348556, 5841912, 6189417, 6189417, 5348556, 5841912, 5829230, 5841912]
+All values: [11357034, 10303054, 10303054, 11342738, 10303054, 10303054, 9208490, 9679500, 10303054, 10303054, 10303054, 10509606, 10303054, 11357034, 11999769, 11999769, 10303054, 11357034, 11342738, 11357034]
+Best by value:  <algorithm.Individual object at 0x000001884F109DC0>
+Best (by value) [0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0] value: 11999769, weight: 6189417, to backpack_capacity: 214763
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1693118 , v_weight_diff: 208405,
+value% to expected: 87.63505460900977%, weight% to expected 96.74256332858275%
+v_result_to_backpack_capacity: 214763, 96.6465183676911%
+
+ For experiments:
+value: 11999769 val_diff: 1693118, %val: 87.63505460900977% weight: 6189417, weight_diff: 208405, %weight: 96.74256332858275% backpack_diff: 214763, %backpack: 96.6465183676911%
+
+--------------Iteration 10--------------------
+Population: 20, 
+All weights: [5848711, 5705283, 6217005, 6217005, 6172329, 5046465, 6172329, 5559305, 5232584, 4415162, 0, 4611124, 6217005, 5514629, 5062141, 6172329, 6217005, 6172329, 6039365, 6172329]
+All values: [11771559, 11389634, 12548313, 12548313, 12449121, 10100342, 12449121, 11144154, 10611336, 9068038, 0, 9285948, 12548313, 11044962, 10283425, 12449121, 12548313, 12449121, 12116231, 12449121]
+Best by value:  <algorithm.Individual object at 0x000001884F10A000>
+Best (by value) [0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1] value: 12548313, weight: 6217005, to backpack_capacity: 187175
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1144574 , v_weight_diff: 180817,
+value% to expected: 91.64110534177343%, weight% to expected 97.17377257447926%
+v_result_to_backpack_capacity: 187175, 97.07729951375508%
+
+ For experiments:
+value: 12548313 val_diff: 1144574, %val: 91.64110534177343% weight: 6217005, weight_diff: 180817, %weight: 97.17377257447926% backpack_diff: 187175, %backpack: 97.07729951375508%
+
+Wplyw prawdopodobienstwa mutacji
+
+
+2024-11-25 18:02:21.314991
+
+params:
+pop_size: 20, no_of_generations: 100, backpack_capacity: 6404180
+stop_condition: 0 - 0: generations, 1: stagnation
+selection_method: 0 - 0: roulette, 1: ranked
+crossover_method: 0 - 0: single point, 1: masked random
+chance_for_mutation: 0.1
+chance_for_crossover: 0.7
+results_to_store: 3 - for stagnation stop condition, difference between last best weights
+
+--------------Iteration 1--------------------
+Population: 20, 
+All weights: [6402462, 6367078, 6144779, 0, 6180163, 6180163, 5450102, 5450102, 6367078, 5494778, 6180163, 6078844, 5450102, 5248231, 6180163, 6402462, 6078844, 6165901, 5599479, 6121225]
+All values: [12913388, 12835044, 12295486, 0, 12373830, 12373830, 10845184, 10845184, 12835044, 10944376, 12373830, 12235826, 10845184, 10546353, 12373830, 12913388, 12235826, 12264673, 11134713, 12165481]
+Best by value:  <algorithm.Individual object at 0x000001FC16BDA7B0>
+Best (by value) [1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0] value: 12913388, weight: 6402462, to backpack_capacity: 1718
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 779499 , v_weight_diff: -4640,
+value% to expected: 94.3072706289039%, weight% to expected 100.07252468105551%
+v_result_to_backpack_capacity: 1718, 99.97317377088089%
+
+ For experiments:
+value: 12913388 val_diff: 779499, %val: 94.3072706289039% weight: 6402462, weight_diff: -4640, %weight: 100.07252468105551% backpack_diff: 1718, %backpack: 99.97317377088089%
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+--------------Iteration 2--------------------
+Population: 20, 
+All weights: [5287262, 5363355, 5262275, 5735942, 5287262, 5686973, 5408031, 5207202, 5238293, 5238293, 5376940, 5849717, 5265407, 5235161, 5287262, 5202909, 5238293, 5238293, 6033910, 5706457]
+All values: [10900427, 11003013, 10633093, 11855215, 10900427, 11680575, 11102205, 10722891, 10725787, 10725787, 11099309, 11955437, 10642763, 10716117, 10900427, 10647443, 10725787, 10725787, 12421252, 11670407]
+Best by value:  <algorithm.Individual object at 0x000001FC16BDA300>
+Best (by value) [0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0] value: 12421252, weight: 6033910, to backpack_capacity: 370270
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1271635 , v_weight_diff: 363912,
+value% to expected: 90.71317100623119%, weight% to expected 94.31193928183686%
+v_result_to_backpack_capacity: 370270, 94.21830741796764%
+
+ For experiments:
+value: 12421252 val_diff: 1271635, %val: 90.71317100623119% weight: 6033910, weight_diff: 363912, %weight: 94.31193928183686% backpack_diff: 370270, %backpack: 94.21830741796764%
+
+--------------Iteration 3--------------------
+Population: 20, 
+All weights: [5520806, 6378594, 6333918, 6333918, 6333918, 6333918, 6260012, 6333918, 6378594, 5520806, 5520806, 5520806, 5520806, 6333918, 6333918, 6333918, 6333918, 6333918, 5520806, 5978048]
+All values: [11368328, 13107176, 13007984, 13007984, 13007984, 13007984, 12817634, 13007984, 13107176, 11368328, 11368328, 11368328, 11368328, 13007984, 13007984, 13007984, 13007984, 13007984, 11368328, 12261748]
+Best by value:  <algorithm.Individual object at 0x000001FC16BDB140>
+Best (by value) [1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1] value: 13107176, weight: 6378594, to backpack_capacity: 25586
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 585711 , v_weight_diff: 19228,
+value% to expected: 95.72251636926529%, weight% to expected 99.699460222557%
+v_result_to_backpack_capacity: 25586, 99.60047968670463%
+
+ For experiments:
+value: 13107176 val_diff: 585711, %val: 95.72251636926529% weight: 6378594, weight_diff: 19228, %weight: 99.699460222557% backpack_diff: 25586, %backpack: 99.60047968670463%
+
+--------------Iteration 4--------------------
+Population: 20, 
+All weights: [6096388, 5883280, 5870598, 5883280, 5870598, 5199475, 6096388, 5199475, 6096388, 5870598, 5186146, 4220751, 4233433, 5870598, 0, 5870598, 4787519, 5713542, 4574255, 4574255]
+All values: [12563396, 12106682, 12092386, 12106682, 12092386, 10772089, 12563396, 10772089, 12563396, 12092386, 10615242, 8671238, 8685534, 12092386, 0, 12092386, 9983708, 11730264, 9465347, 9465347]
+Best by value:  <algorithm.Individual object at 0x000001FC16BDB500>
+Best (by value) [1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1] value: 12563396, weight: 6096388, to backpack_capacity: 307792
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1129491 , v_weight_diff: 301434,
+value% to expected: 91.7512574229233%, weight% to expected 95.28849036437713%
+v_result_to_backpack_capacity: 307792, 95.19388899125258%
+
+ For experiments:
+value: 12563396 val_diff: 1129491, %val: 91.7512574229233% weight: 6096388, weight_diff: 301434, %weight: 95.28849036437713% backpack_diff: 307792, %backpack: 95.19388899125258%
+
+--------------Iteration 5--------------------
+Population: 20, 
+All weights: [5792247, 6085537, 5533335, 6085537, 6081857, 6081857, 5596043, 6274148, 6393831, 6085537, 6130213, 6085537, 5782955, 5533335, 5782955, 5782955, 5640719, 5782955, 5782955, 6358447]
+All values: [11649777, 12412746, 11356589, 12412746, 12427412, 12427412, 11450652, 12587956, 12882915, 12412746, 12511938, 12412746, 11628929, 11356589, 11628929, 11628929, 11549844, 11628929, 11628929, 12804571]
+Best by value:  <algorithm.Individual object at 0x000001FC16BF4C20>
+Best (by value) [0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1] value: 12882915, weight: 6393831, to backpack_capacity: 10349
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 809972 , v_weight_diff: 3991,
+value% to expected: 94.08472442663114%, weight% to expected 99.93761939610074%
+v_result_to_backpack_capacity: 10349, 99.83840241842047%
+
+ For experiments:
+value: 12882915 val_diff: 809972, %val: 94.08472442663114% weight: 6393831, weight_diff: 3991, %weight: 99.93761939610074% backpack_diff: 10349, %backpack: 99.83840241842047%
+
+--------------Iteration 6--------------------
+Population: 20, 
+All weights: [5350075, 5350075, 6282007, 6282007, 5394751, 6282007, 6260677, 6326683, 6282007, 6326683, 6282007, 5350075, 5350075, 6326683, 6282007, 6362067, 5394751, 6282007, 5385459, 6317391]
+All values: [11135502, 11135502, 12962979, 12962979, 11234694, 12962979, 12945505, 13062171, 12962979, 13062171, 12962979, 11135502, 11135502, 13062171, 12962979, 13140515, 11234694, 12962979, 11213846, 13041323]
+Best by value:  <algorithm.Individual object at 0x000001FC16BF5070>
+Best (by value) [1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0] value: 13140515, weight: 6362067, to backpack_capacity: 42113
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 552372 , v_weight_diff: 35755,
+value% to expected: 95.96599314666075%, weight% to expected 99.44113793725428%
+v_result_to_backpack_capacity: 42113, 99.34241386094706%
+
+ For experiments:
+value: 13140515 val_diff: 552372, %val: 95.96599314666075% weight: 6362067, weight_diff: 35755, %weight: 99.44113793725428% backpack_diff: 42113, %backpack: 99.34241386094706%
+
+--------------Iteration 7--------------------
+Population: 20, 
+All weights: [5981745, 5964428, 6017129, 6242919, 5964428, 5847391, 5293305, 6017129, 6242919, 5794690, 5964428, 5050931, 5293305, 6017129, 5570612, 5570612, 6242919, 5527635, 5517911, 6017129]
+All values: [12218537, 11942586, 12296881, 12767891, 11942586, 11920463, 10622289, 12296881, 12767891, 11566168, 11942586, 10148679, 10622289, 12296881, 11437046, 11437046, 12767891, 11334787, 11082751, 12296881]
+Best by value:  <algorithm.Individual object at 0x000001FC16BF5670>
+Best (by value) [0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1] value: 12767891, weight: 6242919, to backpack_capacity: 161261
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 924996 , v_weight_diff: 154903,
+value% to expected: 93.24469704599183%, weight% to expected 97.57881666604666%
+v_result_to_backpack_capacity: 161261, 97.48194148196959%
+
+ For experiments:
+value: 12767891 val_diff: 924996, %val: 93.24469704599183% weight: 6242919, weight_diff: 154903, %weight: 97.57881666604666% backpack_diff: 161261, %backpack: 97.48194148196959%
+
+--------------Iteration 8--------------------
+Population: 20, 
+All weights: [6141827, 6314765, 6141827, 5491189, 6314765, 6221250, 5989100, 5120029, 5443647, 5491189, 6141827, 5491189, 0, 5665482, 6141827, 6316120, 5491189, 5120029, 5491189, 5491189]
+All values: [12573007, 13117764, 12573007, 11429073, 13117764, 12957719, 12331771, 10593808, 11271370, 11429073, 12573007, 11429073, 0, 11654209, 12573007, 12798143, 11429073, 10593808, 11429073, 11429073]
+Best by value:  <algorithm.Individual object at 0x000001FC16BF6060>
+Best (by value) [1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0] value: 13117764, weight: 6314765, to backpack_capacity: 89415
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 575123 , v_weight_diff: 83057,
+value% to expected: 95.79984118761806%, weight% to expected 98.70179257878698%
+v_result_to_backpack_capacity: 89415, 98.60380251648142%
+
+ For experiments:
+value: 13117764 val_diff: 575123, %val: 95.79984118761806% weight: 6314765, weight_diff: 83057, %weight: 98.70179257878698% backpack_diff: 89415, %backpack: 98.60380251648142%
+
+--------------Iteration 9--------------------
+Population: 20, 
+All weights: [5362297, 5843185, 5843185, 5843185, 5632763, 6122257, 5843185, 5843185, 6122257, 5632763, 6122257, 5571064, 5848061, 5843185, 5803385, 5441344, 5632763, 6122257, 5632763, 6068975]
+All values: [10789296, 11569751, 11569751, 11569751, 11359498, 12321592, 11569751, 11569751, 12321592, 11359498, 12321592, 11138063, 11560801, 11569751, 11461609, 10809108, 11359498, 12321592, 11359498, 12040761]
+Best by value:  <algorithm.Individual object at 0x000001FC16BF6960>
+Best (by value) [0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0] value: 12321592, weight: 6122257, to backpack_capacity: 281923
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1371295 , v_weight_diff: 275565,
+value% to expected: 89.98534786710793%, weight% to expected 95.69283109158086%
+v_result_to_backpack_capacity: 281923, 95.59782829339588%
+
+ For experiments:
+value: 12321592 val_diff: 1371295, %val: 89.98534786710793% weight: 6122257, weight_diff: 275565, %weight: 95.69283109158086% backpack_diff: 281923, %backpack: 95.59782829339588%
+
+--------------Iteration 10--------------------
+Population: 20, 
+All weights: [5942567, 5942567, 5987243, 0, 5817505, 5772829, 5772829, 5772829, 5817505, 5942567, 0, 5390365, 5772829, 5474403, 5942567, 0, 5772829, 5942567, 5942567, 5474403]
+All values: [11845201, 11845201, 11944393, 0, 11567975, 11468783, 11468783, 11468783, 11567975, 11845201, 0, 10789044, 11468783, 10900581, 11845201, 0, 11468783, 11845201, 11845201, 10900581]
+Best by value:  <algorithm.Individual object at 0x000001FC16BF6F30>
+Best (by value) [0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0] value: 11944393, weight: 5987243, to backpack_capacity: 416937
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1748494 , v_weight_diff: 410579,
+value% to expected: 87.23064025869782%, weight% to expected 93.5825191760571%
+v_result_to_backpack_capacity: 416937, 93.48961147250702%
+
+ For experiments:
+value: 11944393 val_diff: 1748494, %val: 87.23064025869782% weight: 5987243, weight_diff: 410579, %weight: 93.5825191760571% backpack_diff: 416937, %backpack: 93.48961147250702%
+
+Wplyw prawdopodobienstwa mutacji
+
+
+2024-11-25 18:13:09.884402
+
+params:
+pop_size: 20, no_of_generations: 100, backpack_capacity: 6404180
+stop_condition: 0 - 0: generations, 1: stagnation
+selection_method: 0 - 0: roulette, 1: ranked
+crossover_method: 0 - 0: single point, 1: masked random
+chance_for_mutation: 0.5
+chance_for_crossover: 0.7
+results_to_store: 3 - for stagnation stop condition, difference between last best weights
+
+--------------Iteration 1--------------------
+Population: 20, 
+All weights: [4392858, 4439650, 4625753, 4392858, 4906990, 5225714, 5043156, 0, 5024300, 2978069, 2965450, 4625696, 4392858, 4586929, 6003024, 5429361, 5961353, 4224489, 5059684, 5512952]
+All values: [8835661, 9109035, 9424562, 8835661, 10172469, 10674892, 10054416, 0, 10036268, 6098367, 6145226, 9260082, 8835661, 9241811, 12137119, 10948650, 12090219, 8671683, 10114612, 10988367]
+Best by value:  <algorithm.Individual object at 0x00000286296CB110>
+Best (by value) [1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1] value: 12137119, weight: 6003024, to backpack_capacity: 401156
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1555768 , v_weight_diff: 394798,
+value% to expected: 88.63813014742618%, weight% to expected 93.82918124324185%
+v_result_to_backpack_capacity: 401156, 93.73602865628386%
+
+ For experiments:
+value: 12137119 val_diff: 1555768, %val: 88.63813014742618% weight: 6003024, weight_diff: 394798, %weight: 93.82918124324185% backpack_diff: 401156, %backpack: 93.73602865628386%
+
+--------------Iteration 2--------------------
+Population: 20, 
+All weights: [5131197, 5710787, 5967155, 5792709, 6087655, 4036762, 6251010, 4860777, 5450180, 6314926, 4879883, 6255812, 6255812, 4860665, 5409863, 0, 0, 5568027, 4371171, 4860665]
+All values: [10562165, 11454341, 12276310, 11852890, 12346903, 8219135, 12903556, 10025413, 11027815, 12818735, 9854109, 12670589, 12670589, 9776063, 11019758, 0, 0, 11350741, 8813969, 9776063]
+Best by value:  <algorithm.Individual object at 0x00000286296CB7D0>
+Best (by value) [1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0] value: 12903556, weight: 6251010, to backpack_capacity: 153170
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 789331 , v_weight_diff: 146812,
+value% to expected: 94.23546692527295%, weight% to expected 97.70528157863723%
+v_result_to_backpack_capacity: 153170, 97.60828084157535%
+
+ For experiments:
+value: 12903556 val_diff: 789331, %val: 94.23546692527295% weight: 6251010, weight_diff: 146812, %weight: 97.70528157863723% backpack_diff: 153170, %backpack: 97.60828084157535%
+
+--------------Iteration 3--------------------
+Population: 20, 
+All weights: [5973891, 5810878, 5930093, 6387716, 6233418, 5930093, 6053650, 6387716, 6233418, 6120453, 6053650, 5022398, 5930093, 6387716, 6387716, 5930093, 6233418, 4971154, 6400997, 0]
+All values: [12022543, 11721990, 11747799, 12971561, 12539687, 11747799, 12293527, 12971561, 12539687, 12188399, 12293527, 10194238, 11747799, 12971561, 12971561, 11747799, 12539687, 10257438, 12987613, 0]
+Best by value:  <algorithm.Individual object at 0x00000286296CB530>
+Best (by value) [0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1] value: 12987613, weight: 6400997, to backpack_capacity: 3183
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 705274 , v_weight_diff: -3175,
+value% to expected: 94.84934039110964%, weight% to expected 100.04962626343779%
+v_result_to_backpack_capacity: 3183, 99.95029808656221%
+
+ For experiments:
+value: 12987613 val_diff: 705274, %val: 94.84934039110964% weight: 6400997, weight_diff: -3175, %weight: 100.04962626343779% backpack_diff: 3183, %backpack: 99.95029808656221%
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+--------------Iteration 4--------------------
+Population: 20, 
+All weights: [5532300, 5226087, 6291888, 0, 4326145, 5169069, 4561907, 4071673, 4720061, 5247292, 4270748, 0, 5003605, 6069960, 5441333, 6166089, 5450122, 5473082, 5450122, 4850573]
+All values: [11471283, 10737750, 12820033, 0, 8818299, 10490724, 9144351, 8309677, 9468343, 10573805, 8597657, 0, 10137154, 12200164, 11011337, 12409783, 10996989, 11044815, 10996989, 9899176]
+Best by value:  <algorithm.Individual object at 0x00000286296CB230>
+Best (by value) [1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0] value: 12820033, weight: 6291888, to backpack_capacity: 112292
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 872854 , v_weight_diff: 105934,
+value% to expected: 93.6254932944382%, weight% to expected 98.3442177666087%
+v_result_to_backpack_capacity: 112292, 98.24658270067363%
+
+ For experiments:
+value: 12820033 val_diff: 872854, %val: 93.6254932944382% weight: 6291888, weight_diff: 105934, %weight: 98.3442177666087% backpack_diff: 112292, %backpack: 98.24658270067363%
+
+--------------Iteration 5--------------------
+Population: 20, 
+All weights: [5731773, 5234848, 5146182, 6339644, 3389246, 4917217, 4907422, 4975566, 4888588, 4154079, 4521927, 6386963, 5431099, 5070359, 4584440, 5784191, 4231886, 5522351, 4888588, 5863540]
+All values: [11469496, 10528088, 10233749, 12511761, 6773215, 9826502, 9803032, 10154175, 10026471, 8140416, 8987281, 12752815, 10571450, 10157724, 9409575, 11269530, 8521461, 11108188, 10026471, 11833033]
+Best by value:  <algorithm.Individual object at 0x00000286296E8830>
+Best (by value) [0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1] value: 12752815, weight: 6386963, to backpack_capacity: 17217
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 940072 , v_weight_diff: 10859,
+value% to expected: 93.13459608627458%, weight% to expected 99.83027036388322%
+v_result_to_backpack_capacity: 17217, 99.73115996115037%
+
+ For experiments:
+value: 12752815 val_diff: 940072, %val: 93.13459608627458% weight: 6386963, weight_diff: 10859, %weight: 99.83027036388322% backpack_diff: 17217, %backpack: 99.73115996115037%
+
+--------------Iteration 6--------------------
+Population: 20, 
+All weights: [6131879, 4154835, 4807826, 0, 6288463, 5798969, 0, 5586254, 0, 6131879, 5239553, 4931939, 6288463, 6027289, 6236604, 6333139, 4044416, 5392326, 5239553, 6131879]
+All values: [12613901, 8556360, 9802918, 0, 12877585, 11915491, 0, 11500085, 0, 12613901, 10820347, 10143762, 12877585, 12328231, 12827151, 12976777, 8207548, 11387815, 10820347, 12613901]
+Best by value:  <algorithm.Individual object at 0x00000286296E8950>
+Best (by value) [0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0] value: 12976777, weight: 6333139, to backpack_capacity: 71041
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 716110 , v_weight_diff: 64683,
+value% to expected: 94.77020441343012%, weight% to expected 98.98898406363917%
+v_result_to_backpack_capacity: 71041, 98.89070888076226%
+
+ For experiments:
+value: 12976777 val_diff: 716110, %val: 94.77020441343012% weight: 6333139, weight_diff: 64683, %weight: 98.98898406363917% backpack_diff: 71041, %backpack: 98.89070888076226%
+
+--------------Iteration 7--------------------
+Population: 20, 
+All weights: [5637024, 3028239, 3226813, 3682011, 6053652, 5442776, 4538099, 5442776, 3411545, 5253631, 5253159, 3562409, 5253631, 3869100, 3842159, 3886027, 5253631, 3869100, 4205537, 0]
+All values: [11478964, 6172824, 6455919, 7154424, 12421606, 11167620, 9135695, 11167620, 6584222, 10587953, 10735091, 7234110, 10587953, 7869539, 7621658, 7911672, 10587953, 7869539, 8556770, 0]
+Best by value:  <algorithm.Individual object at 0x00000286296E9550>
+Best (by value) [0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1] value: 12421606, weight: 6053652, to backpack_capacity: 350528
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1271281 , v_weight_diff: 344170,
+value% to expected: 90.71575629010887%, weight% to expected 94.62051304334507%
+v_result_to_backpack_capacity: 350528, 94.52657483081363%
+
+ For experiments:
+value: 12421606 val_diff: 1271281, %val: 90.71575629010887% weight: 6053652, weight_diff: 344170, %weight: 94.62051304334507% backpack_diff: 350528, %backpack: 94.52657483081363%
+
+--------------Iteration 8--------------------
+Population: 20, 
+All weights: [4306157, 5603993, 4960730, 4888110, 4990898, 0, 5703005, 5859897, 5748772, 4748479, 4580718, 5619698, 5018711, 5265012, 4306157, 5639012, 6074755, 4753121, 4836497, 6163932]
+All values: [8878362, 11446422, 10097136, 9917379, 10224535, 0, 11663522, 11811572, 11634788, 9766478, 9219505, 11612311, 10106142, 10776885, 8878362, 11482592, 12430835, 9526990, 9611529, 12717408]
+Best by value:  <algorithm.Individual object at 0x00000286296E9610>
+Best (by value) [1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1] value: 12717408, weight: 6163932, to backpack_capacity: 240248
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 975479 , v_weight_diff: 233890,
+value% to expected: 92.87601657707391%, weight% to expected 96.34422464394913%
+v_result_to_backpack_capacity: 240248, 96.24857514935557%
+
+ For experiments:
+value: 12717408 val_diff: 975479, %val: 92.87601657707391% weight: 6163932, weight_diff: 233890, %weight: 96.34422464394913% backpack_diff: 240248, %backpack: 96.24857514935557%
+
+--------------Iteration 9--------------------
+Population: 20, 
+All weights: [5026891, 5851916, 4486266, 5601594, 6084019, 3435159, 5807240, 5524802, 3626374, 4764508, 5843096, 4435839, 5601594, 6166343, 5495220, 4049224, 5633181, 5602118, 6316878, 3353335]
+All values: [10458411, 12046559, 9241341, 11673916, 12430784, 7290867, 11947367, 11361109, 7472695, 9951821, 12124149, 9140852, 11673916, 12641277, 11320980, 8518717, 11391782, 11492605, 13107020, 6954854]
+Best by value:  <algorithm.Individual object at 0x00000286296EA210>
+Best (by value) [0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1] value: 13107020, weight: 6316878, to backpack_capacity: 87302
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 585867 , v_weight_diff: 80944,
+value% to expected: 95.72137709162428%, weight% to expected 98.73481944324179%
+v_result_to_backpack_capacity: 87302, 98.6367965922257%
+
+ For experiments:
+value: 13107020 val_diff: 585867, %val: 95.72137709162428% weight: 6316878, weight_diff: 80944, %weight: 98.73481944324179% backpack_diff: 87302, %backpack: 98.6367965922257%
+
+--------------Iteration 10--------------------
+Population: 20, 
+All weights: [5763250, 5647236, 6252566, 4617906, 4334166, 0, 6356910, 4029919, 4741063, 5249669, 5833723, 4298667, 5524361, 3262475, 0, 2681350, 5876078, 4184292, 4705670, 4454014]
+All values: [11632495, 11421324, 12570407, 9291355, 8770539, 0, 12812264, 8164393, 9670740, 10665649, 11926277, 8611296, 11121858, 6377194, 0, 5354365, 11917192, 8430752, 9427539, 8977501]
+Best by value:  <algorithm.Individual object at 0x00000286296EAB10>
+Best (by value) [0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1] value: 12812264, weight: 6356910, to backpack_capacity: 47270
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 880623 , v_weight_diff: 40912,
+value% to expected: 93.56875580730346%, weight% to expected 99.36053238117597%
+v_result_to_backpack_capacity: 47270, 99.261888329185%
+
+ For experiments:
+value: 12812264 val_diff: 880623, %val: 93.56875580730346% weight: 6356910, weight_diff: 40912, %weight: 99.36053238117597% backpack_diff: 47270, %backpack: 99.261888329185%
+
+Wplyw prawdopodobienstwa mutacji
+
+
+2024-11-25 18:21:16.509875
+
+params:
+pop_size: 20, no_of_generations: 100, backpack_capacity: 6404180
+stop_condition: 0 - 0: generations, 1: stagnation
+selection_method: 0 - 0: roulette, 1: ranked
+crossover_method: 0 - 0: single point, 1: masked random
+chance_for_mutation: 1.0
+chance_for_crossover: 0.7
+results_to_store: 3 - for stagnation stop condition, difference between last best weights
+
+--------------Iteration 1--------------------
+Population: 20, 
+All weights: [0, 3266048, 6089769, 6089769, 0, 0, 5373432, 0, 6089769, 5559431, 6184832, 4614993, 4244506, 4833178, 5377658, 6089769, 6390742, 5045647, 5811394, 5083707]
+All values: [0, 6728527, 12412489, 12412489, 0, 0, 10940172, 0, 12412489, 11252031, 12237329, 9246606, 8903469, 9417540, 10513157, 12412489, 12931624, 10064103, 11470530, 10319165]
+Best by value:  <algorithm.Individual object at 0x0000017C8900AE10>
+Best (by value) [1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0] value: 12931624, weight: 6390742, to backpack_capacity: 13438
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 761263 , v_weight_diff: 7080,
+value% to expected: 94.44044926391345%, weight% to expected 99.88933734011356%
+v_result_to_backpack_capacity: 13438, 99.79016829633146%
+
+ For experiments:
+value: 12931624 val_diff: 761263, %val: 94.44044926391345% weight: 6390742, weight_diff: 7080, %weight: 99.88933734011356% backpack_diff: 13438, %backpack: 99.79016829633146%
+
+--------------Iteration 2--------------------
+Population: 20, 
+All weights: [0, 0, 0, 4711179, 5781965, 2649394, 4847388, 6064599, 3909855, 0, 4906502, 5427432, 0, 5353019, 5587515, 0, 0, 4852728, 3875062, 0]
+All values: [0, 0, 0, 9736794, 11632427, 5420422, 9742867, 12805504, 7889313, 0, 10134742, 11040893, 0, 10994577, 11777655, 0, 0, 9756762, 7885694, 0]
+Best by value:  <algorithm.Individual object at 0x0000017C8900B6E0>
+Best (by value) [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0] value: 12805504, weight: 6064599, to backpack_capacity: 339581
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 887383 , v_weight_diff: 333223,
+value% to expected: 93.51938710952629%, weight% to expected 94.79161814755084%
+v_result_to_backpack_capacity: 339581, 94.69751006373961%
+
+ For experiments:
+value: 12805504 val_diff: 887383, %val: 93.51938710952629% weight: 6064599, weight_diff: 333223, %weight: 94.79161814755084% backpack_diff: 339581, %backpack: 94.69751006373961%
+
+--------------Iteration 3--------------------
+Population: 20, 
+All weights: [0, 0, 6123832, 0, 5068865, 5447294, 0, 5505937, 0, 0, 0, 4343368, 0, 0, 0, 0, 0, 3383981, 0, 4190123]
+All values: [0, 0, 12540287, 0, 10470840, 11360397, 0, 11632609, 0, 0, 0, 8933205, 0, 0, 0, 0, 0, 6912044, 0, 8774444]
+Best by value:  <algorithm.Individual object at 0x0000017C8900B980>
+Best (by value) [0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0] value: 12540287, weight: 6123832, to backpack_capacity: 280348
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1152600 , v_weight_diff: 273990,
+value% to expected: 91.58249096775573%, weight% to expected 95.71744884430983%
+v_result_to_backpack_capacity: 280348, 95.62242160588865%
+
+ For experiments:
+value: 12540287 val_diff: 1152600, %val: 91.58249096775573% weight: 6123832, weight_diff: 273990, %weight: 95.71744884430983% backpack_diff: 280348, %backpack: 95.62242160588865%
+
+--------------Iteration 4--------------------
+Population: 20, 
+All weights: [0, 5351493, 0, 6030834, 5686622, 5523060, 5363004, 5670532, 3759329, 5844005, 4195052, 0, 0, 4757293, 6177683, 0, 0, 0, 4521557, 6132674]
+All values: [0, 11042365, 0, 12177932, 11622434, 11381280, 10944872, 11604299, 7629952, 11483436, 8735768, 0, 0, 9727609, 12735965, 0, 0, 0, 9066013, 12313655]
+Best by value:  <algorithm.Individual object at 0x0000017C890245C0>
+Best (by value) [0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0] value: 12735965, weight: 6177683, to backpack_capacity: 226497
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 956922 , v_weight_diff: 220139,
+value% to expected: 93.0115394949217%, weight% to expected 96.55915716317209%
+v_result_to_backpack_capacity: 226497, 96.46329428591952%
+
+ For experiments:
+value: 12735965 val_diff: 956922, %val: 93.0115394949217% weight: 6177683, weight_diff: 220139, %weight: 96.55915716317209% backpack_diff: 226497, %backpack: 96.46329428591952%
+
+--------------Iteration 5--------------------
+Population: 20, 
+All weights: [0, 0, 6054261, 5717064, 0, 0, 5686734, 6385405, 6016691, 6042100, 4957550, 0, 3534837, 6270687, 3321706, 6270687, 6270687, 6054261, 4028487, 0]
+All values: [0, 0, 12225580, 11516864, 0, 0, 11492896, 12856388, 11838453, 12190971, 10237327, 0, 6892352, 12584529, 6609135, 12584529, 12584529, 12225580, 8070061, 0]
+Best by value:  <algorithm.Individual object at 0x0000017C89024590>
+Best (by value) [0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1] value: 12856388, weight: 6385405, to backpack_capacity: 18775
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 836499 , v_weight_diff: 12417,
+value% to expected: 93.89099610622654%, weight% to expected 99.80591832658051%
+v_result_to_backpack_capacity: 18775, 99.7068321002845%
+
+ For experiments:
+value: 12856388 val_diff: 836499, %val: 93.89099610622654% weight: 6385405, weight_diff: 12417, %weight: 99.80591832658051% backpack_diff: 18775, %backpack: 99.7068321002845%
+
+--------------Iteration 6--------------------
+Population: 20, 
+All weights: [4441483, 5019635, 5013995, 5911590, 4662534, 5499426, 0, 4522637, 3904928, 5332989, 5332989, 3925324, 5261448, 4832168, 3782941, 4689827, 5779858, 3849227, 5841741, 5398542]
+All values: [8716324, 9954597, 9867252, 12050483, 9233905, 11238855, 0, 9246170, 7688836, 10892526, 10892526, 7993411, 10442751, 9624354, 7302170, 9573452, 11394885, 7464944, 11647548, 11003049]
+Best by value:  <algorithm.Individual object at 0x0000017C8900B860>
+Best (by value) [1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1] value: 12050483, weight: 5911590, to backpack_capacity: 492590
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1642404 , v_weight_diff: 486232,
+value% to expected: 88.0054220852038%, weight% to expected 92.40003863814904%
+v_result_to_backpack_capacity: 492590, 92.30830488836979%
+
+ For experiments:
+value: 12050483 val_diff: 1642404, %val: 88.0054220852038% weight: 5911590, weight_diff: 486232, %weight: 92.40003863814904% backpack_diff: 492590, %backpack: 92.30830488836979%
+
+--------------Iteration 7--------------------
+Population: 20, 
+All weights: [6260337, 5926651, 4691906, 4420632, 5082538, 5349331, 6026901, 0, 5889503, 4021866, 4781422, 0, 5939684, 5085427, 6004641, 4251289, 4127542, 4183594, 0, 4877399]
+All values: [12766914, 12134480, 9855788, 9258212, 10235973, 11287242, 12410282, 0, 12247440, 8423934, 9691033, 0, 12083714, 10346862, 12446540, 8809925, 8639003, 8733595, 0, 9781321]
+Best by value:  <algorithm.Individual object at 0x0000017C89025C10>
+Best (by value) [1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0] value: 12766914, weight: 6260337, to backpack_capacity: 143843
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 925973 , v_weight_diff: 137485,
+value% to expected: 93.23756195461192%, weight% to expected 97.85106556575033%
+v_result_to_backpack_capacity: 143843, 97.75392009593735%
+
+ For experiments:
+value: 12766914 val_diff: 925973, %val: 93.23756195461192% weight: 6260337, weight_diff: 137485, %weight: 97.85106556575033% backpack_diff: 143843, %backpack: 97.75392009593735%
+
+--------------Iteration 8--------------------
+Population: 20, 
+All weights: [5458983, 6057518, 4340729, 6231497, 3333120, 5825271, 4573195, 5088075, 5638330, 6057518, 0, 5615080, 6370817, 4573195, 5750365, 4363169, 0, 2474256, 6020007, 6040435]
+All values: [11263459, 12327619, 8627314, 12780343, 6906653, 11718410, 9389408, 10163984, 11702986, 12327619, 0, 11462236, 13456928, 9389408, 11640430, 9250737, 0, 5091480, 11991461, 12232188]
+Best by value:  <algorithm.Individual object at 0x0000017C89024BF0>
+Best (by value) [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1] value: 13456928, weight: 6370817, to backpack_capacity: 33363
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 235959 , v_weight_diff: 27005,
+value% to expected: 98.27677684041358%, weight% to expected 99.57790323019302%
+v_result_to_backpack_capacity: 33363, 99.47904337479584%
+
+ For experiments:
+value: 13456928 val_diff: 235959, %val: 98.27677684041358% weight: 6370817, weight_diff: 27005, %weight: 99.57790323019302% backpack_diff: 33363, %backpack: 99.47904337479584%
+
+--------------Iteration 9--------------------
+Population: 20, 
+All weights: [0, 5124696, 6109564, 6341812, 3648770, 0, 5040439, 3563530, 6383935, 6397375, 6028067, 6217218, 4584656, 6123406, 0, 5444773, 0, 5096135, 5147519, 0]
+All values: [0, 10251253, 12345834, 12969901, 7396189, 0, 10419559, 7432310, 12730523, 12760653, 12194245, 12449823, 9036699, 12339116, 0, 11014251, 0, 10366768, 10369336, 0]
+Best by value:  <algorithm.Individual object at 0x0000017C89025A90>
+Best (by value) [1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0] value: 12969901, weight: 6341812, to backpack_capacity: 62368
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 722986 , v_weight_diff: 56010,
+value% to expected: 94.719988560484%, weight% to expected 99.12454582200006%
+v_result_to_backpack_capacity: 62368, 99.02613605488915%
+
+ For experiments:
+value: 12969901 val_diff: 722986, %val: 94.719988560484% weight: 6341812, weight_diff: 56010, %weight: 99.12454582200006% backpack_diff: 62368, %backpack: 99.02613605488915%
+
+--------------Iteration 10--------------------
+Population: 20, 
+All weights: [6135681, 5494097, 5109663, 5480225, 4930803, 5202177, 5109663, 5326788, 5230357, 5488849, 5767891, 5858852, 5856826, 4611939, 6243873, 5266454, 5926742, 5682215, 5906395, 6272437]
+All values: [12147426, 11294482, 10476403, 11136198, 10095319, 10727853, 10476403, 10939603, 10452714, 11372473, 11952274, 12099498, 11841875, 9549640, 12746104, 10990675, 11996033, 11581290, 11741568, 12617193]
+Best by value:  <algorithm.Individual object at 0x0000017C89026DE0>
+Best (by value) [1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0] value: 12746104, weight: 6243873, to backpack_capacity: 160307
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 946783 , v_weight_diff: 153949,
+value% to expected: 93.08558523852567%, weight% to expected 97.59372799055679%
+v_result_to_backpack_capacity: 160307, 97.4968380026795%
+
+ For experiments:
+value: 12746104 val_diff: 946783, %val: 93.08558523852567% weight: 6243873, weight_diff: 153949, %weight: 97.59372799055679% backpack_diff: 160307, %backpack: 97.4968380026795%
+
+Wplyw prawdopodobienstwa mutacji
+
+
+2024-11-26 21:20:38.763867
+
+params:
+pop_size: 20, no_of_generations: 100, backpack_capacity: 6404180
+stop_condition: 0 - 0: generations, 1: stagnation
+selection_method: 0 - 0: roulette, 1: ranked
+crossover_method: 0 - 0: single point, 1: masked random
+chance_for_mutation: 0.1
+chance_for_crossover: 0.7
+results_to_store: 3 - for stagnation stop condition, difference between last best weights
+
+--------------Iteration 1--------------------
+Population: 20, 
+All weights: [5887352, 5887352, 5150530, 6369253, 6068279, 6366121, 6333869, 5680031, 6068279, 6120761, 6333869, 5182120, 0, 6333869, 5887352, 6333869, 5674244, 5951023, 6068279, 6120761]
+All values: [11933960, 11933960, 10274148, 12872139, 12214643, 12862469, 12793795, 11481522, 12214643, 12337081, 12793795, 10578824, 0, 12793795, 11933960, 12793795, 11477246, 11960663, 12214643, 12337081]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB6F90>
+Best (by value) [0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0] value: 12872139, weight: 6369253, to backpack_capacity: 34927
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 820748 , v_weight_diff: 28569,
+value% to expected: 94.00602663265971%, weight% to expected 99.55345741097517%
+v_result_to_backpack_capacity: 34927, 99.45462182512047%
+
+ For experiments:
+value: 12872139 val_diff: 820748, %val: 94.00602663265971% weight: 6369253, weight_diff: 28569, %weight: 99.55345741097517% backpack_diff: 34927, %backpack: 99.45462182512047%
+
+--------------Iteration 2--------------------
+Population: 20, 
+All weights: [6195418, 5216694, 5690285, 6195418, 4803761, 5230973, 5216694, 6163166, 5869844, 5722537, 5645238, 5198721, 5230973, 6070884, 6050771, 5230973, 5216694, 5198721, 5902096, 0]
+All values: [12715834, 10614983, 11754678, 12715834, 9637899, 10651943, 10614983, 12647160, 11903566, 11823352, 11443104, 10583269, 10651943, 12468545, 12184249, 10651943, 10614983, 10583269, 11972240, 0]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB7350>
+Best (by value) [1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1] value: 12715834, weight: 6195418, to backpack_capacity: 208762
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 977053 , v_weight_diff: 202404,
+value% to expected: 92.86452155779858%, weight% to expected 96.83636087405996%
+v_result_to_backpack_capacity: 208762, 96.74022279198898%
+
+ For experiments:
+value: 12715834 val_diff: 977053, %val: 92.86452155779858% weight: 6195418, weight_diff: 202404, %weight: 96.83636087405996% backpack_diff: 208762, %backpack: 96.74022279198898%
+
+--------------Iteration 3--------------------
+Population: 20, 
+All weights: [6068518, 6068518, 6138950, 5530314, 6138950, 5945412, 6138950, 5112667, 5756104, 5756104, 5756104, 6202621, 5756104, 5756104, 5338457, 0, 5913160, 5756104, 5945412, 6068518]
+All values: [12454912, 12454912, 12612781, 11308639, 12612781, 12210445, 12612781, 10455256, 11779649, 11779649, 11779649, 12639484, 11779649, 11779649, 10926266, 0, 12141771, 11779649, 12210445, 12454912]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB73B0>
+Best (by value) [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0] value: 12639484, weight: 6202621, to backpack_capacity: 201559
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1053403 , v_weight_diff: 195201,
+value% to expected: 92.30693278926496%, weight% to expected 96.94894606320713%
+v_result_to_backpack_capacity: 201559, 96.8526962077893%
+
+ For experiments:
+value: 12639484 val_diff: 1053403, %val: 92.30693278926496% weight: 6202621, weight_diff: 195201, %weight: 96.94894606320713% backpack_diff: 201559, %backpack: 96.8526962077893%
+
+--------------Iteration 4--------------------
+Population: 20, 
+All weights: [5822650, 0, 5894702, 6120492, 6362866, 6120492, 5822650, 6362866, 6120492, 6120492, 6120492, 6120492, 6120492, 4890718, 6120492, 6120492, 6120492, 6120492, 6120492, 6120492]
+All values: [12254540, 0, 12431356, 12902366, 13375976, 12902366, 12254540, 13375976, 12902366, 12902366, 12902366, 12902366, 12902366, 10427063, 12902366, 12902366, 12902366, 12902366, 12902366, 12902366]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB7AD0>
+Best (by value) [1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1] value: 13375976, weight: 6362866, to backpack_capacity: 41314
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 316911 , v_weight_diff: 34956,
+value% to expected: 97.6855793814701%, weight% to expected 99.45362656228947%
+v_result_to_backpack_capacity: 41314, 99.35489008741166%
+
+ For experiments:
+value: 13375976 val_diff: 316911, %val: 97.6855793814701% weight: 6362866, weight_diff: 34956, %weight: 99.45362656228947% backpack_diff: 41314, %backpack: 99.35489008741166%
+
+--------------Iteration 5--------------------
+Population: 20, 
+All weights: [5712657, 5724481, 5744909, 5692229, 5712657, 5712657, 5744909, 5712657, 5712657, 6341787, 5712657, 5542919, 5712657, 5744909, 6309535, 5744909, 5744909, 5712657, 4982596, 6297111]
+All values: [11712644, 11540591, 11781318, 11471917, 11712644, 11712644, 11781318, 11712644, 11712644, 12936667, 11712644, 11336226, 11712644, 11781318, 12867993, 11781318, 11781318, 11712644, 10183998, 12837475]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD40B0>
+Best (by value) [1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0] value: 12936667, weight: 6341787, to backpack_capacity: 62393
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 756220 , v_weight_diff: 56035,
+value% to expected: 94.47727860457769%, weight% to expected 99.12415506402023%
+v_result_to_backpack_capacity: 62393, 99.02574568484958%
+
+ For experiments:
+value: 12936667 val_diff: 756220, %val: 94.47727860457769% weight: 6341787, weight_diff: 56035, %weight: 99.12415506402023% backpack_diff: 62393, %backpack: 99.02574568484958%
+
+--------------Iteration 6--------------------
+Population: 20, 
+All weights: [6373780, 5990934, 6373780, 6373780, 6373780, 0, 5438732, 5438732, 6373780, 0, 6373780, 6373780, 0, 0, 5990934, 0, 0, 6373780, 5990934, 5990934]
+All values: [12920557, 12087425, 12920557, 12920557, 12920557, 0, 11031268, 11031268, 12920557, 0, 12920557, 12920557, 0, 0, 12087425, 0, 0, 12920557, 12087425, 12087425]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB7380>
+Best (by value) [1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0] value: 12920557, weight: 6373780, to backpack_capacity: 30400
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 772330 , v_weight_diff: 24042,
+value% to expected: 94.35962627895783%, weight% to expected 99.62421586596189%
+v_result_to_backpack_capacity: 30400, 99.52531003188543%
+
+ For experiments:
+value: 12920557 val_diff: 772330, %val: 94.35962627895783% weight: 6373780, weight_diff: 24042, %weight: 99.62421586596189% backpack_diff: 30400, %backpack: 99.52531003188543%
+
+--------------Iteration 7--------------------
+Population: 20, 
+All weights: [6086274, 5918493, 0, 6078726, 6086274, 5822570, 6086274, 5822570, 6312064, 6312064, 5822570, 5854822, 5703428, 0, 6312064, 6086274, 6312064, 5854822, 6142397, 6312064]
+All values: [12104729, 11709022, 0, 12065261, 12104729, 11613645, 12104729, 11613645, 12575739, 12575739, 11613645, 11682319, 11271597, 0, 12575739, 12104729, 12575739, 11682319, 12091964, 12575739]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD5BB0>
+Best (by value) [0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0] value: 12575739, weight: 6312064, to backpack_capacity: 92116
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1117148 , v_weight_diff: 85758,
+value% to expected: 91.84139911473746%, weight% to expected 98.65957508664668%
+v_result_to_backpack_capacity: 92116, 98.56162693740652%
+
+ For experiments:
+value: 12575739 val_diff: 1117148, %val: 91.84139911473746% weight: 6312064, weight_diff: 85758, %weight: 98.65957508664668% backpack_diff: 92116, %backpack: 98.56162693740652%
+
+--------------Iteration 8--------------------
+Population: 20, 
+All weights: [6097220, 6097220, 6141896, 5984840, 5759050, 6141896, 6097220, 6097220, 6367686, 5759050, 6367686, 6097220, 6367686, 6097220, 6097220, 6367686, 5714374, 6141896, 6141896, 5759050]
+All values: [11816522, 11816522, 11915714, 11553592, 11082582, 11915714, 11816522, 11816522, 12386724, 11082582, 12386724, 11816522, 12386724, 11816522, 11816522, 12386724, 10983390, 11915714, 11915714, 11082582]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD55B0>
+Best (by value) [1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0] value: 12386724, weight: 6367686, to backpack_capacity: 36494
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1306163 , v_weight_diff: 30136,
+value% to expected: 90.46101088835393%, weight% to expected 99.52896470079973%
+v_result_to_backpack_capacity: 36494, 99.43015343104035%
+
+ For experiments:
+value: 12386724 val_diff: 1306163, %val: 90.46101088835393% weight: 6367686, weight_diff: 30136, %weight: 99.52896470079973% backpack_diff: 36494, %backpack: 99.43015343104035%
+
+--------------Iteration 9--------------------
+Population: 20, 
+All weights: [5224391, 5379539, 4901141, 5224391, 6203115, 5379539, 5379539, 6203115, 6203115, 5473054, 5379539, 5224391, 5724717, 6203115, 6203115, 6203115, 4400815, 4958801, 6203115, 6203115]
+All values: [10600664, 11012824, 9925980, 10600664, 12701515, 11012824, 11012824, 12701515, 12701515, 11172869, 11012824, 10600664, 11614671, 12701515, 12701515, 12701515, 8911973, 10021512, 12701515, 12701515]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD5700>
+Best (by value) [0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1] value: 12701515, weight: 6203115, to backpack_capacity: 201065
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 991372 , v_weight_diff: 194707,
+value% to expected: 92.75994901586495%, weight% to expected 96.95666744088848%
+v_result_to_backpack_capacity: 201065, 96.86040991977116%
+
+ For experiments:
+value: 12701515 val_diff: 991372, %val: 92.75994901586495% weight: 6203115, weight_diff: 194707, %weight: 96.95666744088848% backpack_diff: 201065, %backpack: 96.86040991977116%
+
+--------------Iteration 10--------------------
+Population: 20, 
+All weights: [0, 6020576, 0, 6246366, 6246366, 6246366, 5580024, 6246366, 6246366, 0, 5635490, 6246366, 0, 6281750, 6246366, 6246366, 6246366, 5314434, 6246366, 6246366]
+All values: [0, 12358456, 0, 12829466, 12829466, 12829466, 11581141, 12829466, 12829466, 0, 11575480, 12829466, 0, 12907810, 12829466, 12829466, 12829466, 11001989, 12829466, 12829466]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD71D0>
+Best (by value) [0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0] value: 12907810, weight: 6281750, to backpack_capacity: 122430
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 785077 , v_weight_diff: 116072,
+value% to expected: 94.26653415017593%, weight% to expected 98.18575759063006%
+v_result_to_backpack_capacity: 122430, 98.08827984222805%
+
+ For experiments:
+value: 12907810 val_diff: 785077, %val: 94.26653415017593% weight: 6281750, weight_diff: 116072, %weight: 98.18575759063006% backpack_diff: 122430, %backpack: 98.08827984222805%
+
+Wplyw prawdopodobienstwa mutacji
+
+
+2024-11-26 21:20:39.307036
+
+params:
+pop_size: 20, no_of_generations: 100, backpack_capacity: 6404180
+stop_condition: 0 - 0: generations, 1: stagnation
+selection_method: 0 - 0: roulette, 1: ranked
+crossover_method: 0 - 0: single point, 1: masked random
+chance_for_mutation: 0.5
+chance_for_crossover: 0.7
+results_to_store: 3 - for stagnation stop condition, difference between last best weights
+
+--------------Iteration 1--------------------
+Population: 20, 
+All weights: [6111208, 0, 6311360, 6169229, 5901704, 0, 6033333, 0, 5011902, 5147066, 6132753, 3900623, 0, 0, 5462021, 5818121, 5094715, 5779153, 4826057, 5248270]
+All values: [12458664, 0, 12796615, 12277401, 11791289, 0, 12322166, 0, 10093885, 10360151, 12411516, 7722835, 0, 0, 11156531, 11803623, 10094777, 11555599, 9707431, 10757628]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB6FF0>
+Best (by value) [1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1] value: 12796615, weight: 6311360, to backpack_capacity: 92820
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 896272 , v_weight_diff: 86462,
+value% to expected: 93.45447019317402%, weight% to expected 98.6485713419348%
+v_result_to_backpack_capacity: 92820, 98.55063411709227%
+
+ For experiments:
+value: 12796615 val_diff: 896272, %val: 93.45447019317402% weight: 6311360, weight_diff: 86462, %weight: 98.6485713419348% backpack_diff: 92820, %backpack: 98.55063411709227%
+
+--------------Iteration 2--------------------
+Population: 20, 
+All weights: [5146122, 5354819, 0, 4766392, 5268754, 5285263, 4224421, 5320282, 0, 3975693, 4320979, 6168434, 5923720, 0, 5130030, 4941000, 6197833, 5726431, 5190798, 0]
+All values: [10348837, 10978401, 0, 9577517, 10819217, 10969730, 8846960, 11005900, 0, 8164123, 8838957, 12578020, 12201352, 0, 10520973, 9894075, 12718117, 11766818, 10448029, 0]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB7650>
+Best (by value) [1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0] value: 12718117, weight: 6197833, to backpack_capacity: 206347
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 974770 , v_weight_diff: 199989,
+value% to expected: 92.88119444789108%, weight% to expected 96.87410809491105%
+v_result_to_backpack_capacity: 206347, 96.77793253781124%
+
+ For experiments:
+value: 12718117 val_diff: 974770, %val: 92.88119444789108% weight: 6197833, weight_diff: 199989, %weight: 96.87410809491105% backpack_diff: 206347, %backpack: 96.77793253781124%
+
+--------------Iteration 3--------------------
+Population: 20, 
+All weights: [2907753, 0, 3025821, 6162651, 5747608, 0, 6162651, 5097029, 4888449, 3818042, 3025821, 6097181, 5499964, 5616169, 6097181, 4651481, 3894708, 5656364, 5492005, 5499964]
+All values: [5860374, 0, 6354813, 12467569, 11596236, 0, 12467569, 10476306, 10060012, 7795839, 6354813, 12254291, 11124344, 11455274, 12254291, 9599903, 7947585, 11501825, 11107674, 11124344]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB7CB0>
+Best (by value) [1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1] value: 12467569, weight: 6162651, to backpack_capacity: 241529
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1225318 , v_weight_diff: 235171,
+value% to expected: 91.05142691968466%, weight% to expected 96.32420220506292%
+v_result_to_backpack_capacity: 241529, 96.22857258852811%
+
+ For experiments:
+value: 12467569 val_diff: 1225318, %val: 91.05142691968466% weight: 6162651, weight_diff: 235171, %weight: 96.32420220506292% backpack_diff: 241529, %backpack: 96.22857258852811%
+
+--------------Iteration 4--------------------
+Population: 20, 
+All weights: [5474466, 0, 4903820, 0, 4261438, 6088976, 5978816, 4431176, 5958973, 0, 6096156, 5099103, 6183859, 5350337, 5190597, 6211836, 4588754, 0, 4504725, 5820817]
+All values: [11181466, 0, 9996715, 0, 8688276, 12455919, 11948489, 9064694, 12160692, 0, 12411412, 10130050, 12804424, 10856550, 10441356, 12736822, 9341446, 0, 9073711, 11913451]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD6CC0>
+Best (by value) [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0] value: 12804424, weight: 6183859, to backpack_capacity: 220321
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 888463 , v_weight_diff: 213963,
+value% to expected: 93.51149980278082%, weight% to expected 96.65569001450807%
+v_result_to_backpack_capacity: 220321, 96.55973130049436%
+
+ For experiments:
+value: 12804424 val_diff: 888463, %val: 93.51149980278082% weight: 6183859, weight_diff: 213963, %weight: 96.65569001450807% backpack_diff: 220321, %backpack: 96.55973130049436%
+
+--------------Iteration 5--------------------
+Population: 20, 
+All weights: [2292882, 3997451, 3546250, 0, 5544273, 5512021, 3740001, 3900117, 6210297, 4936368, 6386639, 6386639, 5986823, 0, 5434279, 6079134, 6366211, 5512021, 5336207, 4197243]
+All values: [4491662, 7719713, 6971706, 0, 10896338, 10827664, 7273635, 7771965, 12399823, 9951051, 12921953, 12921953, 11917996, 0, 10853749, 12411921, 12681226, 10827664, 10482414, 8167055]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD45F0>
+Best (by value) [0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0] value: 12921953, weight: 6386639, to backpack_capacity: 17541
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 770934 , v_weight_diff: 11183,
+value% to expected: 94.36982135323252%, weight% to expected 99.82520614046467%
+v_result_to_backpack_capacity: 17541, 99.72610076543758%
+
+ For experiments:
+value: 12921953 val_diff: 770934, %val: 94.36982135323252% weight: 6386639, weight_diff: 11183, %weight: 99.82520614046467% backpack_diff: 17541, %backpack: 99.72610076543758%
+
+--------------Iteration 6--------------------
+Population: 20, 
+All weights: [6255677, 5280767, 5389438, 0, 6364804, 5450123, 4853048, 5054656, 5993020, 6394551, 5745947, 6364804, 4655861, 6364804, 6364804, 5013469, 5603852, 4955628, 0, 2969347]
+All values: [12965293, 10928832, 11025386, 0, 12956312, 11151857, 10189477, 10481176, 12244363, 12914390, 11642380, 12956312, 9490911, 12956312, 12956312, 10185976, 11500996, 10051778, 0, 6248080]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB7D10>
+Best (by value) [0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1] value: 12965293, weight: 6255677, to backpack_capacity: 148503
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 727594 , v_weight_diff: 142145,
+value% to expected: 94.68633605170335%, weight% to expected 97.77822827831096%
+v_result_to_backpack_capacity: 148503, 97.68115512056188%
+
+ For experiments:
+value: 12965293 val_diff: 727594, %val: 94.68633605170335% weight: 6255677, weight_diff: 142145, %weight: 97.77822827831096% backpack_diff: 148503, %backpack: 97.68115512056188%
+
+--------------Iteration 7--------------------
+Population: 20, 
+All weights: [0, 4171461, 5370434, 5961917, 0, 5196776, 5660376, 4194932, 5831533, 5909637, 5465365, 6131127, 0, 0, 4687825, 5412342, 4138046, 0, 5562215, 5831533]
+All values: [0, 8309744, 10713201, 11945093, 0, 10508752, 11265350, 8572881, 11881267, 11999497, 11096912, 12291574, 0, 0, 9378683, 11001968, 8261538, 0, 11013141, 11881267]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD5430>
+Best (by value) [0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1] value: 12291574, weight: 6131127, to backpack_capacity: 273053
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1401313 , v_weight_diff: 266695,
+value% to expected: 89.7661245579548%, weight% to expected 95.83147202282277%
+v_result_to_backpack_capacity: 273053, 95.73633158343456%
+
+ For experiments:
+value: 12291574 val_diff: 1401313, %val: 89.7661245579548% weight: 6131127, weight_diff: 266695, %weight: 95.83147202282277% backpack_diff: 273053, %backpack: 95.73633158343456%
+
+--------------Iteration 8--------------------
+Population: 20, 
+All weights: [5126034, 4679517, 4573730, 4859076, 0, 4101343, 0, 5159732, 3903032, 4355899, 5233982, 6008069, 3973435, 4285496, 5447897, 6092909, 4453525, 6048444, 0, 5047599]
+All values: [10168655, 9308820, 9163829, 9457708, 0, 8396732, 0, 10163801, 7884872, 8631258, 10569098, 12227674, 7951519, 8564611, 11126318, 12391027, 9115000, 12462795, 0, 9914416]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD5160>
+Best (by value) [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0] value: 12462795, weight: 6048444, to backpack_capacity: 355736
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1230092 , v_weight_diff: 349378,
+value% to expected: 91.01656210264497%, weight% to expected 94.53911034098792%
+v_result_to_backpack_capacity: 355736, 94.44525294417085%
+
+ For experiments:
+value: 12462795 val_diff: 1230092, %val: 91.01656210264497% weight: 6048444, weight_diff: 349378, %weight: 94.53911034098792% backpack_diff: 355736, %backpack: 94.44525294417085%
+
+--------------Iteration 9--------------------
+Population: 20, 
+All weights: [6343418, 6361862, 5488749, 0, 6062525, 0, 4868416, 0, 0, 0, 6343418, 6058648, 5361174, 5110165, 4255975, 6306566, 0, 5216628, 5916861, 6306566]
+All values: [13138489, 12674394, 10797859, 0, 12521248, 0, 9891626, 0, 0, 0, 13138489, 12453268, 10633229, 10453044, 8599482, 12783846, 0, 10366171, 11641717, 12783846]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD5D00>
+Best (by value) [1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1] value: 13138489, weight: 6343418, to backpack_capacity: 60762
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 554398 , v_weight_diff: 54404,
+value% to expected: 95.9511971434512%, weight% to expected 99.14964811462401%
+v_result_to_backpack_capacity: 60762, 99.05121342623099%
+
+ For experiments:
+value: 13138489 val_diff: 554398, %val: 95.9511971434512% weight: 6343418, weight_diff: 54404, %weight: 99.14964811462401% backpack_diff: 60762, %backpack: 99.05121342623099%
+
+--------------Iteration 10--------------------
+Population: 20, 
+All weights: [5817779, 0, 5084618, 0, 0, 5828413, 6182387, 6269716, 5561952, 0, 5304630, 6182387, 3079037, 6069155, 6269716, 5817779, 5585034, 4189533, 5373242, 0]
+All values: [11643047, 0, 10453226, 0, 0, 11816249, 12697021, 12829337, 11350657, 0, 10686463, 12697021, 6180979, 12274203, 12829337, 11643047, 11466520, 8466296, 11304221, 0]
+Best by value:  <algorithm.Individual object at 0x0000026EB2E0B290>
+Best (by value) [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0] value: 12829337, weight: 6269716, to backpack_capacity: 134464
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 863550 , v_weight_diff: 128106,
+value% to expected: 93.69344098143803%, weight% to expected 97.9976623294615%
+v_result_to_backpack_capacity: 134464, 97.90037131998164%
+
+ For experiments:
+value: 12829337 val_diff: 863550, %val: 93.69344098143803% weight: 6269716, weight_diff: 128106, %weight: 97.9976623294615% backpack_diff: 134464, %backpack: 97.90037131998164%
+
+Wplyw prawdopodobienstwa mutacji
+
+
+2024-11-26 21:20:39.896831
+
+params:
+pop_size: 20, no_of_generations: 100, backpack_capacity: 6404180
+stop_condition: 0 - 0: generations, 1: stagnation
+selection_method: 0 - 0: roulette, 1: ranked
+crossover_method: 0 - 0: single point, 1: masked random
+chance_for_mutation: 1.0
+chance_for_crossover: 0.7
+results_to_store: 3 - for stagnation stop condition, difference between last best weights
+
+--------------Iteration 1--------------------
+Population: 20, 
+All weights: [6236045, 6044915, 6110328, 3951706, 5692728, 5744235, 5634641, 0, 0, 0, 6285085, 5842026, 3974031, 6331987, 0, 0, 6375209, 5842026, 0, 3825563]
+All values: [12580793, 12332048, 12429617, 7975954, 11476214, 11798281, 11305194, 0, 0, 0, 12811472, 11760227, 7758392, 12978538, 0, 0, 12685250, 11760227, 0, 7359038]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB73B0>
+Best (by value) [0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0] value: 12978538, weight: 6331987, to backpack_capacity: 72193
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 714349 , v_weight_diff: 65835,
+value% to expected: 94.78306510526232%, weight% to expected 98.97097793592881%
+v_result_to_backpack_capacity: 72193, 98.87272062933896%
+
+ For experiments:
+value: 12978538 val_diff: 714349, %val: 94.78306510526232% weight: 6331987, weight_diff: 65835, %weight: 98.97097793592881% backpack_diff: 72193, %backpack: 98.87272062933896%
+
+--------------Iteration 2--------------------
+Population: 20, 
+All weights: [5182056, 4278505, 5686278, 4662856, 5072223, 5686278, 5802933, 5802933, 6205908, 4458806, 0, 0, 0, 4913806, 6015429, 6015429, 5802933, 5072223, 6202233, 3986726]
+All values: [10512418, 8533640, 11710388, 9313668, 10170800, 11710388, 11579118, 11579118, 12472963, 8923728, 0, 0, 0, 9905715, 12188839, 12188839, 11579118, 10170800, 12390369, 8133601]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB6D20>
+Best (by value) [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0] value: 12472963, weight: 6205908, to backpack_capacity: 198272
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1219924 , v_weight_diff: 191914,
+value% to expected: 91.09081963504117%, weight% to expected 97.00032292239453%
+v_result_to_backpack_capacity: 198272, 96.90402206059167%
+
+ For experiments:
+value: 12472963 val_diff: 1219924, %val: 91.09081963504117% weight: 6205908, weight_diff: 191914, %weight: 97.00032292239453% backpack_diff: 198272, %backpack: 96.90402206059167%
+
+--------------Iteration 3--------------------
+Population: 20, 
+All weights: [5543189, 0, 5455249, 5003075, 4229739, 5810349, 0, 5075416, 3899594, 6187452, 6397709, 6284308, 5128998, 3814934, 0, 0, 6187452, 4984573, 0, 0]
+All values: [11247939, 0, 11047483, 10102357, 8209644, 11782932, 0, 10396551, 7730807, 12284721, 13068693, 12682016, 10482699, 7815677, 0, 0, 12284721, 9894728, 0, 0]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB7F80>
+Best (by value) [0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1] value: 13068693, weight: 6397709, to backpack_capacity: 6471
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 624194 , v_weight_diff: 113,
+value% to expected: 95.44147264196367%, weight% to expected 99.99823377393119%
+v_result_to_backpack_capacity: 6471, 99.89895661895825%
+
+ For experiments:
+value: 13068693 val_diff: 624194, %val: 95.44147264196367% weight: 6397709, weight_diff: 113, %weight: 99.99823377393119% backpack_diff: 6471, %backpack: 99.89895661895825%
+
+--------------Iteration 4--------------------
+Population: 20, 
+All weights: [4051501, 0, 4359636, 6394950, 0, 5029604, 5211133, 4531121, 3360566, 5133605, 3598716, 4723132, 0, 4103870, 4109001, 5329277, 5269256, 3407276, 4208929, 4723132]
+All values: [7768512, 0, 8951688, 12840879, 0, 10506185, 10718604, 9199777, 6951315, 10606937, 7502322, 9603589, 0, 8393759, 8719541, 11079182, 10629222, 6883484, 8413151, 9603589]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AB79B0>
+Best (by value) [1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1] value: 12840879, weight: 6394950, to backpack_capacity: 9230
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 852008 , v_weight_diff: 2872,
+value% to expected: 93.77773292074929%, weight% to expected 99.9551097232777%
+v_result_to_backpack_capacity: 9230, 99.85587538139153%
+
+ For experiments:
+value: 12840879 val_diff: 852008, %val: 93.77773292074929% weight: 6394950, weight_diff: 2872, %weight: 99.9551097232777% backpack_diff: 9230, %backpack: 99.85587538139153%
+
+--------------Iteration 5--------------------
+Population: 20, 
+All weights: [6149048, 3274220, 0, 5294881, 0, 4723431, 5212293, 6348393, 6197109, 6252802, 0, 4544569, 6149048, 5745294, 0, 3426454, 6149048, 5525725, 0, 0]
+All values: [12424215, 6728905, 0, 10718206, 0, 9774612, 10510892, 12763061, 12800948, 12708690, 0, 9276595, 12424215, 12102603, 0, 6854041, 12424215, 11136702, 0, 0]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD5EE0>
+Best (by value) [0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] value: 12800948, weight: 6197109, to backpack_capacity: 207071
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 891939 , v_weight_diff: 200713,
+value% to expected: 93.48611435995929%, weight% to expected 96.86279174381531%
+v_result_to_backpack_capacity: 207071, 96.76662742146536%
+
+ For experiments:
+value: 12800948 val_diff: 891939, %val: 93.48611435995929% weight: 6197109, weight_diff: 200713, %weight: 96.86279174381531% backpack_diff: 207071, %backpack: 96.76662742146536%
+
+--------------Iteration 6--------------------
+Population: 20, 
+All weights: [4202755, 3548728, 0, 0, 5462274, 5858316, 5674273, 4993917, 4786051, 4756332, 5815568, 5815568, 6250517, 3416882, 0, 0, 5429829, 4386435, 0, 0]
+All values: [8264611, 7162186, 0, 0, 10894051, 11639833, 11266311, 9780876, 9637277, 9728283, 11735384, 11735384, 12516904, 6941787, 0, 0, 10656822, 8732864, 0, 0]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD4650>
+Best (by value) [0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0] value: 12516904, weight: 6250517, to backpack_capacity: 153663
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 1175983 , v_weight_diff: 147305,
+value% to expected: 91.4117234736546%, weight% to expected 97.69757583127509%
+v_result_to_backpack_capacity: 153663, 97.60058274439507%
+
+ For experiments:
+value: 12516904 val_diff: 1175983, %val: 91.4117234736546% weight: 6250517, weight_diff: 147305, %weight: 97.69757583127509% backpack_diff: 153663, %backpack: 97.60058274439507%
+
+--------------Iteration 7--------------------
+Population: 20, 
+All weights: [3611447, 5836809, 3785779, 5687799, 4735201, 5597005, 3441213, 4562286, 5439850, 0, 5851807, 4076141, 3029371, 5204756, 4600912, 5722073, 5784446, 4320137, 5181718, 3670266]
+All values: [7292089, 11651025, 7660620, 11565954, 9940131, 11150276, 6981251, 9475412, 10846010, 0, 11637292, 8202576, 6091043, 10548456, 9295451, 11494837, 11660353, 9040966, 10799966, 7440068]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD71D0>
+Best (by value) [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1] value: 11660353, weight: 5784446, to backpack_capacity: 619734
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 2032534 , v_weight_diff: 613376,
+value% to expected: 85.15627858464033%, weight% to expected 90.4127373346742%
+v_result_to_backpack_capacity: 619734, 90.3229765559369%
+
+ For experiments:
+value: 11660353 val_diff: 2032534, %val: 85.15627858464033% weight: 5784446, weight_diff: 613376, %weight: 90.4127373346742% backpack_diff: 619734, %backpack: 90.3229765559369%
+
+--------------Iteration 8--------------------
+Population: 20, 
+All weights: [6010168, 0, 0, 4951788, 0, 6068289, 5121526, 0, 2904263, 5210962, 0, 6309270, 6257433, 5464470, 5033039, 6396589, 6257433, 4422693, 0, 4825142]
+All values: [12251523, 0, 0, 10075327, 0, 12207587, 10130793, 0, 5766482, 10617338, 0, 12681015, 12679959, 10887137, 10143766, 12772638, 12679959, 8801696, 0, 9743993]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD4E90>
+Best (by value) [1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1] value: 12772638, weight: 6396589, to backpack_capacity: 7591
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 920249 , v_weight_diff: 1233,
+value% to expected: 93.27936468036287%, weight% to expected 99.98072781643504%
+v_result_to_backpack_capacity: 7591, 99.8814680411856%
+
+ For experiments:
+value: 12772638 val_diff: 920249, %val: 93.27936468036287% weight: 6396589, weight_diff: 1233, %weight: 99.98072781643504% backpack_diff: 7591, %backpack: 99.8814680411856%
+
+--------------Iteration 9--------------------
+Population: 20, 
+All weights: [5290217, 4181127, 5218332, 6134647, 5592058, 5042756, 4712177, 6072844, 4348060, 5740183, 4417677, 6133160, 4473680, 3570620, 5446916, 4523105, 6271919, 4064101, 5797118, 3586533]
+All values: [10795715, 8515894, 10829240, 12461023, 11241741, 10308932, 9347222, 12172944, 8803367, 11729718, 9014810, 12971408, 8989985, 7101235, 11207835, 9476429, 12829276, 8462205, 12263328, 7380283]
+Best by value:  <algorithm.Individual object at 0x0000026EB0AD5130>
+Best (by value) [0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1] value: 12971408, weight: 6133160, to backpack_capacity: 271020
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 721479 , v_weight_diff: 264662,
+value% to expected: 94.73099427461864%, weight% to expected 95.86324846174213%
+v_result_to_backpack_capacity: 271020, 95.76807647505223%
+
+ For experiments:
+value: 12971408 val_diff: 721479, %val: 94.73099427461864% weight: 6133160, weight_diff: 264662, %weight: 95.86324846174213% backpack_diff: 271020, %backpack: 95.76807647505223%
+
+--------------Iteration 10--------------------
+Population: 20, 
+All weights: [6190184, 6190184, 5785221, 5510580, 0, 5851273, 4667500, 5510580, 0, 0, 6190184, 6190184, 0, 5381678, 0, 5522732, 0, 6174891, 6190184, 6190184]
+All values: [12790959, 12790959, 11565232, 11418324, 0, 11577721, 9682481, 11418324, 0, 0, 12790959, 12790959, 0, 10804253, 0, 11488661, 0, 12255283, 12790959, 12790959]
+Best by value:  <algorithm.Individual object at 0x0000026EB3403E00>
+Best (by value) [1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1] value: 12790959, weight: 6190184, to backpack_capacity: 213996
+
+Expected        [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1] value: 13692887, weight: 6397822, 99.9007210915371%
+
+Compare best by value:
+v_value_diff: 901928 , v_weight_diff: 207638,
+value% to expected: 93.41316407562555%, weight% to expected 96.75455178340378%
+v_result_to_backpack_capacity: 213996, 96.65849492050505%
+
+ For experiments:
+value: 12790959 val_diff: 901928, %val: 93.41316407562555% weight: 6190184, weight_diff: 207638, %weight: 96.75455178340378% backpack_diff: 213996, %backpack: 96.65849492050505%

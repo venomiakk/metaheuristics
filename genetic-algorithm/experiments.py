@@ -161,6 +161,7 @@ def experiment2(mutation_probability):
     """
     @brief  Wplyw prawdopodobienstwa mutacji
     """
+    print(f'szansa {mutation_probability}')
     population_size = 20
     no_of_generations = 100
     backpack_capacity = 6404180
@@ -212,6 +213,7 @@ def experiment1(crossover_probability):
     """
     @brief  Wplyw prawdopodobienstwa krzyzowania
     """
+    print(f'szansa {crossover_probability}')
     population_size = 20
     no_of_generations = 100
     backpack_capacity = 6404180
@@ -263,14 +265,14 @@ def test():
     @brief  Wplyw prawdopodobienstwa krzyzowania
     """
     # data:
-    population_size = 2
-    no_of_generations = 10
+    population_size = 1000
+    no_of_generations = 1000
     backpack_capacity = 6404180
     stop_condition = 0
     selection_method = 0
     crossover_method = 0
     results_to_store = 3
-    chance_for_mutation = 0.7
+    chance_for_mutation = 0.3
     chance_for_crossover = 0.7
 
     best_values = []

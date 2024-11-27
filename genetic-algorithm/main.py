@@ -56,16 +56,11 @@ def set_run_all_experiments():
     experiments.experiment5(0)
     experiments.experiment5(1)
 
-    # TODO czy jeszcze szansa na krzyzowanie z druga metoda?
+
 
 
 if __name__ == '__main__':
-    # interface()
-    #
-    experiments.experiment1(0.1)
+    interface()
 
-    # experiments.test()
 
-# Maximum value: 13692887
-# Maximum weight: 6397822
-# Expected chromosome: [0,0,0,0,1,1,0,1,0,0,1,1,0,1,0,1,0,0,0,0,1,1,0,1,0,1]
+

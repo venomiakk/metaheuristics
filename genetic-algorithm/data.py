@@ -28,11 +28,11 @@ items = [
 ]
 
 
-# Backpack capacity: 6404180
-# Maximum value: 13692887
-# Maximum weight: 6397822
-# Expected chromosome: [0,0,0,0,1,1,0,1,0,0,1,1,0,1,0,1,0,0,0,0,1,1,0,1,0,1]
-# Selected items:
+# Pojemnosc plecaka: 6404180
+# Maksymalna wartosc: 13692887
+# Maksymalna waga: 6397822
+# Chromosom: [0,0,0,0,1,1,0,1,0,0,1,1,0,1,0,1,0,0,0,0,1,1,0,1,0,1]
+# Przedmioty:
 # {'id': 25, 'name': 'Puchar z cynku', 'weight': 978724, 'value': 2100851}
 # {'id': 23, 'name': 'Kusza', 'weight': 952360, 'value': 2068204}
 # {'id': 21, 'name': 'Trucizna', 'weight': 730061, 'value': 1528646}

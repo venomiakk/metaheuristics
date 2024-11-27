@@ -46,9 +46,9 @@ def save_results_txt(filename, all_generations, population_size, no_of_generatio
         # for k in ga.stored_results:
         #     stored_weights.append(k)
         print(f'\n For experiments:\n'
-              f'value: {bestValue.value} val_diff: {expectedBestValue - bestValue.value}, %val: {bestValue.value / expectedBestValue * 100}% '
-              f'weight: {bestValue.weight}, weight_diff: {expectedBestWeight - bestValue.weight}, %weight: {bestValue.weight / expectedBestWeight * 100}% '
-              f'backpack_diff: {backpack_capacity - bestValue.weight}, %backpack: {bestValue.weight / backpack_capacity * 100}%\n')
+              f'value: {bestValue.value} val_diff: {expectedBestValue - bestValue.value}, %val: {round((bestValue.value / expectedBestValue * 100), 2)}% '
+              f'weight: {bestValue.weight}, weight_diff: {expectedBestWeight - bestValue.weight}, %weight: {round((bestValue.weight / expectedBestWeight * 100), 2)}% '
+              f'backpack_diff: {backpack_capacity - bestValue.weight}, %backpack: {round((bestValue.weight / backpack_capacity * 100), 2)}%\n')
         with open(filename, 'a') as file:
             file.write(f'\n--------------Iteration {i + 1}--------------------\n'
                        f'Population: {population_size}, \n'
@@ -77,24 +77,3 @@ def save_results_txt(filename, all_generations, population_size, no_of_generatio
                        )
             if bestValue.weight >= expectedBestWeight or bestValue.value >= expectedBestValue:
                 file.write(f'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
-
-    # res1 = find_phrases_in_file(filename, 'v_result_to_backpack_capacity:')
-    # res2 = find_phrases_in_file(filename, 'v_weight_diff:')
-    # res3 = find_phrases_in_file(filename, 'v_value_diff:')
-    # res4 = find_phrases_in_file(filename, 'w_result_to_backpack_capacity:')
-    # res5 = find_phrases_in_file(filename, 'w_weight_diff:')
-    # res6 = find_phrases_in_file(filename, 'w_value_diff:')
-    # with open(filename, 'a') as f2:
-    #     f2.write(f'\n\n-------------BEST RESULTS------------'
-    #              f'\n[[result_to_backpack_capacity,line_number]] by value\n'
-    #              f'{res1}\n'
-    #              f'[[weight_diff,line_number]]\n'
-    #              f'{res2}\n'
-    #              f'[[value_diff,line_number]]\n'
-    #              f'{res3}\n'
-    #              f'\n[[result_to_backpack_capacity,line_number]] by weight\n'
-    #              f'{res4}\n'
-    #              f'[[weight_diff,line_number]]\n'
-    #              f'{res5}\n'
-    #              f'[[value_diff,line_number]]\n'
-    #              f'{res6}\n')

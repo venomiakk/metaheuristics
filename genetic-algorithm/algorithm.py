@@ -77,7 +77,7 @@ class GeneticAlgorithm:
                 new_generation.extend([a_child, b_child])
 
             population = new_generation
-            #TODO best by value or best by weight?
+
             best_individual = select_highest_value_individual(population)
 
             if self.stop_condition == 0:
@@ -95,15 +95,15 @@ class GeneticAlgorithm:
         self.final_iterations = generations_iter
         expectedBestValue = 13692887
         expectedBestWeight = 6397822
-        # print(f'\nGenerations: {generations_iter}\n'
-        #       f'Best by value: {best_individual.chromosome}\n'
-        #       f'Value: {best_individual.value}, Weight: {best_individual.weight}, '
-        #       f'{best_individual.weight / self.backpack_capacity * 100}% of backpack\n'
-        #       f'Diff to expected best values:\n'
-        #       f'value_diff: {expectedBestValue - best_individual.value}, '
-        #       f'{best_individual.value / expectedBestValue * 100}%, '
-        #       f'weight_diff: {expectedBestWeight - best_individual.weight}, '
-        #       f'{best_individual.weight / expectedBestWeight * 100}%')
+        print(f'\nGenerations: {generations_iter}\n'
+              f'Best by value: {best_individual.chromosome}\n'
+              f'Value: {best_individual.value}, Weight: {best_individual.weight}, '
+              f'{best_individual.weight / self.backpack_capacity * 100}% of backpack\n'
+              f'Diff to expected best values:\n'
+              f'value_diff: {expectedBestValue - best_individual.value}, '
+              f'{best_individual.value / expectedBestValue * 100}%, '
+              f'weight_diff: {expectedBestWeight - best_individual.weight}, '
+              f'{best_individual.weight / expectedBestWeight * 100}%')
         return population
 
     def __generate_starting_population(self):
@@ -151,18 +151,6 @@ class GeneticAlgorithm:
         probabilities = [(self.population_size - rank) / rank_sum for rank in range(self.population_size)]
         cumulative_probability = [sum(probabilities[:i + 1]) for i in range(len(probabilities))]
 
-        # Baker's linear ranking selection
-        # sp = 1.0  # selection pressure, typically between 1 and 2
-        # rank_sum = self.population_size * (self.population_size + 1) / 2  # sum of an arithmetic series
-        # probabilities = [
-        #     (2 - sp) / self.population_size + 2 * rank * (sp - 1) / (self.population_size * (self.population_size - 1))
-        #     for rank in range(self.population_size)]
-        # cumulative_probability = [sum(probabilities[:i + 1]) for i in range(len(probabilities))]
-
-        # print(rank_sum)
-        # print(probabilities)
-        # print(cumulative_probability)
-
         selected_individuals = []
         for _ in range(self.population_size):
             r = random.random()
@@ -194,23 +182,14 @@ class GeneticAlgorithm:
         else:
             return parent_a, parent_b
 
-    def __crossover_masked_random(self, parent_a, parent_b, min_crossings=6, max_crossings=15):
+    def __crossover_masked_random(self, parent_a, parent_b):
         if random.random() <= self.chance_for_crossover:
-            # crossing_points = random.randint(min_crossings, max_crossings)
-            # interval = int(len(parent_a.chromosome) / crossing_points) + 1
-            # print(crossing_points)
-            # print(interval)
-
             crossing_mask = [random.randint(0, 1) for _ in range(len(parent_a.chromosome))]
             a_child_chromosome = [a_gene if mask_bit == 1 else b_gene for a_gene, b_gene, mask_bit in
                                   zip(parent_a.chromosome, parent_b.chromosome, crossing_mask)]
             b_child_chromosome = [b_gene if mask_bit == 1 else a_gene for a_gene, b_gene, mask_bit in
                                   zip(parent_a.chromosome, parent_b.chromosome, crossing_mask)]
-            # print(parent_a.chromosome)
-            # print(parent_b.chromosome)
-            # print(crossing_mask)
-            # print(a_child_chromosome)
-            # print(b_child_chromosome)
+
             return Individual(a_child_chromosome), Individual(b_child_chromosome)
         else:
             return parent_a, parent_b

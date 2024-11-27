@@ -1,10 +1,6 @@
 import matplotlib.pyplot as plt
-import numpy as np
 from matplotlib.ticker import PercentFormatter
 
-
-def format_with_commas(x, pos):
-    return f'{int(x): }'
 
 
 def bar_plot_weights(best_weights, avg_weights, worst_weights):
