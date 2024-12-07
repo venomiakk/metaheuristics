@@ -23,8 +23,14 @@ class Ant:
 
         for attraction in self.possible_to_visit:
             used_indexes.append(attraction)
+            #!!
             pheromones = traces[current_attraction - 1][attraction - 1] ** alpha
-            heuristics = (1 / distances[current_attraction - 1][attraction - 1]) ** beta
+            #!!
+            attractions_dst = distances[current_attraction - 1][attraction - 1]
+            if attractions_dst == 0:
+                attractions_dst = 1e-10
+
+            heuristics = (1 / attractions_dst) ** beta
             probability = pheromones * heuristics
             probabilities_sum += probability
             used_pobabilties.append(probability)
@@ -54,7 +60,9 @@ class Ant:
     def get_travelled_distance(self, distances_matrix):
         total_distance = 0
         for i in range(1, len(self.visited_attractions)):
+            #!!
             first = self.visited_attractions[i - 1] - 1
+            #!!
             second = self.visited_attractions[i] - 1
             total_distance += distances_matrix[first][second]
         return total_distance

@@ -1,14 +1,8 @@
 import numpy as np
 
-data1 = 'data/A-n32-k5.txt'
-data2 = 'data/A-n80-k10.txt'
 
-
-def get_distances_matrix(which_file=0):
+def get_distances_matrix(filepath='data/A-n32-k5.txt'):
     data = []
-    filepath = 'data/A-n32-k5.txt'
-    if which_file != 0:
-        filepath = 'data/A-n80-k10.txt'
 
     with open(filepath, 'r') as file:
         for line in file:
