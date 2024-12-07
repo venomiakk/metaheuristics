@@ -4,9 +4,13 @@ data1 = 'data/A-n32-k5.txt'
 data2 = 'data/A-n80-k10.txt'
 
 
-def get_distances_matrix():
+def get_distances_matrix(which_file=0):
     data = []
-    with open(data1, 'r') as file:
+    filepath = 'data/A-n32-k5.txt'
+    if which_file != 0:
+        filepath = 'data/A-n80-k10.txt'
+
+    with open(filepath, 'r') as file:
         for line in file:
             parts = line.split()
             index = int(parts[0])
@@ -29,7 +33,5 @@ def get_distances_matrix():
     return distances_matix
 
 
-
 if __name__ == '__main__':
-    mtp = get_distances_matrix()
-    print(mtp)
+    print('readdata')
