@@ -2,15 +2,16 @@ import random
 
 from readdata import get_distances_matrix
 from ant import Ant
+import numpy as np
 
 
 class AntAlgorithm:
-    def __init__(self, num_ants, num_of_iterations, alpha=0.5, beta=0.5, evaporation=0.5,
-                 random_attraction_probability=0.0, file_path='data/A-n32-k5.txt', stop_condition=0):
+    def __init__(self, num_ants=1, num_of_iterations=10, alpha=0.5, beta=0.5, evaporation=0.5,
+                 random_attraction_probability=0.0, file_path='data/A-n32-k5.txt', stop_condition=0,
+                 no_changed_items=10):
         self.distances = get_distances_matrix(filepath=file_path)
         self.traces = self.__generate_traces()
         self.num_of_attractions = len(self.distances)
-
 
         self.num_ants_multiplier = num_ants
         self.ants_colony = self.__generate_colony()
@@ -23,7 +24,11 @@ class AntAlgorithm:
 
         self.all_distances_accross_iters = []
 
+        self.stop_cond = stop_condition
+        self.no_changed_items = no_changed_items
+
     def run(self):
+        last_bests = []
         # 1. generate traces - constructor
         # 2. generate first colony - constructor
 
@@ -48,13 +53,17 @@ class AntAlgorithm:
                     best_dst = dst
 
             # checking for stop
-            # TODO implement other stop condition
-            if iteration >= self.num_of_iterations:
-                # print("ALGO:")
-                # print(best_ant.visited_attractions)
-                # print(best_dst)
-                # print(self.get_all_distances_stats_from_colony())
-                return best_ant, best_dst
+            if self.stop_cond == 0:
+                if iteration >= self.num_of_iterations:
+                    return best_ant, best_dst
+            else:
+                last_bests.append(best_dst)
+                if len(last_bests) > self.no_changed_items:
+                    last_bests.pop(0)
+                    avg_diff = np.mean(np.abs(np.diff(last_bests)))
+                    if avg_diff < 1:
+                        print(f'Iterations: {iteration}')
+                        return best_ant, best_dst
 
             # generate colony for next iteration
             self.ants_colony = self.__generate_colony()
