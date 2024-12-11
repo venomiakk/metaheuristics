@@ -6,8 +6,8 @@ import numpy as np
 
 
 class AntAlgorithm:
-    def __init__(self, num_ants=1, num_of_iterations=10, alpha=0.5, beta=0.5, evaporation=0.5,
-                 random_attraction_probability=0.0, file_path='data/A-n32-k5.txt', stop_condition=0,
+    def __init__(self, num_ants=1, num_of_iterations=30, alpha=2, beta=2, evaporation=0.5,
+                 random_attraction_probability=0.1, file_path='data/A-n32-k5.txt', stop_condition=0,
                  no_changed_items=10):
         self.distances = get_distances_matrix(filepath=file_path)
         self.traces = self.__generate_traces()

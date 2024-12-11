@@ -16,6 +16,8 @@ def get_coords(filepath='data/A-n32-k5.txt'):
 
 def plot_ant_path(ant, dst, filepath='data/A-n32-k5.txt'):
     indices, x_coords, y_coords = get_coords(filepath)
+
+    plt.figure(figsize=(12, 8))
     plt.scatter(x_coords, y_coords)
     for i, txt in enumerate(indices):
         plt.annotate(txt, (x_coords[i], y_coords[i]))
@@ -40,6 +42,8 @@ def plot_ant_path(ant, dst, filepath='data/A-n32-k5.txt'):
 
 def plot_all_ants_paths(ants, dsts, filepath='data/A-n32-k5.txt'):
     indices, x_coords, y_coords = get_coords(filepath)
+
+    plt.figure(figsize=(12, 8))
     plt.scatter(x_coords, y_coords)
     for i, txt in enumerate(indices):
         plt.annotate(txt, (x_coords[i], y_coords[i]))

@@ -13,8 +13,8 @@ def run_interface():
         no_change_items = int(input(" Podaj ilosc ostatnich wynikow branych pod uwage: "))
 
     ants_num = int(input("Podaj mnoznik ilosci mrowek: "))
-    alpha = float(input("Podaj wage feromonow (alfa) (0.0 - 1.0): "))
-    beta = float(input("Podaj wage metaheurystyki (beta) (0.0 - 1.0): "))
+    alpha = float(input("Podaj wage feromonow (alfa): "))
+    beta = float(input("Podaj wage metaheurystyki (beta): "))
     evap = float(input("Podaj wspolczynnik wyparowywania (0.0 - 1.0): "))
     rap = float(input("Podaj prawdopodobienstwo wybrania losowej atrakcji (0.0 - 1.0): "))
     file = int(input("Wybierz plik z danymi: (0 - A-n32-k5.txt, 1 - A-n80-k10.txt): "))
