@@ -1,2 +1,4 @@
+from interface import console_interface
+
 if __name__ == '__main__':
-    print('pso')
+    console_interface()
