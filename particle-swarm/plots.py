@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from functions import ackley, himmelblaus
+from matplotlib.ticker import MaxNLocator
 
 
 def plot_ackley(title=True, particles=None, best_particle=None, iteration=None, no_particles=None, inertia=None,
@@ -80,52 +81,42 @@ def heatmap(particles):
 
 def histogram_ackley(particles):
     z = [obj.fitness for obj in particles]
-
     bins = np.linspace(0, 10, 20)  # Przedziały od 0 do 100 co 10
     counts, edges, bars = plt.hist(z, bins=bins, edgecolor='black', color='skyblue')
-
-    # Dodanie etykiet
-    plt.title("Histogram wartości funkcji celu (z)")
-    plt.xlabel("Przedziały wartości funkcji celu (z)")
+    plt.title("Rozkład cząstek")
+    plt.xlabel("Przedziały wartości funkcji")
     plt.ylabel("Liczba cząstek")
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.xticks(edges, rotation=45)
-
-    # Wyświetlenie liczby cząstek nad słupkami
+    plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
     for count, bar in zip(counts, bars):
         height = bar.get_height()
         plt.text(bar.get_x() + bar.get_width() / 2, height, int(count), ha='center', va='bottom')
-
+    plt.tight_layout()
     plt.show()
 
 
 def histogram_himmelblaus(particles):
-    #TODO zrobic na sztywno biny, podpisac jako stringi
     z = [obj.fitness for obj in particles]
-
-    # Logarytmiczne biny
-    bins = np.logspace(np.log10(1), np.log10(810), 20)
-    print(bins)
-    # Histogram
-    counts, edges, bars = plt.hist(z, bins=bins, edgecolor='black', color='skyblue')
-
-    # Skala logarytmiczna na osi X
-    plt.xscale('log')
-
-    # Ustawienie ticków na osi X
-    plt.xticks(bins, labels=[f"{int(b)}" for b in bins], rotation=45)
-
-    plt.title("Histogram rozkładu cząstek")
+    bins = [0.0, 0.5, 1.0, 1.5, 2.0, 4.0, 8.0, 11.0, 16.0, 23.0, 33.0, 48.0, 68.0, 139.0, 197.0, 281.0, 400.0, 569.0,
+            810.0, np.inf]
+    counts, bin_edges = np.histogram(z, bins=bins)
+    bin_counts = list(counts)
+    categories = [str(num) for num in bins]
+    categories = categories[:-1]
+    bars = plt.bar(categories, bin_counts, width=1.0, align='edge', edgecolor='black', color='skyblue')
+    plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.xticks(rotation=45)
+    plt.title("Rozkład cząstek")
     plt.xlabel("Przedziały wartości funkcji")
     plt.ylabel("Liczba cząstek")
-    plt.grid(axis='y', linestyle='--', alpha=0.7)
-
-    # Wyświetlenie liczby cząstek nad słupkami
-    for count, bar in zip(counts, bars):
-        height = bar.get_height()
-        plt.text(bar.get_x() + bar.get_width() / 2, height, int(count), ha='center', va='bottom')
-
+    for bar in bars:
+        yval = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width() / 2, yval, int(yval), ha='center', va='bottom')
+    plt.tight_layout()
     plt.show()
+
 
 if __name__ == '__main__':
     plot_ackley()
