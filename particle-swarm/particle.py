@@ -6,10 +6,6 @@ class Particle:
         self.x = x
         self.y = y
         self.inertia = inertia
-        ##
-        self.inertia_x = inertia
-        self.inertia_y = inertia
-        ##
         self.cognition = cognition
         self.social = social
 
@@ -18,7 +14,6 @@ class Particle:
         self.best_x = self.x
         self.best_y = self.y
 
-        self.velocity = 0
         self.fitness = float('inf')
         self.best_fitness = self.fitness
 
@@ -37,9 +32,9 @@ class Particle:
         social_rand = np.random.rand()
         cognitive_rand = np.random.rand()
 
-        # inetrtia
-        inertia_x = self.inertia_x * self.velocity_x
-        inertia_y = self.inertia_y * self.velocity_y
+        # inertia
+        inertia_x = self.inertia * self.velocity_x
+        inertia_y = self.inertia * self.velocity_y
 
         # social component
         social_distance = np.sqrt((best_particle.x - self.x) ** 2 + (best_particle.y - self.best_y) ** 2)

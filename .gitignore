@@ -7,3 +7,7 @@ outputs.txt
 */.idea
 
 */results
+
+.xlsx
+*/*.xlsx
+

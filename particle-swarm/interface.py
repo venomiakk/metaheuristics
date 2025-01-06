@@ -1,5 +1,5 @@
 from algorithm import ParticleSwarmAlgorithm
-from plots import plot_himmelblaus, plot_ackley
+from plots import plot_himmelblaus, plot_ackley, histogram_himmelblaus, histogram_ackley
 
 
 def console_interface():
@@ -33,11 +33,13 @@ def console_interface():
         plot_ackley(particles=obj.swarm, best_particle=best_particle, iteration=iters, inertia=glb_inertia,
                     social=glb_social,
                     cognition=glb_cognitive, no_particles=glb_no_particles)
+        histogram_ackley(obj.swarm)
     else:
         plot_himmelblaus(particles=obj.swarm, best_particle=best_particle, iteration=iters,
                          inertia=glb_inertia,
                          social=glb_social,
                          cognition=glb_cognitive, no_particles=glb_no_particles)
+        histogram_himmelblaus(obj.swarm)
 
 
 if __name__ == '__main__':
