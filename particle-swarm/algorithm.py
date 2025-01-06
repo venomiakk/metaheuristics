@@ -1,3 +1,5 @@
+import copy
+
 import numpy as np
 from matplotlib.pyplot import title
 
@@ -33,16 +35,24 @@ class ParticleSwarmAlgorithm:
         self.min_fvalue = -5
         self.max_fvalue = 5
 
+        # all particles
+        self.all_particles = []
+
     def run(self):
         iterations = 0
         self.__generate_swarm()
         self.__calculate_swarm_fitness()
+
+        self.__add_particle_toall()
+
         while True:
             # update position
-            self.plot_particles(self.swarm, self.best_particle)
+            # self.plot_particles(self.swarm, self.best_particle)
             self.__update_swarm(function_borders=True)
             # calculate fitness for every particle
             self.__calculate_swarm_fitness()
+
+            self.__add_particle_toall()
 
             # stop condition
             iterations += 1
@@ -76,8 +86,9 @@ class ParticleSwarmAlgorithm:
         for particle in self.swarm:
             particle.update_position(best_particle=self.best_particle, function_borders=function_borders)
 
-    def __get_best_particle(self):
-        pass
+    def __add_particle_toall(self):
+        for particle in self.swarm:
+            self.all_particles.append(copy.deepcopy(particle))
 
     def plot_particles(self, particles, best_particle):
         if self.choosen_function == 0:
