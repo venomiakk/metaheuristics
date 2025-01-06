@@ -1,4 +1,6 @@
 import numpy as np
+from matplotlib.pyplot import title
+
 from particle import Particle
 from functions import ackley, himmelblaus
 from plots import plot_himmelblaus, plot_ackley
@@ -37,6 +39,7 @@ class ParticleSwarmAlgorithm:
         self.__calculate_swarm_fitness()
         while True:
             # update position
+            self.plot_particles(self.swarm, self.best_particle)
             self.__update_swarm(function_borders=True)
             # calculate fitness for every particle
             self.__calculate_swarm_fitness()
@@ -66,17 +69,18 @@ class ParticleSwarmAlgorithm:
     def __calculate_swarm_fitness(self):
         for particle in self.swarm:
             particle.calculate_fitnes(self.function)
-            # get best particle
-            if particle.fitness < self.best_particle_fitness:
-                self.best_particle = particle
-                self.best_particle_fitness = particle.fitness
+        self.best_particle = min(self.swarm, key=lambda part: part.fitness)
+        self.best_particle_fitness = self.best_particle.fitness
 
     def __update_swarm(self, function_borders=True):
         for particle in self.swarm:
-            particle.update_position2(best_particle=self.best_particle, function_borders=function_borders)
+            particle.update_position(best_particle=self.best_particle, function_borders=function_borders)
+
+    def __get_best_particle(self):
+        pass
 
     def plot_particles(self, particles, best_particle):
         if self.choosen_function == 0:
-            plot_ackley(particles, best_particle)
+            plot_ackley(particles=particles, best_particle=best_particle)
         else:
-            plot_himmelblaus(particles, best_particle)
+            plot_himmelblaus(particles=particles, best_particle=best_particle)
