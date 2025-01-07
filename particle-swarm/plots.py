@@ -5,7 +5,7 @@ from matplotlib.ticker import MaxNLocator
 
 
 def plot_ackley(title=True, particles=None, best_particle=None, iteration=None, no_particles=None, inertia=None,
-                cognition=None, social=None):
+                cognition=None, social=None, file=None):
     x = np.linspace(-5, 5, 400)
     y = np.linspace(-5, 5, 400)
     x, y = np.meshgrid(x, y)
@@ -29,12 +29,14 @@ def plot_ackley(title=True, particles=None, best_particle=None, iteration=None, 
         plt.title(
             f"Ackley, iteracje: {iteration}, cząstki: {no_particles}, inercja: {inertia}, \n"
             f"współczynnik poznawczy: {cognition}, współczynnik społeczny: {social}")
+    if file:
+        plt.savefig(f'{file}.png')
     plt.show()
     plt.close()
 
 
 def plot_himmelblaus(title=True, particles=None, best_particle=None, iteration=None, no_particles=None, inertia=None,
-                     cognition=None, social=None):
+                     cognition=None, social=None, file=None):
     # Generating data
     x = np.linspace(-5, 5, 400)
     y = np.linspace(-5, 5, 400)
@@ -62,6 +64,8 @@ def plot_himmelblaus(title=True, particles=None, best_particle=None, iteration=N
         plt.title(
             f"Himmelblau, iteracje: {iteration}, cząstki: {no_particles}, inercja: {inertia}, \n"
             f"współczynnik poznawczy: {cognition}, współczynnik społeczny: {social}")
+    if file:
+        plt.savefig(f'{file}.png')
     plt.show()
     plt.close()
 
@@ -79,7 +83,7 @@ def heatmap(particles):
     plt.show()
 
 
-def histogram_ackley(particles):
+def histogram_ackley(particles, file=None):
     z = [obj.fitness for obj in particles]
     bins = np.linspace(0, 10, 20)  # Przedziały od 0 do 100 co 10
     counts, edges, bars = plt.hist(z, bins=bins, edgecolor='black', color='skyblue')
@@ -93,10 +97,13 @@ def histogram_ackley(particles):
         height = bar.get_height()
         plt.text(bar.get_x() + bar.get_width() / 2, height, int(count), ha='center', va='bottom')
     plt.tight_layout()
+    if file:
+        plt.savefig(f'{file}.png')
     plt.show()
+    plt.close()
 
 
-def histogram_himmelblaus(particles):
+def histogram_himmelblaus(particles, file=None):
     z = [obj.fitness for obj in particles]
     bins = [0.0, 0.5, 1.0, 1.5, 2.0, 4.0, 8.0, 11.0, 16.0, 23.0, 33.0, 48.0, 68.0, 139.0, 197.0, 281.0, 400.0, 569.0,
             810.0, np.inf]
@@ -115,7 +122,10 @@ def histogram_himmelblaus(particles):
         yval = bar.get_height()
         plt.text(bar.get_x() + bar.get_width() / 2, yval, int(yval), ha='center', va='bottom')
     plt.tight_layout()
+    if file:
+        plt.savefig(f'{file}.png')
     plt.show()
+    plt.close()
 
 
 if __name__ == '__main__':

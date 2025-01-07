@@ -1,8 +1,5 @@
 import copy
-
 import numpy as np
-from matplotlib.pyplot import title
-
 from particle import Particle
 from functions import ackley, himmelblaus
 from plots import plot_himmelblaus, plot_ackley
