@@ -347,66 +347,111 @@ def test_himmelblaus():
 
 
 def run_all_experiments():
-    experiment1_iters(25, 0)
+    plt_path = f'{plot_folder}/ex1'
+    experiment1_iters(15, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment1_iters(50, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment1_iters(100, 0, xlsx_file=excel_file, plot_file=plt_path)
+
+    experiment1_iters(15, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment1_iters(50, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment1_iters(100, 1, xlsx_file=excel_file, plot_file=plt_path)
+
+    plt_path = f'{plot_folder}/ex2'
+    experiment2_no_particles(10, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment2_no_particles(30, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment2_no_particles(100, 0, xlsx_file=excel_file, plot_file=plt_path)
+
+    experiment2_no_particles(10, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment2_no_particles(30, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment2_no_particles(100, 1, xlsx_file=excel_file, plot_file=plt_path)
+
+    plt_path = f'{plot_folder}/ex3'
+    experiment3_inertia(0.1, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment3_inertia(0.5, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment3_inertia(0.9, 0, xlsx_file=excel_file, plot_file=plt_path)
+
+    experiment3_inertia(0.1, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment3_inertia(0.5, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment3_inertia(0.9, 1, xlsx_file=excel_file, plot_file=plt_path)
+
+    plt_path = f'{plot_folder}/ex4'
+    experiment4_cognitive(0.1, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment4_cognitive(0.5, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment4_cognitive(0.9, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment4_cognitive(1.5, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment4_cognitive(2, 0, xlsx_file=excel_file, plot_file=plt_path)
+
+    experiment4_cognitive(0.1, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment4_cognitive(0.5, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment4_cognitive(0.9, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment4_cognitive(1.5, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment4_cognitive(2, 1, xlsx_file=excel_file, plot_file=plt_path)
+
+    plt_path = f'{plot_folder}/ex5'
+    experiment5_social(0.1, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment5_social(0.5, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment5_social(0.9, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment5_social(1.5, 0, xlsx_file=excel_file, plot_file=plt_path)
+    experiment5_social(2, 0, xlsx_file=excel_file, plot_file=plt_path)
+
+    experiment5_social(0.1, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment5_social(0.5, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment5_social(0.9, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment5_social(1.5, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment5_social(2, 1, xlsx_file=excel_file, plot_file=plt_path)
+
+
+if __name__ == '__main__':
+
+    experiment1_iters(15, 0)
     experiment1_iters(50, 0)
     experiment1_iters(100, 0)
 
-    experiment1_iters(25, 1)
+    experiment1_iters(15, 1)
     experiment1_iters(50, 1)
     experiment1_iters(100, 1)
 
 
-if __name__ == '__main__':
-    # plt_path = f'{plot_folder}/ex1'
-    # experiment1_iters(15, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment1_iters(50, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment1_iters(100, 0, xlsx_file=excel_file, plot_file=plt_path)
-    #
-    # experiment1_iters(15, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment1_iters(50, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment1_iters(100, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment2_no_particles(10, 0)
+    experiment2_no_particles(30, 0)
+    experiment2_no_particles(100, 0)
 
-    # plt_path = f'{plot_folder}/ex2'
-    # experiment2_no_particles(10, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment2_no_particles(30, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment2_no_particles(100, 0, xlsx_file=excel_file, plot_file=plt_path)
-    #
-    # experiment2_no_particles(10, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment2_no_particles(30, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment2_no_particles(100, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment2_no_particles(10, 1)
+    experiment2_no_particles(30, 1)
+    experiment2_no_particles(100, 1)
 
-    # plt_path = f'{plot_folder}/ex3'
-    # experiment3_inertia(0.1, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment3_inertia(0.5, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment3_inertia(0.9, 0, xlsx_file=excel_file, plot_file=plt_path)
-    #
-    # experiment3_inertia(0.1, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment3_inertia(0.5, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment3_inertia(0.9, 1, xlsx_file=excel_file, plot_file=plt_path)
 
-    # plt_path = f'{plot_folder}/ex4'
-    # experiment4_cognitive(0.1, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment4_cognitive(0.5, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment4_cognitive(0.9, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment4_cognitive(1.5, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment4_cognitive(2, 0, xlsx_file=excel_file, plot_file=plt_path)
-    #
-    # experiment4_cognitive(0.1, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment4_cognitive(0.5, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment4_cognitive(0.9, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment4_cognitive(1.5, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment4_cognitive(2, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment3_inertia(0.1, 0)
+    experiment3_inertia(0.5, 0)
+    experiment3_inertia(0.9, 0)
 
-    # plt_path = f'{plot_folder}/ex5'
-    # experiment5_social(0.1, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment5_social(0.5, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment5_social(0.9, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment5_social(1.5, 0, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment5_social(2, 0, xlsx_file=excel_file, plot_file=plt_path)
-    #
-    # experiment5_social(0.1, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment5_social(0.5, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment5_social(0.9, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment5_social(1.5, 1, xlsx_file=excel_file, plot_file=plt_path)
-    # experiment5_social(2, 1, xlsx_file=excel_file, plot_file=plt_path)
+    experiment3_inertia(0.1, 1)
+    experiment3_inertia(0.5, 1)
+    experiment3_inertia(0.9, 1)
+
+
+    experiment4_cognitive(0.1, 0)
+    experiment4_cognitive(0.5, 0)
+    experiment4_cognitive(0.9, 0)
+    experiment4_cognitive(1.5, 0)
+    experiment4_cognitive(2, 0)
+
+    experiment4_cognitive(0.1, 1)
+    experiment4_cognitive(0.5, 1)
+    experiment4_cognitive(0.9, 1)
+    experiment4_cognitive(1.5, 1)
+    experiment4_cognitive(2, 1)
+
+
+    experiment5_social(0.1, 0)
+    experiment5_social(0.5, 0)
+    experiment5_social(0.9, 0)
+    experiment5_social(1.5, 0)
+    experiment5_social(2, 0)
+
+    experiment5_social(0.1, 1)
+    experiment5_social(0.5, 1)
+    experiment5_social(0.9, 1)
+    experiment5_social(1.5, 1)
+    experiment5_social(2, 1)
 
