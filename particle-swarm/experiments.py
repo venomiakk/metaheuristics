@@ -10,7 +10,7 @@ glb_inertia = 0.5
 glb_social = 0.5
 glb_cognitive = 0.5
 no_runs = 5
-excel_file = 'output/res1/res.xlsx'
+excel_file = 'output/res1/res2.xlsx'
 plot_folder = 'output/res1'
 
 
@@ -320,8 +320,8 @@ def experiment5_social(param, function, xlsx_file=None, plot_file=None):
 
 def test_ackley():
     obj = ParticleSwarmAlgorithm(number_of_particles=glb_no_particles, choosen_function=0, particle_inertia=glb_inertia,
-                                 particle_social=glb_social,
-                                 particle_cognition=glb_cognitive, stop_condition=0, stop_value=glb_iterations)
+                                 particle_social=2,
+                                 particle_cognition=0.1, stop_condition=0, stop_value=glb_iterations)
     iters, best_particle = obj.run()
     plot_ackley(particles=obj.swarm, best_particle=best_particle, iteration=iters, inertia=glb_inertia,
                 social=glb_social,
@@ -334,8 +334,8 @@ def test_ackley():
 
 def test_himmelblaus():
     obj = ParticleSwarmAlgorithm(number_of_particles=glb_no_particles, choosen_function=1, particle_inertia=glb_inertia,
-                                 particle_social=glb_social,
-                                 particle_cognition=glb_cognitive, stop_condition=0, stop_value=glb_iterations)
+                                 particle_social=2,
+                                 particle_cognition=0.1, stop_condition=0, stop_value=glb_iterations)
     iters, best_particle = obj.run()
     plot_himmelblaus(particles=obj.swarm, best_particle=best_particle, iteration=iters, inertia=glb_inertia,
                      social=glb_social,
@@ -346,8 +346,8 @@ def test_himmelblaus():
     histogram_himmelblaus(obj.swarm)
 
 
-def run_all_experiments():
-    plt_path = f'{plot_folder}/ex1'
+def run_all_experiments_savedata():
+    plt_path = f'{plot_folder}/ex11'
     experiment1_iters(15, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment1_iters(50, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment1_iters(100, 0, xlsx_file=excel_file, plot_file=plt_path)
@@ -356,7 +356,7 @@ def run_all_experiments():
     experiment1_iters(50, 1, xlsx_file=excel_file, plot_file=plt_path)
     experiment1_iters(100, 1, xlsx_file=excel_file, plot_file=plt_path)
 
-    plt_path = f'{plot_folder}/ex2'
+    plt_path = f'{plot_folder}/ex22'
     experiment2_no_particles(10, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment2_no_particles(30, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment2_no_particles(100, 0, xlsx_file=excel_file, plot_file=plt_path)
@@ -365,7 +365,7 @@ def run_all_experiments():
     experiment2_no_particles(30, 1, xlsx_file=excel_file, plot_file=plt_path)
     experiment2_no_particles(100, 1, xlsx_file=excel_file, plot_file=plt_path)
 
-    plt_path = f'{plot_folder}/ex3'
+    plt_path = f'{plot_folder}/ex33'
     experiment3_inertia(0.1, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment3_inertia(0.5, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment3_inertia(0.9, 0, xlsx_file=excel_file, plot_file=plt_path)
@@ -374,7 +374,7 @@ def run_all_experiments():
     experiment3_inertia(0.5, 1, xlsx_file=excel_file, plot_file=plt_path)
     experiment3_inertia(0.9, 1, xlsx_file=excel_file, plot_file=plt_path)
 
-    plt_path = f'{plot_folder}/ex4'
+    plt_path = f'{plot_folder}/ex44'
     experiment4_cognitive(0.1, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment4_cognitive(0.5, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment4_cognitive(0.9, 0, xlsx_file=excel_file, plot_file=plt_path)
@@ -387,7 +387,7 @@ def run_all_experiments():
     experiment4_cognitive(1.5, 1, xlsx_file=excel_file, plot_file=plt_path)
     experiment4_cognitive(2, 1, xlsx_file=excel_file, plot_file=plt_path)
 
-    plt_path = f'{plot_folder}/ex5'
+    plt_path = f'{plot_folder}/ex55'
     experiment5_social(0.1, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment5_social(0.5, 0, xlsx_file=excel_file, plot_file=plt_path)
     experiment5_social(0.9, 0, xlsx_file=excel_file, plot_file=plt_path)
@@ -401,8 +401,7 @@ def run_all_experiments():
     experiment5_social(2, 1, xlsx_file=excel_file, plot_file=plt_path)
 
 
-if __name__ == '__main__':
-
+def run_all_experiments():
     experiment1_iters(15, 0)
     experiment1_iters(50, 0)
     experiment1_iters(100, 0)
@@ -410,7 +409,6 @@ if __name__ == '__main__':
     experiment1_iters(15, 1)
     experiment1_iters(50, 1)
     experiment1_iters(100, 1)
-
 
     experiment2_no_particles(10, 0)
     experiment2_no_particles(30, 0)
@@ -420,7 +418,6 @@ if __name__ == '__main__':
     experiment2_no_particles(30, 1)
     experiment2_no_particles(100, 1)
 
-
     experiment3_inertia(0.1, 0)
     experiment3_inertia(0.5, 0)
     experiment3_inertia(0.9, 0)
@@ -428,7 +425,6 @@ if __name__ == '__main__':
     experiment3_inertia(0.1, 1)
     experiment3_inertia(0.5, 1)
     experiment3_inertia(0.9, 1)
-
 
     experiment4_cognitive(0.1, 0)
     experiment4_cognitive(0.5, 0)
@@ -442,7 +438,6 @@ if __name__ == '__main__':
     experiment4_cognitive(1.5, 1)
     experiment4_cognitive(2, 1)
 
-
     experiment5_social(0.1, 0)
     experiment5_social(0.5, 0)
     experiment5_social(0.9, 0)
@@ -455,3 +450,6 @@ if __name__ == '__main__':
     experiment5_social(1.5, 1)
     experiment5_social(2, 1)
 
+
+if __name__ == '__main__':
+    run_all_experiments()

@@ -39,7 +39,7 @@ class Particle:
         # social component
         social_distance = np.sqrt((best_particle.x - self.x) ** 2 + (best_particle.y - self.best_y) ** 2)
         social_x = (best_particle.x - self.x) / (social_distance + 1e-10)
-        social_y = (best_particle.y - self.best_y) / (social_distance + 1e-10)
+        social_y = (best_particle.y - self.y) / (social_distance + 1e-10)
         social_component_x = self.social * social_rand * social_x
         social_component_y = self.social * social_rand * social_y
 
