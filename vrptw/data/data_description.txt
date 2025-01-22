@@ -1,0 +1,11 @@
+CUST NO. - liczba porządkowa, 0 = magazyn > początek i koniec trasy
+XCOORD. - punkt x
+YCOORD. - punkt y
+DEMAND - waga
+READY TIME  - od kiedy można odebrać
+DUE DATE - do kiedy można odebrac
+SERVICE TIME - czas odbioru
+
+//
+przyjąć ustaloną wartość prędkości i obliczać czas na podstawie odległości euklidesowej między punktami
+np. 50km/h
