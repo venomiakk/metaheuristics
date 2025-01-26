@@ -7,6 +7,7 @@ class Customer:
         self.readytime = readytime
         self.duedate = duedate
         self.servicetime = servicetime
+        self.visited = False
 
 
     def __str__(self):

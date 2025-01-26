@@ -24,5 +24,4 @@ def getCustomersFromCSV(filename):
 
 if __name__ == '__main__':
     points = csvToPoints('data/r1type_vc200/R101.csv')
-    print(points[0].calculateDst(points[1]))
-    print(points[1].calculateDst(points[0]))
+    print(points[0])
