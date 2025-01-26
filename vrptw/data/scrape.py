@@ -12,7 +12,8 @@ response.raise_for_status()
 # Parsowanie HTML
 soup = BeautifulSoup(response.text, 'html.parser')
 
-# Szukanie tagów <tt>
+
+# albo 'b' albo 'p'
 tt_tags = soup.find_all('b')
 # Dane z tabel
 tables = {}  # Słownik: klucze - nagłówki (R101, R102), wartości - dane tabeli

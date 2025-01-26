@@ -36,34 +36,33 @@ class AntColonyOptimization:
         #         print(customer.custno)
         
     def run(self):
-        best_solution = None
-        best_distance = float('inf')
+        customers_to_visit = deepcopy(self.customers)
+        results = []
         for _ in range(self.n_generations):
+            best_solution = None
+            best_distance = 0 #float('inf')
             ants = [Ant() for _ in range(self.n_ants)]
             for ant in ants:
                 # ? Unvisited here or what???
-                routes = self.build_routes(ant)
-                ant.routes = routes
-            
-            best_ant_routes = self.select_best_route(ants)
-            best_ant_len = sum([sum([customer.calculateDst(route[i + 1]) for i, customer in enumerate(route[:-1])]) for route in best_ant_routes])
-
-            if best_ant_len < best_distance:
-                best_solution = best_ant_routes
-                best_distance = best_ant_len
+                self.build_routes(ant, customers_to_visit)
+                   
+                # TODO What is best route?
+                best_ant_routes = self.select_best_route(ants)
+                best_ant_len = sum([sum([customer.calculateDst(route[i + 1]) for i, customer in enumerate(route[:-1])]) for route in best_ant_routes])
+                results.append(best_ant_routes)
+                if best_ant_len > best_distance:
+                    best_solution = best_ant_routes
+                    best_distance = best_ant_len
 
             self.update_pheromones(ants)
         
-        print(best_distance, best_solution)
-        return best_solution, best_distance
+        # print(best_distance, best_solution)
+        print(len(results))
+        return results
     
-    def build_routes(self, ant, unvisited=None):
-        if unvisited is None:
-            unvisited = deepcopy(self.customers)
-        else:
-            unvisited = deepcopy(unvisited)
+    def build_routes(self, ant, unvisited):
         iters = 0
-        ant.reset()
+        # ant.reset()
         # ant = Ant()
 
         current_location = self.depot
@@ -132,7 +131,7 @@ class AntColonyOptimization:
         # !
         # And final route is a list of routes
         # print(ant.vehicle.current_time, ant.vehicle.current_load)
-        return ant.routes
+        return ant
 
     def _create_distance_matrix(self) -> np.ndarray:
         n_nodes = len(self.customers) + 1
@@ -156,11 +155,14 @@ class AntColonyOptimization:
         for ant in ants:
             for route in ant.routes:
                 for i in range(len(route) - 1):
-                    self.pheromones[route[i].custno - 1, route[i + 1].custno - 1] += 1 / ant.calculateDistanceSum()
+                    self.pheromones[route[i].custno - 1, route[i + 1].custno - 1] += 1 / (ant.calculateDistanceSum()+1e-10)
 
     def select_best_route(self, ants):
-        best_ant = min(ants, key=lambda ant: ant.calculateDistanceSum())
+        best_ant = max(ants, key=lambda ant: ant.calculateDistanceSum())
         return best_ant.routes
+    
+    def select_best_ant(self, ants):
+        return max(ants, key=lambda ant: ant.calculateDistanceSum())
 
 if __name__ == '__main__':
     aco = AntColonyOptimization()
