@@ -8,7 +8,10 @@ class Customer:
         self.duedate = duedate
         self.servicetime = servicetime
         self.visited = False
+        self.dsttodepot = None
 
+    def setDstToDepot(self, depot):
+        self.dsttodepot = ((self.xcord - depot.xcord)**2 + (self.ycord - depot.ycord)**2)**0.5
 
     def __str__(self):
         return f"Customer:{self.custno} {self.xcord}, {self.ycord}, {self.demand}, {self.readytime}, {self.duedate}, {self.servicetime}"

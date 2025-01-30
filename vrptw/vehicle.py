@@ -11,6 +11,12 @@ class Vehicle:
         self.current_load = 0
         self.current_time = 0
 
+    def calculateRouteDistance(self):
+        distance = 0
+        for i in range(1, len(self.route)):
+            distance += self.route[i-1].calculateDst(self.route[i])
+        return distance
+
     def calculateDistance(self, next_customer):
         return self.route[-1].calculateDst(next_customer)
 
@@ -46,6 +52,30 @@ class Vehicle:
             return False
         return True
     
+    def canVisitInReadyTime(self, customer):
+        if self.calculateArrivalTime(customer) < customer.readytime:
+            # print('Ready Time')
+            return False
+        return True
+    
+    def canVisitBeforeDueDate(self, customer):
+        if self.calculateArrivalTime(customer) > customer.duedate:
+            # print('Due Date')
+            return False
+        return True
+    
+    def canMakeBackToDepotFromCustomer(self, customer):
+        if self.calculateArrivalTime(customer) + customer.servicetime + self.calculateArrivalTimeToDepot(customer) > self.max_time:
+            # print('Service Time')
+            return False
+        return True
+
+    def canFit(self, customer):
+        return self.current_load + customer.demand <= self.capacity
+
+    def waitForCustomer(self, customer):
+        self.current_time = customer.readytime
+
     def canVisitAnyOf(self, customers):
         for customer in customers:
             if self.canVisit(customer):
@@ -57,3 +87,17 @@ class Vehicle:
         self.current_time = self.calculateArrivalTime(customer) + customer.servicetime
         #! MUST BE THE LAST LINE
         self.route.append(customer)
+    
+    def printRoute(self, idx=None):
+        if idx:
+            print(f'Route {idx}:', end=' ')
+        else:
+            print('Route:', end=' ')
+        for customer in self.route:
+            print(f'{customer.custno}, ', end=' ')
+    
+    def routeToString(self):
+        route = ''
+        for customer in self.route:
+            route += f'{customer.custno}, '
+        return route
