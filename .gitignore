@@ -11,3 +11,4 @@ outputs.txt
 .xlsx
 */*.xlsx
 
+*/test_plots

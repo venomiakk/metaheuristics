@@ -1,0 +1,3 @@
+- tworzenie klastrów uwzględniając okna czasowe i pojemność
+  - np. wybieranie losowego punktu i poruszanie się dookoła niego aż do momentu wypełnienia pojazdu
+  - trzeba jakoś sprawdzać lub ewentualnie czekać na start_time
