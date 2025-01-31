@@ -9,7 +9,7 @@ def csvToPoints(filename):
         for line in f:
             line = line.strip()
             fields = line.split(',')
-            custno = int(fields[0])
+            custno = int(fields[0]) - 1
             xcord = float(fields[1])
             ycord = float(fields[2])
             demand = float(fields[3])
@@ -29,7 +29,7 @@ def plotPlainData(filename='data/r1type_vc200/R101.csv'):
     points = csvToPoints(filename)
     x = [point.xcord for point in points]
     y = [point.ycord for point in points]
-    colors = ['ro' if point.custno != 1 else 'bo' for point in points]
+    colors = ['ro' if point.custno != 0 else 'bo' for point in points]
     for i in range(len(points)):
         plt.plot(x[i], y[i], colors[i])
     plt.show()

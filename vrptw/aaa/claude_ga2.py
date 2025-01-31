@@ -227,12 +227,12 @@ def csvToPoints(filename):
     return points
 
 def main():
-    customers = csvToPoints('data/r1type_vc200/R101.csv')
+    customers = csvToPoints('data/C1type_vc200/C101.csv')
     
     vrptw = VRPTWGenetic(customers, 
                          vehicle_capacity=200, 
-                         population_size=200, 
-                         generations=300, 
+                         population_size=50, 
+                         generations=100, 
                          mutation_rate=0.15)
     
     routes = vrptw.solve()

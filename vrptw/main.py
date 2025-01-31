@@ -3,7 +3,6 @@ from customer import Customer
 from utils import getCustomersFromCSV, csvToPoints, plotPlainData, plotRoutes, greedy
 from copy import deepcopy
 
-
 # def ga_test():
 #     file = 'data/c1type_vc200/C101.csv'
 #     capacity = 200
@@ -40,9 +39,8 @@ def main():
     print(f'Dst: {distance}, Vehicles: {len(vehicles)}')
     routes = [vehicle.route for vehicle in vehicles]
     plotRoutes(routes, allpoints)
-    
-
+    plotPlainData(file)
 
 
 if __name__ == '__main__':
-    main()
+    test()
