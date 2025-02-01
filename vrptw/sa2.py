@@ -44,6 +44,21 @@ def find_seed(customers, depot):
     seed = max(customers, key=lambda c: (-euclidean_distance(c, depot), c.due_date))
     return seed
 
+def time_feasible_route(route, depot, distance_matrix):
+    current_time = 0
+    prev = depot
+    for customer in route:
+        # Travel time to customer
+        arrival = current_time + distance_matrix[prev.id][customer.id]
+        arrival = max(arrival, customer.ready_time)
+        if arrival > customer.due_date:
+            return False
+        # Service time
+        departure = arrival + customer.service_time
+        current_time = departure
+        prev = customer
+    return True
+
 def time_feasible(route, customer, position, depot, distance_matrix):
     # Check time window feasibility after inserting customer at position
     current_time = 0
@@ -68,6 +83,10 @@ def time_feasible(route, customer, position, depot, distance_matrix):
             current_time = departure
             prev = next_c
     return True
+
+def route_capacity_feasible(route, vehicle_capacity):
+    total_demand = sum(c.demand for c in route)
+    return total_demand <= vehicle_capacity
 
 def capacity_feasible(route, customer, vehicle_capacity):
     total_demand = sum(c.demand for c in route) + customer.demand
@@ -197,6 +216,40 @@ def inter_relocate(routes, depot, distance_matrix, vehicle_capacity):
         src_route.append(customer)
         return routes
 
+def inter_exchange(routes, depot, distance_matrix, vehicle_capacity):
+    if len(routes) < 2:
+        return routes
+
+    # Select two distinct routes
+    route1_idx, route2_idx = random.sample(range(len(routes)), 2)
+    route1 = routes[route1_idx].copy()
+    route2 = routes[route2_idx].copy()
+
+    if not route1 or not route2:
+        return routes
+
+    # Randomly select customers to swap
+    customer1 = random.choice(route1)
+    customer2 = random.choice(route2)
+
+    # Swap customers
+    new_route1 = [customer2 if c == customer1 else c for c in route1]
+    new_route2 = [customer1 if c == customer2 else c for c in route2]
+
+    # Check feasibility after swap
+    feasible = (
+        route_capacity_feasible(new_route1, vehicle_capacity) and  # Use new helper
+        route_capacity_feasible(new_route2, vehicle_capacity) and
+        time_feasible_route(new_route1, depot, distance_matrix) and  # NEW: See Step 3
+        time_feasible_route(new_route2, depot, distance_matrix)
+    )
+
+    if feasible:
+        routes[route1_idx] = new_route1
+        routes[route2_idx] = new_route2
+
+    return routes
+
 def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity, initial_temp=1000, cooling_rate=0.995, iterations=1000):
     current_solution = copy.deepcopy(initial_routes)
     best_solution = copy.deepcopy(current_solution)
@@ -207,12 +260,14 @@ def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity
     for _ in range(iterations):
         # Generate neighbor solution (escape move)
         neighbor = copy.deepcopy(current_solution)
-        move_type = random.choice(['intra', 'inter'])
-        if move_type == 'intra' and neighbor:
+        move_type = random.choice(['intra_relocate', 'inter_relocate', 'inter_exchange'])
+        if move_type == 'intra_relocate' and neighbor:
             route_idx = random.randint(0, len(neighbor)-1)
             neighbor[route_idx] = intra_relocate(neighbor[route_idx], depot, distance_matrix)
-        elif move_type == 'inter':
+        elif move_type == 'inter_relocate':
             neighbor = inter_relocate(neighbor, depot, distance_matrix, vehicle_capacity)
+        elif move_type == 'inter_exchange':
+            neighbor = inter_exchange(neighbor, depot, distance_matrix, vehicle_capacity)
         
         neighbor_cost = calculate_objective(neighbor, depot, distance_matrix)
         
@@ -328,7 +383,7 @@ def main():
         vehicle_capacity,
         initial_temp=1000,  
         cooling_rate=0.995,
-        iterations=5000
+        iterations=50000
     )
     
     # Save and plot optimized solution
