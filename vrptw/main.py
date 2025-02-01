@@ -1,6 +1,6 @@
 from vehicle import Vehicle
 from customer import Customer
-from utils import getCustomersFromCSV, csvToPoints, plotPlainData, plotRoutes, greedy
+from utils import getCustomersFromCSV, csvToPoints, plotPlainData, plotRoutes, greedy, calculateSolutionDistance
 from copy import deepcopy
 
 # def ga_test():
@@ -25,22 +25,23 @@ from copy import deepcopy
 
 
 def main():
-    file = 'data/r1type_vc200/R101.csv'
+    file = 'data/c1type_vc200/C101.csv'
     capacity = 200
     allpoints = csvToPoints(file)
     depot, customers = allpoints[0], allpoints[1:]
     vehicles = greedy(depot, customers, capacity)
     distance = 0
     for idx, vehicle in enumerate(vehicles):
-        distance += vehicle.calculateRouteDistance()
+        r_dst = vehicle.calculateRouteDistance()
+        distance += r_dst
         rt = vehicle.routeToString()
-        print(f'Route {idx+1}: {rt}')
+        print(f'Route {idx+1}: {rt}, Distance: {r_dst}, Time: {vehicle.current_time}, Load: {vehicle.current_load}')
 
     print(f'Dst: {distance}, Vehicles: {len(vehicles)}')
     routes = [vehicle.route for vehicle in vehicles]
     plotRoutes(routes, allpoints)
-    plotPlainData(file)
+    # plotPlainData(file)
 
 
 if __name__ == '__main__':
-    test()
+   main()

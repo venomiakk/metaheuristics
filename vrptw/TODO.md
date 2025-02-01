@@ -7,3 +7,7 @@
 - GA od zera, operacje add i swap
 - osobnik jako całe rozwiązanie czy trasa
 - pierwsze rozwiązanie jako 100 pojazdów?
+
+- jako osobnik przyjąć listę wszystkich punktów gdzie 0 jest depot i oddziela kolejne trasy
+
+- klastrowanie z uwzględnieniem okien czasowych

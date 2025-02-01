@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from customer import Customer
 from vehicle import Vehicle
 from copy import deepcopy
+import random
 
 def csvToPoints(filename):
     points = []
@@ -62,7 +63,13 @@ def greedy(depot, customers, capacity):
         
         while len(possible_to_visit) > 0:
             # 1. find nearest customer
-            nearest_customer = min(possible_to_visit, key=lambda x: vehicle.route[-1].calculateDst(x))
+            # nearest_customers = sorted(possible_to_visit, key=lambda x: vehicle.route[-1].calculateDst(x))[:5]
+            random_number = random.uniform(0, 1)
+            if random_number < 0.3:
+                nearest_customer = min(possible_to_visit, key=lambda x: x.servicetime)
+            else:
+                nearest_customer = min(possible_to_visit, key=lambda x: vehicle.route[-1].calculateDst(x))
+
             possible_to_visit.remove(nearest_customer)
             # 2. check if can fit
             if not vehicle.canFit(nearest_customer):
@@ -88,6 +95,12 @@ def greedy(depot, customers, capacity):
         vehicles.append(vehicle)
     
     return vehicles
+
+def calculateSolutionDistance(vehicles):
+    distance = 0
+    for vehicle in vehicles:
+        distance += vehicle.calculateRouteDistance()
+    return distance
 
 
 if __name__ == '__main__':
