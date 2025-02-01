@@ -3,6 +3,8 @@ import random
 import csv
 import copy
 from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
+import os
 
 # Data Parsing
 class Customer:
@@ -230,9 +232,77 @@ def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity
 # Main Execution
 # (Previous code remains the same until the Main Execution section)
 
-# Modified Main Execution with depot display and SA tuning
-if __name__ == "__main__":
-    depot, customers = load_data('data/r1type_vc200/R101.csv')
+# ====================== NEW FUNCTIONS ====================== #
+def plot_routes(routes, depot, filename="routes.png"):
+    plt.figure(figsize=(10, 10))
+    
+    # Plot depot
+    plt.scatter(depot.x, depot.y, c='red', s=100, marker='s', edgecolors='black', label='Depot', zorder=10)
+    
+    # Plot customers and routes
+    colors = plt.cm.tab20.colors  # 20 distinct colors
+    for i, route in enumerate(routes):
+        if not route:
+            continue
+        
+        # Generate route coordinates (including depot at start/end)
+        x = [depot.x] + [c.x for c in route] + [depot.x]
+        y = [depot.y] + [c.y for c in route] + [depot.y]
+        
+        # Plot customers
+        plt.scatter(
+            [c.x for c in route], 
+            [c.y for c in route], 
+            color=colors[i % 20],
+            s=50,
+            label=f'Route {i+1}' if i < 20 else None
+        )
+        
+        # Plot route path
+        plt.plot(x, y, linestyle='-', linewidth=1, color=colors[i % 20])
+    
+    plt.title("Vehicle Routes")
+    plt.xlabel("X Coordinate")
+    plt.ylabel("Y Coordinate")
+    plt.grid(True)
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+    
+    # Create output directory if not exists
+    os.makedirs("output", exist_ok=True)
+    plt.savefig(f"output/{filename}")
+    plt.close()
+
+def save_results(routes, depot, distance_matrix, filename="results.txt"):
+    os.makedirs("output", exist_ok=True)
+    with open(f"output/{filename}", "w") as f:
+        total_distance = 0
+        total_vehicles = len(routes)
+        
+        f.write("Route Details:\n")
+        f.write("="*50 + "\n")
+        
+        for i, route in enumerate(routes):
+            route_distance = calculate_route_distance(route, depot, distance_matrix)
+            total_distance += route_distance
+            
+            # Format route with depot at start/end
+            route_ids = [depot.id] + [c.id for c in route] + [depot.id]
+            
+            f.write(f"Route {i+1}:\n")
+            f.write(f"  Customers: {len(route)}\n")
+            f.write(f"  Sequence: {route_ids}\n")
+            f.write(f"  Distance: {route_distance:.2f}\n")
+            f.write("-"*50 + "\n")
+        
+        f.write("\nSummary:\n")
+        f.write("="*50 + "\n")
+        f.write(f"Total Vehicles: {total_vehicles}\n")
+        f.write(f"Total Distance: {total_distance:.2f}\n")
+
+# ====================== UPDATED MAIN ====================== #
+def main():
+    depot, customers = load_data('data/rc1type_vc200/RC101.csv')
     vehicle_capacity = 200
     
     # Precompute distance matrix
@@ -246,33 +316,31 @@ if __name__ == "__main__":
     # Generate initial solution
     initial_routes = solomon_i1(depot, customers, distance_matrix, vehicle_capacity)
     
-    # Display initial routes with depot
-    print("Initial Solution:")
-    for i, route in enumerate(initial_routes):
-        route_ids = [depot.id] + [c.id for c in route] + [depot.id]
-        distance = calculate_route_distance(route, depot, distance_matrix)
-        print(f"Route {i+1}: {route_ids}, Distance: {distance:.2f}")
-
-    total_distance = sum(calculate_route_distance(route, depot, distance_matrix) for route in initial_routes)
-    print(f"\nTotal Vehicles: {len(initial_routes)}, Total Distance: {total_distance:.2f}")
+    # Save and plot initial solution
+    save_results(initial_routes, depot, distance_matrix, "initial_results.txt")
+    plot_routes(initial_routes, depot, "initial_routes.png")
     
-    # Apply Simulated Annealing with adjusted parameters
+    # Apply Simulated Annealing
     optimized_routes = simulated_annealing(
         initial_routes, 
         depot, 
         distance_matrix, 
         vehicle_capacity,
-        initial_temp=10000,  # Increased temperature
+        initial_temp=1000,  
         cooling_rate=0.995,
-        iterations=5000      # More iterations
+        iterations=5000
     )
     
-    # Display optimized routes with depot
-    print("\nOptimized Solution:")
-    for i, route in enumerate(optimized_routes):
-        route_ids = [depot.id] + [c.id for c in route] + [depot.id]
-        distance = calculate_route_distance(route, depot, distance_matrix)
-        print(f"Route {i+1}: {route_ids}, Distance: {distance:.2f}")
+    # Save and plot optimized solution
+    save_results(optimized_routes, depot, distance_matrix, "optimized_results.txt")
+    plot_routes(optimized_routes, depot, "optimized_routes.png")
     
-    total_distance = sum(calculate_route_distance(route, depot, distance_matrix) for route in optimized_routes)
-    print(f"\nTotal Vehicles: {len(optimized_routes)}, Total Distance: {total_distance:.2f}")
+    # Terminal output
+    print("\nResults saved to:")
+    print("- output/initial_results.txt")
+    print("- output/initial_routes.png")
+    print("- output/optimized_results.txt")
+    print("- output/optimized_routes.png")
+
+if __name__ == "__main__":
+    main()
