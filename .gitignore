@@ -12,3 +12,4 @@ outputs.txt
 */*.xlsx
 
 */test_plots
+vrptw/res.txt
