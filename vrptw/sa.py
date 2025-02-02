@@ -177,6 +177,33 @@ def route_merge(routes, depot, distance_matrix, vehicle_capacity):
     
     return routes
 
+def escape_move(current_solution, depot, distance_matrix, vehicle_capacity):
+    neighbor = copy.deepcopy(current_solution)
+    move_type = random.choices([
+        'intra_relocate', 
+        'inter_relocate', 
+        'inter_exchange', 
+        'cross_exchange', 
+        'route_merge' 
+    ],  weights=[1, 1, 1, 2, 3],  # Higher weight for route_merge
+        k=1
+    )[0]
+    if move_type == 'intra_relocate' and neighbor:
+        route_idx = random.randint(0, len(neighbor)-1)
+        neighbor[route_idx] = intra_relocate(neighbor[route_idx], depot, distance_matrix)
+    elif move_type == 'inter_relocate':
+        neighbor = inter_relocate(neighbor, depot, distance_matrix, vehicle_capacity)
+    elif move_type == 'inter_exchange':
+        neighbor = inter_exchange(neighbor, depot, distance_matrix, vehicle_capacity)
+    elif move_type == 'cross_exchange':
+        neighbor = cross_exchange(neighbor, depot, distance_matrix, vehicle_capacity)
+    elif move_type == 'route_merge':
+        neighbor = route_merge(neighbor, depot, distance_matrix, vehicle_capacity)
+    
+    neighbor = [route for route in neighbor if len(route) > 0]
+
+    return neighbor
+
 def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity, initial_temp=1000, cooling_rate=0.995, iterations=1000):
     current_solution = copy.deepcopy(initial_routes)
     best_solution = copy.deepcopy(current_solution)
@@ -186,30 +213,8 @@ def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity
     
     for i in range(iterations):
         print(f'\rIteration {i+1}/{iterations}', end='', flush=True)
-        # Generate neighbor solution (escape move)
-        neighbor = copy.deepcopy(current_solution)
-        move_type = random.choices([
-        'intra_relocate', 
-        'inter_relocate', 
-        'inter_exchange', 
-        'cross_exchange', 
-        'route_merge' 
-    ],  weights=[1, 1, 1, 1, 3],  # Higher weight for route_merge
-        k=1
-    )[0]
-        if move_type == 'intra_relocate' and neighbor:
-            route_idx = random.randint(0, len(neighbor)-1)
-            neighbor[route_idx] = intra_relocate(neighbor[route_idx], depot, distance_matrix)
-        elif move_type == 'inter_relocate':
-            neighbor = inter_relocate(neighbor, depot, distance_matrix, vehicle_capacity)
-        elif move_type == 'inter_exchange':
-            neighbor = inter_exchange(neighbor, depot, distance_matrix, vehicle_capacity)
-        elif move_type == 'cross_exchange':
-            neighbor = cross_exchange(neighbor, depot, distance_matrix, vehicle_capacity)
-        elif move_type == 'route_merge':
-            neighbor = route_merge(neighbor, depot, distance_matrix, vehicle_capacity)
-        
-        neighbor = [route for route in neighbor if len(route) > 0]
+
+        neighbor = escape_move(current_solution, depot, distance_matrix, vehicle_capacity)
         neighbor_cost = calculate_objective(neighbor, depot, distance_matrix)
         
         # Metropolis acceptance criterion

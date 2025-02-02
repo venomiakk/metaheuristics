@@ -13,3 +13,4 @@
 - klastrowanie z uwzględnieniem okien czasowych
 
 - dodanie do SA2 jakiś merge-route, ILS
+- weighted sums in calculate_objective

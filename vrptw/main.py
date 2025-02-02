@@ -1,6 +1,12 @@
 from outputdata import save_results, plot_routes, save_results_csv, plot_results, save_results_txt
 from sa import run_sa, calculate_route_distance
 
+#best so far 
+# cooling_rate = 0.950
+G_ITERS = 10000
+G_CR = 0.950
+G_INITTEMP = 10000
+
 def test1():
     filepath = 'data/rc1type_vc200/RC101.csv'
     vcapacity = 200
@@ -8,9 +14,9 @@ def test1():
     path = 'test1'
     best_Dst = 1696.94
     best_Vehicles = 14
-    init_temp = 1000
-    cooling_rate = 0.990
-    iterations = 100000
+    init_temp = G_INITTEMP
+    cooling_rate = G_CR
+    iterations = G_ITERS
     csvdata = []
     for i in range(10):
         row = []
@@ -41,9 +47,9 @@ def test2():
     path = 'test2'
     best_Dst = 1696.94
     best_Vehicles = 14
-    init_temp = 1000
-    cooling_rate = 0.995
-    iterations = 100000
+    init_temp = 10000
+    cooling_rate = G_CR
+    iterations = G_ITERS
     csvdata = []
     for i in range(10):
         row = []
@@ -74,9 +80,9 @@ def test3():
     path = 'test3'
     best_Dst = 1696.94
     best_Vehicles = 14
-    init_temp = 1000
-    cooling_rate = 0.999
-    iterations = 100000
+    init_temp = 100000
+    cooling_rate = G_CR
+    iterations = G_ITERS
     csvdata = []
     for i in range(10):
         row = []
@@ -121,8 +127,8 @@ def run_first():
 
 def main():
     test1()
-    test2()
-    test3()
+    # test2()
+    # test3()
     
 
 if __name__ == '__main__':
