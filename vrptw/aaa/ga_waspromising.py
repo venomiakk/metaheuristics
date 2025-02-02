@@ -1,6 +1,6 @@
 from typing import List, Tuple
 from customer import Customer
-from vehicle import Vehicle
+from v2.vehicle import Vehicle
 from copy import deepcopy
 import random
 

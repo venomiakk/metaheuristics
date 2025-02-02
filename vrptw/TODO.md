@@ -11,3 +11,5 @@
 - jako osobnik przyjąć listę wszystkich punktów gdzie 0 jest depot i oddziela kolejne trasy
 
 - klastrowanie z uwzględnieniem okien czasowych
+
+- dodanie do SA2 jakiś merge-route, ILS

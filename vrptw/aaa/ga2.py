@@ -1,7 +1,7 @@
 from copy import deepcopy
 import random
 import numpy as np
-from vehicle import Vehicle
+from v2.vehicle import Vehicle
 
 class VRPTW_Genetic:
     def __init__(self, depot, customers, vehicle_capacity, 

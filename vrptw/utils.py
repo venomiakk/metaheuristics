@@ -1,110 +1,86 @@
-import matplotlib.pyplot as plt
+import csv
 from customer import Customer
-from vehicle import Vehicle
-from copy import deepcopy
-import random
+import math
 
-def csvToPoints(filename):
-    points = []
-    with open(filename, 'r') as f:
-        for line in f:
-            line = line.strip()
-            fields = line.split(',')
-            custno = int(fields[0]) - 1
-            xcord = float(fields[1])
-            ycord = float(fields[2])
-            demand = float(fields[3])
-            readytime = float(fields[4])
-            duedate = float(fields[5])
-            servicetime = float(fields[6])
-            point = Customer(custno, xcord, ycord, demand, readytime, duedate, servicetime)
-            points.append(point)
-    return points
+def load_data(file_path):
+    customers = []
+    with open(file_path, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            id = int(row[0])
+            x = float(row[1])
+            y = float(row[2])
+            demand = float(row[3])
+            ready_time = float(row[4])
+            due_date = float(row[5])
+            service_time = float(row[6])
+            customers.append(Customer(id, x, y, demand, ready_time, due_date, service_time))
+    depot = customers[0]
+    customers = customers[1:]
+    return depot, customers
 
-def getCustomersFromCSV(filename):
-    points = csvToPoints(filename)
-    depot = points.pop(0)
-    return depot, points
+def euclidean_distance(a, b):
+    return math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2)
 
-def plotPlainData(filename='data/r1type_vc200/R101.csv'):
-    points = csvToPoints(filename)
-    x = [point.xcord for point in points]
-    y = [point.ycord for point in points]
-    colors = ['ro' if point.custno != 0 else 'bo' for point in points]
-    for i in range(len(points)):
-        plt.plot(x[i], y[i], colors[i])
-    plt.show()
+def time_feasible_route(route, depot, distance_matrix):
+    current_time = 0
+    prev = depot
+    for customer in route:
+        # Travel time to customer
+        arrival = current_time + distance_matrix[prev.id][customer.id]
+        arrival = max(arrival, customer.ready_time)
+        if arrival > customer.due_date:
+            return False
+        # Service time
+        departure = arrival + customer.service_time
+        current_time = departure
+        prev = customer
+    return True
 
-def plotRoutes(routes, points_dict, title='VRPTW Routes'):
-    plt.figure(figsize=(8, 8))
-    for idx, route in enumerate(routes):
-        # `route` already contains Customer objects, so access coords directly
-        x = [cust.xcord for cust in route]
-        y = [cust.ycord for cust in route]
-        plt.plot(x, y, marker='o', label=f'Route {idx+1}')
-    plt.scatter(points_dict[0].xcord, points_dict[0].ycord, color='red', zorder=10, label='Depot')
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.title(title)
-    plt.legend()
-    plt.show()
+def time_feasible(route, customer, position, depot, distance_matrix):
+    # Check time window feasibility after inserting customer at position
+    current_time = 0
+    current_load = 0
+    prev = depot
+    for i in range(len(route) + 1):
+        if i == position:
+            arrival = current_time + distance_matrix[prev.id][customer.id]
+            arrival = max(arrival, customer.ready_time)
+            departure = arrival + customer.service_time
+            if arrival > customer.due_date:
+                return False
+            current_time = departure
+            prev = customer
+        if i < len(route):
+            next_c = route[i]
+            arrival = current_time + distance_matrix[prev.id][next_c.id]
+            arrival = max(arrival, next_c.ready_time)
+            if arrival > next_c.due_date:
+                return False
+            departure = arrival + next_c.service_time
+            current_time = departure
+            prev = next_c
+    return True
 
-def greedy(depot, customers, capacity):
-    unvisited = deepcopy(customers)
-    vehicles = []
-    # unvisited = [customer for customer in unvisited if customer not in test]
-    # while len(unvisited) > 0:
-    #     unvisited = unvisited[:int(len(unvisited)/2)]
-    #     print(len(unvisited))
-    while len(unvisited) > 0:
-        vehicle = Vehicle(capacity, depot)
-        vehicle.route.append(depot)
-        possible_to_visit = unvisited.copy()
-        
-        while len(possible_to_visit) > 0:
-            # 1. find nearest customer
-            # nearest_customers = sorted(possible_to_visit, key=lambda x: vehicle.route[-1].calculateDst(x))[:5]
-            random_number = random.uniform(0, 1)
-            if random_number < 0.3:
-                nearest_customer = min(possible_to_visit, key=lambda x: x.servicetime)
-            else:
-                nearest_customer = min(possible_to_visit, key=lambda x: vehicle.route[-1].calculateDst(x))
+def route_capacity_feasible(route, vehicle_capacity):
+    total_demand = sum(c.demand for c in route)
+    return total_demand <= vehicle_capacity
 
-            possible_to_visit.remove(nearest_customer)
-            # 2. check if can fit
-            if not vehicle.canFit(nearest_customer):
-                continue
-            # 3. can make back to depot
-            if not vehicle.canMakeBackToDepotFromCustomer(nearest_customer):
-                continue
-            # 4. can make it before due date
-            if not vehicle.canVisitBeforeDueDate(nearest_customer):
-                continue
-            # 5. can visit in ready time or make it wait
-            # 6. visit customer
-            #? could take few customers in range and check min(readytime) and visit that customer
-            if vehicle.canVisitInReadyTime(nearest_customer):
-                vehicle.visit(nearest_customer)
-            else:
-                vehicle.waitForCustomer(nearest_customer)
-                vehicle.visit(nearest_customer)
-            # 7. remove customer from unvisited
-            unvisited.remove(nearest_customer)
-        
-        vehicle.route.append(depot)
-        vehicles.append(vehicle)
-    
-    return vehicles
+def capacity_feasible(route, customer, vehicle_capacity):
+    total_demand = sum(c.demand for c in route) + customer.demand
+    return total_demand <= vehicle_capacity
 
-def calculateSolutionDistance(vehicles):
-    distance = 0
-    for vehicle in vehicles:
-        distance += vehicle.calculateRouteDistance()
-    return distance
+# SA
+def calculate_route_distance(route, depot, distance_matrix):
+    if not route:
+        return 0
+    total = distance_matrix[depot.id][route[0].id]
+    for i in range(len(route)-1):
+        total += distance_matrix[route[i].id][route[i+1].id]
+    total += distance_matrix[route[-1].id][depot.id]
+    return total
 
-
-if __name__ == '__main__':
-    points = csvToPoints('data/r1type_vc200/R101.csv')
-    print(points[0])
-    # plotPlainData()
-    plotRoutes([[1, 2, 3, 4], [5, 6, 7, 8]], csvToPoints('data/r1type_vc200/R101.csv'))
+def calculate_objective(routes, depot, distance_matrix):
+    num_vehicles = len(routes)
+    total_distance = sum(calculate_route_distance(route, depot, distance_matrix) for route in routes)
+    return num_vehicles * 1e6 + total_distance  # Prioritize fewer vehicles

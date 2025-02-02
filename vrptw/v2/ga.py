@@ -1,6 +1,6 @@
-from vehicle import Vehicle
+from v2.vehicle import Vehicle
 from customer import Customer
-from utils import getCustomersFromCSV, csvToPoints, plotPlainData, plotRoutes, greedy, calculateSolutionDistance
+from v2.utils import getCustomersFromCSV, csvToPoints, plotPlainData, plotRoutes, greedy, calculateSolutionDistance
 
 class GA_VRPTW:
     def __init__(self, depot, customers, vehicle_capacity, 

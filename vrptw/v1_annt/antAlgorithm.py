@@ -2,7 +2,7 @@ from customer import Customer
 import numpy as np
 from csvToPoints import getCustomersFromCSV
 from copy import deepcopy
-from vehicle import Vehicle
+from v2.vehicle import Vehicle
 from ant import Ant
 
 class AntColonyOptimization:

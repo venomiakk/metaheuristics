@@ -257,7 +257,8 @@ def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity
     best_cost = current_cost
     temp = initial_temp
     
-    for _ in range(iterations):
+    for i in range(iterations):
+        print(f'\rIteration {i+1}/{iterations}', end='', flush=True)
         # Generate neighbor solution (escape move)
         neighbor = copy.deepcopy(current_solution)
         move_type = random.choice(['intra_relocate', 'inter_relocate', 'inter_exchange'])
@@ -381,9 +382,9 @@ def main():
         depot, 
         distance_matrix, 
         vehicle_capacity,
-        initial_temp=1000,  
+        initial_temp=1,  
         cooling_rate=0.995,
-        iterations=50000
+        iterations=100000
     )
     
     # Save and plot optimized solution

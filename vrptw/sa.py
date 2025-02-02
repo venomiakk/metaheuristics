@@ -1,267 +1,171 @@
 import random
+import copy
 import math
-import csv
-import matplotlib.pyplot as plt
-from copy import deepcopy
-import numpy as np
-from typing import List, Tuple, Dict
-from dataclasses import dataclass
-import random
-import math
+from utils import time_feasible, capacity_feasible, route_capacity_feasible, time_feasible_route, euclidean_distance, load_data
+from solomoni1 import solomon_i1
 
 
-@dataclass
-class Customer:
-    id: int
-    x: float
-    y: float
-    demand: float
-    ready_time: float  # Earliest service time
-    due_time: float    # Latest service time
-    service_time: float
+def calculate_route_distance(route, depot, distance_matrix):
+    if not route:
+        return 0
+    total = distance_matrix[depot.id][route[0].id]
+    for i in range(len(route)-1):
+        total += distance_matrix[route[i].id][route[i+1].id]
+    total += distance_matrix[route[-1].id][depot.id]
+    return total
 
-class Route:
-    def __init__(self, depot: Customer, capacity: float):
-        self.path = [depot]  # Start and end with depot
-        self.capacity = capacity
-        self.current_load = 0
-        self.current_time = 0
+def calculate_objective(routes, depot, distance_matrix):
+    num_vehicles = len(routes)
+    total_distance = sum(calculate_route_distance(route, depot, distance_matrix) for route in routes)
+    return num_vehicles * 1e6 + total_distance  # Prioritize fewer vehicles
+
+def intra_relocate(route, depot, distance_matrix):
+    if len(route) < 2:
+        return route
+    i = random.randint(0, len(route)-1)
+    customer = route.pop(i)
+    best_pos = -1
+    best_cost = float('inf')
+    for j in range(len(route)+1):
+        new_route = route[:j] + [customer] + route[j:]
+        if time_feasible(new_route, customer, j, depot, distance_matrix):
+            cost = calculate_route_distance(new_route, depot, distance_matrix)
+            if cost < best_cost:
+                best_cost = cost
+                best_pos = j
+    if best_pos != -1:
+        return route[:best_pos] + [customer] + route[best_pos:]
+    else:
+        route.insert(i, customer)  # Revert if no feasible position
+        return route
+
+def inter_relocate(routes, depot, distance_matrix, vehicle_capacity):
+    if len(routes) < 2:
+        return routes
+    src_route_idx = random.randint(0, len(routes)-1)
+    src_route = routes[src_route_idx]
+    if len(src_route) == 0:
+        return routes
+    customer = src_route.pop(random.randint(0, len(src_route)-1))
+    
+    best_dest_idx = -1
+    best_pos = -1
+    best_cost = float('inf')
+    for dest_route_idx in range(len(routes)):
+        if dest_route_idx == src_route_idx:
+            continue
+        dest_route = routes[dest_route_idx]
+        for j in range(len(dest_route)+1):
+            new_route = dest_route[:j] + [customer] + dest_route[j:]
+            if capacity_feasible(new_route, customer, vehicle_capacity) and time_feasible(new_route, customer, j, depot, distance_matrix):
+                cost = calculate_route_distance(new_route, depot, distance_matrix)
+                if cost < best_cost:
+                    best_cost = cost
+                    best_dest_idx = dest_route_idx
+                    best_pos = j
+    if best_dest_idx != -1:
+        routes[best_dest_idx] = routes[best_dest_idx][:best_pos] + [customer] + routes[best_dest_idx][best_pos:]
+        if len(src_route) == 0:
+            routes.pop(src_route_idx)
+        return routes
+    else:
+        src_route.append(customer)
+        return routes
+
+def inter_exchange(routes, depot, distance_matrix, vehicle_capacity):
+    if len(routes) < 2:
+        return routes
+
+    # Select two distinct routes
+    route1_idx, route2_idx = random.sample(range(len(routes)), 2)
+    route1 = routes[route1_idx].copy()
+    route2 = routes[route2_idx].copy()
+
+    if not route1 or not route2:
+        return routes
+
+    # Randomly select customers to swap
+    customer1 = random.choice(route1)
+    customer2 = random.choice(route2)
+
+    # Swap customers
+    new_route1 = [customer2 if c == customer1 else c for c in route1]
+    new_route2 = [customer1 if c == customer2 else c for c in route2]
+
+    # Check feasibility after swap
+    feasible = (
+        route_capacity_feasible(new_route1, vehicle_capacity) and
+        route_capacity_feasible(new_route2, vehicle_capacity) and
+        time_feasible_route(new_route1, depot, distance_matrix) and
+        time_feasible_route(new_route2, depot, distance_matrix)
+    )
+
+    if feasible:
+        routes[route1_idx] = new_route1
+        routes[route2_idx] = new_route2
+
+    return routes
+
+def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity, initial_temp=1000, cooling_rate=0.995, iterations=1000):
+    current_solution = copy.deepcopy(initial_routes)
+    best_solution = copy.deepcopy(current_solution)
+    current_cost = calculate_objective(current_solution, depot, distance_matrix)
+    best_cost = current_cost
+    temp = initial_temp
+    
+    for i in range(iterations):
+        print(f'\rIteration {i+1}/{iterations}', end='', flush=True)
+        # Generate neighbor solution (escape move)
+        neighbor = copy.deepcopy(current_solution)
+        move_type = random.choice(['intra_relocate', 'inter_relocate', 'inter_exchange'])
+        if move_type == 'intra_relocate' and neighbor:
+            route_idx = random.randint(0, len(neighbor)-1)
+            neighbor[route_idx] = intra_relocate(neighbor[route_idx], depot, distance_matrix)
+        elif move_type == 'inter_relocate':
+            neighbor = inter_relocate(neighbor, depot, distance_matrix, vehicle_capacity)
+        elif move_type == 'inter_exchange':
+            neighbor = inter_exchange(neighbor, depot, distance_matrix, vehicle_capacity)
         
-    def is_feasible(self, customer: Customer, position: int) -> bool:
-        """Check if inserting customer at position is feasible regarding capacity and time windows"""
-        # First check capacity
-        if self.current_load + customer.demand > self.capacity:
-            return False
-            
-        # Then check time windows
-        temp_route = self.path.copy()
-        temp_route.insert(position, customer)
-        current_time = 0
-        temp_load = 0
+        neighbor_cost = calculate_objective(neighbor, depot, distance_matrix)
         
-        for i in range(len(temp_route) - 1):
-            current = temp_route[i]
-            next_customer = temp_route[i + 1]
-            
-            # Update load
-            if i > 0:  # Don't count depot
-                temp_load += current.demand
-                if temp_load > self.capacity:
-                    return False
-            
-            # TODO
-            # Add travel time (using Euclidean distance)
-            travel_time = np.sqrt((current.x - next_customer.x)**2 + 
-                                (current.y - next_customer.y)**2)
-            current_time = max(current_time + travel_time, next_customer.ready_time)
-            
-            if current_time > next_customer.due_time:
-                return False
-                
-            current_time += next_customer.service_time
-            
-        return True
-
-    def add_customer(self, customer: Customer, position: int) -> bool:
-        """Add customer to route if feasible and update current load"""
-        if self.is_feasible(customer, position):
-            self.path.insert(position, customer)
-            self.current_load += customer.demand
-            return True
-        return False
-
-    def remove_customer(self, position: int) -> Customer:
-        """Remove customer from route and update current load"""
-        customer = self.path.pop(position)
-        if position > 0 and position < len(self.path):  # Don't count depot
-            self.current_load -= customer.demand
-        return customer
-
-    def calculate_total_distance(self) -> float:
-        """Calculate total distance of route"""
-        total = 0
-        for i in range(len(self.path) - 1):
-            current = self.path[i]
-            next_customer = self.path[i + 1]
-            total += np.sqrt((current.x - next_customer.x)**2 + 
-                           (current.y - next_customer.y)**2)
-        return total
-
-class Solution:
-    def __init__(self, routes: List[Route]):
-        self.routes = routes
-    
-    def objective_value(self) -> float:
-        """Calculate total distance + vehicle penalty"""
-        total_distance = sum(route.calculate_total_distance() for route in self.routes)
-        vehicle_penalty = len(self.routes) * 1000  # Penalize number of vehicles
-        return total_distance + vehicle_penalty
-    
-    def __str__(self):
-        r_str = ''
-        for idx, route in enumerate(self.routes):
-            r_str += f'Route {idx + 1}: '
-            for customer in route.path:
-                r_str += str(customer.id) + ' '
-            r_str += '\n'
-        return r_str
-
-def readData(file):
-    customers = []
-    with open(file) as f:
-        for line in f:
-            line = line.strip().split(',')
-            customers.append(Customer(int(line[0])-1, float(line[1]), float(line[2]), float(line[3]), float(line[4]), float(line[5]), float(line[6])))
-    return customers
-
-def plotRoutes(routes, depot, title='VRPTW Routes'):
-    plt.figure(figsize=(8, 8))
-    for idx, route in enumerate(routes):
-        x = [cust['x'] for cust in route]
-        y = [cust['y'] for cust in route]
-        plt.plot(x, y, marker='o', label=f'Route {idx+1}')
-    plt.scatter(depot['x'], depot['y'], color='red', zorder=10, label='Depot')
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.title(title)
-    plt.legend()
-    plt.show()
-
-def create_initial_solution(customers: List[Customer], depot: Customer, vehicle_capacity: float) -> Solution:
-    """Create initial solution ensuring valid routes"""
-    routes = []
-    unassigned = customers.copy()
-    
-    while unassigned:
-        route = Route(depot, vehicle_capacity)
-        route.add_customer(depot, 0)  # Start with depot
+        # Metropolis acceptance criterion
+        if neighbor_cost < current_cost or random.random() < math.exp((current_cost - neighbor_cost) / temp):
+            current_solution = neighbor
+            current_cost = neighbor_cost
+            if neighbor_cost < best_cost:
+                best_solution = copy.deepcopy(neighbor)
+                best_cost = neighbor_cost
         
-        # Try to add customers while feasible
-        i = 0
-        while i < len(unassigned):
-            customer = unassigned[i]
-            if route.is_feasible(customer, len(route.path)-1):
-                if route.add_customer(customer, len(route.path)-1):  # Add before final depot
-                    unassigned.remove(customer)
-                    continue
-            i += 1
-            
-        route.add_customer(depot, len(route.path))  # End with depot
-        if len(route.path) > 2:  # Only add routes with at least one customer
-            routes.append(route)
+        # Cool down
+        temp *= cooling_rate
     
-    return Solution(routes)
+    return best_solution
 
-def escape(solution: Solution) -> Solution:
-    """Generate neighboring solution using operators from the paper"""
-    new_solution = Solution([Route(route.path[0], route.capacity) for route in solution.routes])
-    for i, route in enumerate(new_solution.routes):
-        route.path = solution.routes[i].path.copy()
-        route.current_load = solution.routes[i].current_load
+def run_sa(filepath='data/rc1type_vc200/RC101.csv', vehicle_capacity=200, initial_temp=10, cooling_rate=0.995, iterations=10000):
+    depot, customers = load_data(filepath)
     
-    operator = random.choice(['intra_relocate', 'inter_relocate', 'inter_exchange'])
+    # Precompute distance matrix
+    all_nodes = [depot] + customers
+    distance_matrix = {}
+    for i in all_nodes:
+        distance_matrix[i.id] = {}
+        for j in all_nodes:
+            distance_matrix[i.id][j.id] = euclidean_distance(i, j)
     
-    if operator == 'intra_relocate' and len(new_solution.routes) > 0:
-        route = random.choice(new_solution.routes)
-        if len(route.path) > 3:
-            pos1 = random.randint(1, len(route.path) - 2)
-            pos2 = random.randint(1, len(route.path) - 2)
-            customer = route.remove_customer(pos1)
-            if not route.add_customer(customer, pos2):
-                route.add_customer(customer, pos1)  # Revert if infeasible
-            
-    elif operator == 'inter_relocate' and len(new_solution.routes) > 1:
-        route1, route2 = random.sample(new_solution.routes, 2)
-        # Add length check for both routes
-        if len(route1.path) > 3 and len(route2.path) > 2:
-            pos1 = random.randint(1, len(route1.path) - 2)
-            pos2 = random.randint(1, len(route2.path) - 1)
-            customer = route1.remove_customer(pos1)
-            if not route2.add_customer(customer, pos2):
-                route1.add_customer(customer, pos1)  # Revert if infeasible
-                
-    elif operator == 'inter_exchange' and len(new_solution.routes) > 1:
-        route1, route2 = random.sample(new_solution.routes, 2)
-        if len(route1.path) > 3 and len(route2.path) > 3:
-            pos1 = random.randint(1, len(route1.path) - 2)
-            pos2 = random.randint(1, len(route2.path) - 2)
-            
-            # Store original loads
-            load1 = route1.current_load
-            load2 = route2.current_load
-            
-            # Try exchange
-            customer1 = route1.remove_customer(pos1)
-            customer2 = route2.remove_customer(pos2)
-            
-            feasible = (route1.add_customer(customer2, pos1) and 
-                       route2.add_customer(customer1, pos2))
-            
-            if not feasible:
-                # Revert if infeasible
-                route1.path = []
-                route2.path = []
-                route1.current_load = load1
-                route2.current_load = load2
-                route1.add_customer(customer1, pos1)
-                route2.add_customer(customer2, pos2)
+    # Generate initial solution
+    initial_routes = solomon_i1(depot, customers, distance_matrix, vehicle_capacity)
     
-    return new_solution
+    
+    # Apply Simulated Annealing
+    optimized_routes = simulated_annealing(
+        initial_routes, 
+        depot, 
+        distance_matrix, 
+        vehicle_capacity,
+        initial_temp=initial_temp,  
+        cooling_rate=cooling_rate,
+        iterations=iterations
+    )
+    
+    return initial_routes, optimized_routes, depot, distance_matrix
 
-def simulated_annealing(customers: List[Customer], depot: Customer,
-                       vehicle_capacity: float,
-                       initial_temp: float = 100, cooling_rate: float = 0.95,
-                       min_temp: float = 0.1, max_iterations: int = 100) -> Solution:
-    """Main Simulated Annealing algorithm"""
-    
-    current = create_initial_solution(customers, depot, vehicle_capacity)
-    
-    # Initialize best solution
-    best = Solution([Route(depot, vehicle_capacity) for _ in current.routes])
-    for i, route in enumerate(best.routes):
-        route.path = [depot] + current.routes[i].path[1:-1] + [depot]  # Ensure depot at start/end
-        route.current_load = current.routes[i].current_load
-    
-    temperature = initial_temp
-    
-    while temperature > min_temp and max_iterations > 0:
-        neighbor = escape(current)
-        delta = neighbor.objective_value() - current.objective_value()
-        
-        if delta < 0 or random.random() < math.exp(-delta / temperature):
-            current = neighbor
-            
-            if current.objective_value() < best.objective_value():
-                best = Solution([Route(depot, vehicle_capacity) for _ in current.routes])
-                for i, route in enumerate(best.routes):
-                    route.path = [depot] + current.routes[i].path[1:-1] + [depot]  # Ensure depot at start/end
-                    route.current_load = current.routes[i].current_load
-        
-        temperature *= cooling_rate
-        max_iterations -= 1
-    
-    return best
-
-
-def main():
-    file = 'data/c1type_vc200/C101.csv'
-    VCAPACITY = 200
-    allpoint = readData(file)
-    DEPOT = allpoint[0]
-    CUSTOMERS = allpoint[1:]
-    # display(DEPOT)
-    # display(CUSTOMERS)
-    # initial_solution = create_initial_solution(CUSTOMERS, DEPOT, VCAPACITY)
-    # print(initial_solution)
-    best_solution = simulated_annealing(CUSTOMERS, DEPOT, VCAPACITY)
-        
-    # Print results
-    for i, route in enumerate(best_solution.routes):
-        print(f"Route {i + 1}:")
-        print(f"Path: {[c.id for c in route.path]}")
-        print(f"Load: {route.current_load}/{route.capacity}")
-        print(f"Distance: {route.calculate_total_distance():.2f}")
-        print("---")
-
-if __name__ == "__main__":
-    main()
