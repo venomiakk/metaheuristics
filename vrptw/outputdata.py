@@ -5,7 +5,7 @@ import csv
 import numpy as np
 import math
 
-def plot_routes(routes, depot, filename="routes.png", data_file=None, iterations=None, cooling_rate=None, initial_temp=None, dst=None):
+def plot_routes(routes, depot, filename="routes.png", data_file=None, iterations=None, cooling_rate=None, initial_temp=None, dst=0):
     plt.figure(figsize=(10, 10))
     
     # Plot depot

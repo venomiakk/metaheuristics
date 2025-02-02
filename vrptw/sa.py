@@ -106,6 +106,77 @@ def inter_exchange(routes, depot, distance_matrix, vehicle_capacity):
 
     return routes
 
+def cross_exchange(routes, depot, distance_matrix, vehicle_capacity):
+    """
+    Swaps segments between two routes to reduce total distance.
+    Returns modified routes if feasible, otherwise returns original routes.
+    """
+    if len(routes) < 2:
+        return routes  # Need at least two routes
+    
+    # Select two distinct routes
+    route_a_idx, route_b_idx = random.sample(range(len(routes)), 2)
+    route_a = routes[route_a_idx].copy()
+    route_b = routes[route_b_idx].copy()
+    
+    if len(route_a) < 2 or len(route_b) < 2:
+        return routes  # Need at least two customers in each route
+    
+    # Randomly select segments to swap (non-zero length)
+    a_start, a_end = sorted(random.sample(range(len(route_a)), 2))
+    b_start, b_end = sorted(random.sample(range(len(route_b)), 2))
+    
+    # Extract segments
+    segment_a = route_a[a_start:a_end]
+    segment_b = route_b[b_start:b_end]
+    
+    # Swap segments
+    new_route_a = route_a[:a_start] + segment_b + route_a[a_end:]
+    new_route_b = route_b[:b_start] + segment_a + route_b[b_end:]
+    
+    # Check feasibility
+    feasible = (
+        route_capacity_feasible(new_route_a, vehicle_capacity) and
+        route_capacity_feasible(new_route_b, vehicle_capacity) and
+        time_feasible_route(new_route_a, depot, distance_matrix) and
+        time_feasible_route(new_route_b, depot, distance_matrix)
+    )
+    
+    if feasible:
+        routes[route_a_idx] = new_route_a
+        routes[route_b_idx] = new_route_b
+    
+    return routes
+
+def route_merge(routes, depot, distance_matrix, vehicle_capacity):
+    """
+    Attempts to merge two routes into one, reducing vehicle count.
+    Returns modified routes if feasible, otherwise original routes.
+    """
+    if len(routes) < 2:
+        return routes  # Need at least two routes
+    
+    # Select two distinct routes
+    route1_idx, route2_idx = random.sample(range(len(routes)), 2)
+    route1 = routes[route1_idx].copy()
+    route2 = routes[route2_idx].copy()
+    
+    # Merge the two routes (order randomized)
+    merged_route = route1 + route2
+    
+    # Check feasibility of the merged route
+    feasible = (
+        route_capacity_feasible(merged_route, vehicle_capacity) and
+        time_feasible_route(merged_route, depot, distance_matrix)
+    )
+    
+    if feasible:
+        # Remove the two original routes and add the merged one
+        routes = [route for idx, route in enumerate(routes) if idx not in (route1_idx, route2_idx)]
+        routes.append(merged_route)
+    
+    return routes
+
 def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity, initial_temp=1000, cooling_rate=0.995, iterations=1000):
     current_solution = copy.deepcopy(initial_routes)
     best_solution = copy.deepcopy(current_solution)
@@ -117,7 +188,15 @@ def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity
         print(f'\rIteration {i+1}/{iterations}', end='', flush=True)
         # Generate neighbor solution (escape move)
         neighbor = copy.deepcopy(current_solution)
-        move_type = random.choice(['intra_relocate', 'inter_relocate', 'inter_exchange'])
+        move_type = random.choices([
+        'intra_relocate', 
+        'inter_relocate', 
+        'inter_exchange', 
+        'cross_exchange', 
+        'route_merge' 
+    ],  weights=[1, 1, 1, 1, 3],  # Higher weight for route_merge
+        k=1
+    )[0]
         if move_type == 'intra_relocate' and neighbor:
             route_idx = random.randint(0, len(neighbor)-1)
             neighbor[route_idx] = intra_relocate(neighbor[route_idx], depot, distance_matrix)
@@ -125,7 +204,12 @@ def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity
             neighbor = inter_relocate(neighbor, depot, distance_matrix, vehicle_capacity)
         elif move_type == 'inter_exchange':
             neighbor = inter_exchange(neighbor, depot, distance_matrix, vehicle_capacity)
+        elif move_type == 'cross_exchange':
+            neighbor = cross_exchange(neighbor, depot, distance_matrix, vehicle_capacity)
+        elif move_type == 'route_merge':
+            neighbor = route_merge(neighbor, depot, distance_matrix, vehicle_capacity)
         
+        neighbor = [route for route in neighbor if len(route) > 0]
         neighbor_cost = calculate_objective(neighbor, depot, distance_matrix)
         
         # Metropolis acceptance criterion
