@@ -181,23 +181,25 @@ def intra_two_opt(route, depot, distance_matrix):
     """
     Reverses a segment of the route to eliminate crossings.
     """
-    if len(route) < 4:
-        return route
+    if len(route) < 2:
+        return route  # Need at least two customers to swap
     
-    # Randomly select two distinct indices
-    i, j = sorted(random.sample(range(1, len(route)-1), 2))
+    # Select two distinct indices (including start/end)
+    i, j = sorted(random.sample(range(len(route)), 2))
     
-    # Reverse the segment between i and j
+    
+   # Reverse the segment between i and j (inclusive)
     new_route = route[:i] + route[i:j+1][::-1] + route[j+1:]
     
-    # Check feasibility and improvement
+    # Calculate cost change
     original_cost = calculate_route_distance(route, depot, distance_matrix)
     new_cost = calculate_route_distance(new_route, depot, distance_matrix)
     
+    # Check feasibility and improvement
     if new_cost < original_cost and time_feasible_route(new_route, depot, distance_matrix):
         return new_route
     else:
-        return route
+        return route  # Reject the move
 
 def escape_move(current_solution, depot, distance_matrix, vehicle_capacity):
     neighbor = copy.deepcopy(current_solution)
