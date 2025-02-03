@@ -37,7 +37,6 @@ def solomon_i1(depot, customers, distance_matrix, vehicle_capacity):
     unserved = customers.copy()
     
     while unserved:
-        # Find seed customer
         seed = find_seed(unserved, depot)
         route = [seed]
         unserved.remove(seed)

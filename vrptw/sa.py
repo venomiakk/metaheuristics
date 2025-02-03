@@ -177,6 +177,28 @@ def route_merge(routes, depot, distance_matrix, vehicle_capacity):
     
     return routes
 
+def intra_two_opt(route, depot, distance_matrix):
+    """
+    Reverses a segment of the route to eliminate crossings.
+    """
+    if len(route) < 4:
+        return route
+    
+    # Randomly select two distinct indices
+    i, j = sorted(random.sample(range(1, len(route)-1), 2))
+    
+    # Reverse the segment between i and j
+    new_route = route[:i] + route[i:j+1][::-1] + route[j+1:]
+    
+    # Check feasibility and improvement
+    original_cost = calculate_route_distance(route, depot, distance_matrix)
+    new_cost = calculate_route_distance(new_route, depot, distance_matrix)
+    
+    if new_cost < original_cost and time_feasible_route(new_route, depot, distance_matrix):
+        return new_route
+    else:
+        return route
+
 def escape_move(current_solution, depot, distance_matrix, vehicle_capacity):
     neighbor = copy.deepcopy(current_solution)
     move_type = random.choices([
@@ -185,7 +207,7 @@ def escape_move(current_solution, depot, distance_matrix, vehicle_capacity):
         'inter_exchange', 
         'cross_exchange', 
         'route_merge' 
-    ],  weights=[1, 1, 1, 2, 3],  # Higher weight for route_merge
+    ],  weights=[1, 1, 1, 2, 3],
         k=1
     )[0]
     if move_type == 'intra_relocate' and neighbor:
@@ -199,10 +221,23 @@ def escape_move(current_solution, depot, distance_matrix, vehicle_capacity):
         neighbor = cross_exchange(neighbor, depot, distance_matrix, vehicle_capacity)
     elif move_type == 'route_merge':
         neighbor = route_merge(neighbor, depot, distance_matrix, vehicle_capacity)
-    
-    neighbor = [route for route in neighbor if len(route) > 0]
 
     return neighbor
+
+def local_search(solution, depot, distance_matrix, vehicle_capacity):
+
+    improved = True
+    best_solution = copy.deepcopy(solution)
+    
+    while improved:
+        improved = False
+        for i in range(len(best_solution)):
+            new_route = intra_two_opt(best_solution[i], depot, distance_matrix)
+            if calculate_route_distance(new_route, depot, distance_matrix) < calculate_route_distance(best_solution[i], depot, distance_matrix):
+                best_solution[i] = new_route
+                improved = True
+
+    return best_solution
 
 def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity, initial_temp=1000, cooling_rate=0.995, iterations=1000):
     current_solution = copy.deepcopy(initial_routes)
@@ -215,9 +250,11 @@ def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity
         print(f'\rIteration {i+1}/{iterations}', end='', flush=True)
 
         neighbor = escape_move(current_solution, depot, distance_matrix, vehicle_capacity)
+        neighbor = local_search(neighbor, depot, distance_matrix, vehicle_capacity)
+
+        neighbor = [route for route in neighbor if len(route) > 0]
         neighbor_cost = calculate_objective(neighbor, depot, distance_matrix)
         
-        # Metropolis acceptance criterion
         if neighbor_cost < current_cost or random.random() < math.exp((current_cost - neighbor_cost) / temp):
             current_solution = neighbor
             current_cost = neighbor_cost
@@ -225,7 +262,6 @@ def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity
                 best_solution = copy.deepcopy(neighbor)
                 best_cost = neighbor_cost
         
-        # Cool down
         temp *= cooling_rate
     
     return best_solution
