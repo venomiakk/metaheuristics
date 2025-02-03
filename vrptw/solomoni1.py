@@ -2,7 +2,7 @@ from utils import euclidean_distance
 from utils import time_feasible, capacity_feasible
 
 def find_seed(customers, depot):
-    # Seed selection: farthest from depot and earliest due date
+    # Seed: najdalszy klient z najwczesniejszym due_date
     seed = max(customers, key=lambda c: (-euclidean_distance(c, depot), c.due_date))
     return seed
 
@@ -12,7 +12,6 @@ def find_best_insertion(route, customer, depot, distance_matrix, vehicle_capacit
     best_position = -1
     for i in range(len(route) + 1):
         if capacity_feasible(route, customer, vehicle_capacity) and time_feasible(route, customer, i, depot, distance_matrix):
-            # Calculate insertion cost (increase in distance)
             if len(route) == 0:
                 cost = distance_matrix[depot.id][customer.id] + distance_matrix[customer.id][depot.id]
             else:

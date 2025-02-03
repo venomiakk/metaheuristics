@@ -8,20 +8,16 @@ import math
 def plot_routes(routes, depot, filename="routes.png", data_file=None, iterations=None, cooling_rate=None, initial_temp=None, dst=0):
     plt.figure(figsize=(10, 10))
     
-    # Plot depot
     plt.scatter(depot.x, depot.y, c='red', s=100, marker='s', edgecolors='black', label='Magazyn', zorder=10)
     
-    # Plot customers and routes
-    colors = plt.cm.tab20.colors  # 20 distinct colors
+    colors = plt.cm.tab20.colors
     for i, route in enumerate(routes):
         if not route:
             continue
-        
-        # Generate route coordinates (including depot at start/end)
+
         x = [depot.x] + [c.x for c in route] + [depot.x]
         y = [depot.y] + [c.y for c in route] + [depot.y]
         
-        # Plot customers
         plt.scatter(
             [c.x for c in route], 
             [c.y for c in route], 
@@ -30,7 +26,6 @@ def plot_routes(routes, depot, filename="routes.png", data_file=None, iterations
             label=f'Pojazd {i+1}' if i < 20 else None
         )
         
-        # Plot route path
         plt.plot(x, y, linestyle='-', linewidth=1, color=colors[i % 20])
     
     title = f"{data_file}, Iteracje: {iterations}, Początkowa temperatura: {initial_temp}, Wsp. schładzania: {cooling_rate}, Odległość: {dst:.2f}"
@@ -41,7 +36,6 @@ def plot_routes(routes, depot, filename="routes.png", data_file=None, iterations
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
     
-    # Create output directory if not exists
     os.makedirs("output", exist_ok=True)
     plt.savefig(f"output/{filename}")
     plt.close()
@@ -52,20 +46,19 @@ def save_results(routes, depot, distance_matrix, filename="results.txt"):
         total_distance = 0
         total_vehicles = len(routes)
         
-        f.write("Route Details:\n")
+        f.write("Trasy:\n")
         f.write("="*50 + "\n")
         
         for i, route in enumerate(routes):
             route_distance = calculate_route_distance(route, depot, distance_matrix)
             total_distance += route_distance
             
-            # Format route with depot at start/end
             route_ids = [depot.id] + [c.id for c in route] + [depot.id]
             
-            f.write(f"Route {i+1}:\n")
-            f.write(f"  Customers: {len(route)}\n")
-            f.write(f"  Sequence: {route_ids}\n")
-            f.write(f"  Distance: {route_distance:.2f}\n")
+            f.write(f"Trasa {i+1}:\n")
+            f.write(f"  Klienci: {len(route)}\n")
+            f.write(f"  Kolejność: {route_ids}\n")
+            f.write(f"  Odległość: {route_distance:.2f}\n")
             f.write("-"*50 + "\n")
         
         f.write("\nSummary:\n")
@@ -133,7 +126,6 @@ def plot_results(data, best_distance=None, best_vehicles=None, filename="combine
                        step=100)
     ax1.set_yticks(y_range)
     
-    # Annotations and styling for distance plot
     for x, y in zip(x_values, distances):
         ax1.annotate(f'{y:.0f}', (x, y), xytext=(0, 10), textcoords='offset points', ha='center')
     if best_distance:
@@ -144,12 +136,10 @@ def plot_results(data, best_distance=None, best_vehicles=None, filename="combine
     ax1.grid(True)
     ax1.legend()
     
-    # Vehicles plot
     ax2.plot(x_values, vehicles, linestyle='-', marker='o', color='green', label='Uzyskane wyniki')
     ax2.set_xticks(range(min(x_values), max(x_values) + 1))
     ax2.set_yticks(range(int(min_vehicles) - 2, int(max_vehicles) + 3))
     
-    # Annotations and styling for vehicles plot
     for x, y in zip(x_values, vehicles):
         ax2.annotate(f'{y}', (x, y), xytext=(0, 10), textcoords='offset points', ha='center')
     if best_vehicles:

@@ -26,19 +26,16 @@ def time_feasible_route(route, depot, distance_matrix):
     current_time = 0
     prev = depot
     for customer in route:
-        # Travel time to customer
         arrival = current_time + distance_matrix[prev.id][customer.id]
         arrival = max(arrival, customer.ready_time)
         if arrival > customer.due_date:
             return False
-        # Service time
         departure = arrival + customer.service_time
         current_time = departure
         prev = customer
     return True
 
 def time_feasible(route, customer, position, depot, distance_matrix):
-    # Check time window feasibility after inserting customer at position
     current_time = 0
     current_load = 0
     prev = depot
@@ -83,4 +80,4 @@ def calculate_route_distance(route, depot, distance_matrix):
 def calculate_objective(routes, depot, distance_matrix):
     num_vehicles = len(routes)
     total_distance = sum(calculate_route_distance(route, depot, distance_matrix) for route in routes)
-    return num_vehicles * 1e6 + total_distance  # Prioritize fewer vehicles
+    return num_vehicles * 1e6 + total_distance

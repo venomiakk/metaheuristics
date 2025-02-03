@@ -17,7 +17,7 @@ def calculate_route_distance(route, depot, distance_matrix):
 def calculate_objective(routes, depot, distance_matrix):
     num_vehicles = len(routes)
     total_distance = sum(calculate_route_distance(route, depot, distance_matrix) for route in routes)
-    return num_vehicles * 1e6 + total_distance  # Prioritize fewer vehicles
+    return num_vehicles * 1e6 + total_distance
 
 def intra_relocate(route, depot, distance_matrix):
     if len(route) < 2:
@@ -36,7 +36,7 @@ def intra_relocate(route, depot, distance_matrix):
     if best_pos != -1:
         return route[:best_pos] + [customer] + route[best_pos:]
     else:
-        route.insert(i, customer)  # Revert if no feasible position
+        route.insert(i, customer)
         return route
 
 def inter_relocate(routes, depot, distance_matrix, vehicle_capacity):
@@ -76,7 +76,6 @@ def inter_exchange(routes, depot, distance_matrix, vehicle_capacity):
     if len(routes) < 2:
         return routes
 
-    # Select two distinct routes
     route1_idx, route2_idx = random.sample(range(len(routes)), 2)
     route1 = routes[route1_idx].copy()
     route2 = routes[route2_idx].copy()
@@ -84,15 +83,12 @@ def inter_exchange(routes, depot, distance_matrix, vehicle_capacity):
     if not route1 or not route2:
         return routes
 
-    # Randomly select customers to swap
     customer1 = random.choice(route1)
     customer2 = random.choice(route2)
 
-    # Swap customers
     new_route1 = [customer2 if c == customer1 else c for c in route1]
     new_route2 = [customer1 if c == customer2 else c for c in route2]
 
-    # Check feasibility after swap
     feasible = (
         route_capacity_feasible(new_route1, vehicle_capacity) and
         route_capacity_feasible(new_route2, vehicle_capacity) and
@@ -107,34 +103,26 @@ def inter_exchange(routes, depot, distance_matrix, vehicle_capacity):
     return routes
 
 def cross_exchange(routes, depot, distance_matrix, vehicle_capacity):
-    """
-    Swaps segments between two routes to reduce total distance.
-    Returns modified routes if feasible, otherwise returns original routes.
-    """
+
     if len(routes) < 2:
-        return routes  # Need at least two routes
+        return routes
     
-    # Select two distinct routes
     route_a_idx, route_b_idx = random.sample(range(len(routes)), 2)
     route_a = routes[route_a_idx].copy()
     route_b = routes[route_b_idx].copy()
     
     if len(route_a) < 2 or len(route_b) < 2:
-        return routes  # Need at least two customers in each route
+        return routes
     
-    # Randomly select segments to swap (non-zero length)
     a_start, a_end = sorted(random.sample(range(len(route_a)), 2))
     b_start, b_end = sorted(random.sample(range(len(route_b)), 2))
     
-    # Extract segments
     segment_a = route_a[a_start:a_end]
     segment_b = route_b[b_start:b_end]
     
-    # Swap segments
     new_route_a = route_a[:a_start] + segment_b + route_a[a_end:]
     new_route_b = route_b[:b_start] + segment_a + route_b[b_end:]
     
-    # Check feasibility
     feasible = (
         route_capacity_feasible(new_route_a, vehicle_capacity) and
         route_capacity_feasible(new_route_b, vehicle_capacity) and
@@ -149,57 +137,81 @@ def cross_exchange(routes, depot, distance_matrix, vehicle_capacity):
     return routes
 
 def route_merge(routes, depot, distance_matrix, vehicle_capacity):
-    """
-    Attempts to merge two routes into one, reducing vehicle count.
-    Returns modified routes if feasible, otherwise original routes.
-    """
+
     if len(routes) < 2:
-        return routes  # Need at least two routes
+        return routes
     
-    # Select two distinct routes
     route1_idx, route2_idx = random.sample(range(len(routes)), 2)
     route1 = routes[route1_idx].copy()
     route2 = routes[route2_idx].copy()
     
-    # Merge the two routes (order randomized)
     merged_route = route1 + route2
     
-    # Check feasibility of the merged route
     feasible = (
         route_capacity_feasible(merged_route, vehicle_capacity) and
         time_feasible_route(merged_route, depot, distance_matrix)
     )
     
     if feasible:
-        # Remove the two original routes and add the merged one
         routes = [route for idx, route in enumerate(routes) if idx not in (route1_idx, route2_idx)]
         routes.append(merged_route)
     
     return routes
 
+
+def orientation(p, q, r):
+    val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y)
+    if val == 0:
+        return 0
+    return 1 if val > 0 else 2
+
+
+def on_segment(p, q, r):
+    return (min(p.x, q.x) <= r.x <= max(p.x, q.x)) and (min(p.y, q.y) <= r.y <= max(p.y, q.y))
+
+def segments_intersect(p1, q1, p2, q2):
+    o1 = orientation(p1, q1, p2)
+    o2 = orientation(p1, q1, q2)
+    o3 = orientation(p2, q2, p1)
+    o4 = orientation(p2, q2, q1)
+
+    if o1 != o2 and o3 != o4:
+        return True
+    if o1 == 0 and on_segment(p1, q1, p2):
+        return True
+    if o2 == 0 and on_segment(p1, q1, q2):
+        return True
+    if o3 == 0 and on_segment(p2, q2, p1):
+        return True
+    if o4 == 0 and on_segment(p2, q2, q1):
+        return True
+
+    return False
+
 def intra_two_opt(route, depot, distance_matrix):
-    """
-    Reverses a segment of the route to eliminate crossings.
-    """
-    if len(route) < 2:
-        return route  # Need at least two customers to swap
+    if len(route) < 4:
+        return route
+
+    for i in range(len(route) - 1):
+        for j in range(i + 2, len(route) - 1):
+            p1, q1 = route[i], route[i+1]
+            p2, q2 = route[j], route[j+1]
+
+            if segments_intersect(p1, q1, p2, q2):
+                new_route = route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]
+                new_cost = calculate_route_distance(new_route, depot, distance_matrix)
+                original_cost = calculate_route_distance(route, depot, distance_matrix)
+                if new_cost < original_cost and time_feasible_route(new_route, depot, distance_matrix):
+                    return new_route
     
-    # Select two distinct indices (including start/end)
     i, j = sorted(random.sample(range(len(route)), 2))
-    
-    
-   # Reverse the segment between i and j (inclusive)
     new_route = route[:i] + route[i:j+1][::-1] + route[j+1:]
-    
-    # Calculate cost change
-    original_cost = calculate_route_distance(route, depot, distance_matrix)
     new_cost = calculate_route_distance(new_route, depot, distance_matrix)
-    
-    # Check feasibility and improvement
+    original_cost = calculate_route_distance(route, depot, distance_matrix)
     if new_cost < original_cost and time_feasible_route(new_route, depot, distance_matrix):
         return new_route
     else:
-        return route  # Reject the move
+        return route
 
 def escape_move(current_solution, depot, distance_matrix, vehicle_capacity):
     neighbor = copy.deepcopy(current_solution)
@@ -227,10 +239,9 @@ def escape_move(current_solution, depot, distance_matrix, vehicle_capacity):
     return neighbor
 
 def local_search(solution, depot, distance_matrix, vehicle_capacity):
-
     improved = True
     best_solution = copy.deepcopy(solution)
-    
+    best_cost = calculate_objective(best_solution, depot, distance_matrix)
     while improved:
         improved = False
         for i in range(len(best_solution)):
@@ -271,7 +282,6 @@ def simulated_annealing(initial_routes, depot, distance_matrix, vehicle_capacity
 def run_sa(filepath='data/rc1type_vc200/RC101.csv', vehicle_capacity=200, initial_temp=10, cooling_rate=0.995, iterations=10000):
     depot, customers = load_data(filepath)
     
-    # Precompute distance matrix
     all_nodes = [depot] + customers
     distance_matrix = {}
     for i in all_nodes:
@@ -279,11 +289,8 @@ def run_sa(filepath='data/rc1type_vc200/RC101.csv', vehicle_capacity=200, initia
         for j in all_nodes:
             distance_matrix[i.id][j.id] = euclidean_distance(i, j)
     
-    # Generate initial solution
     initial_routes = solomon_i1(depot, customers, distance_matrix, vehicle_capacity)
     
-    
-    # Apply Simulated Annealing
     optimized_routes = simulated_annealing(
         initial_routes, 
         depot, 
