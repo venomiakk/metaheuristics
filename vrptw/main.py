@@ -259,12 +259,12 @@ def run_c103():
                   iterations=iterations, cooling_rate=cooling_rate, initial_temp=init_temp, data_file=test_file)
 
 def main():
-    # run_c101()
-    # run_r101()
-    # run_rc101()
-    # run_c103()
+    run_c101()
+    run_r101()
+    run_rc101()
+    run_c103()
 
-    test1()
+    # test1()
     # test3()
 
 
